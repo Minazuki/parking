@@ -29,7 +29,13 @@
 
 兩筆userData均為purpose=parking-seed-format-test、activityYear=116、stage=test-only，不是正式抽選。此測試只驗證seed服務及收據流程，未產生任何住戶配位，亦未驗證本機seeded PRNG或配位重現功能。
 
-目前結論：generateSignedBlobs → getResult → verifySignature的真實服務流程可行。帳號免費／付費授權、額度及適用範圍不由這兩次成功回應推定；本次未核查帳號方案。
+目前結論：下圖的真實服務流程可行。帳號免費／付費授權、額度及適用範圍不由這兩次成功回應推定；本次未核查帳號方案。
+
+```mermaid
+flowchart LR
+    generate["generateSignedBlobs"] --> get["getResult"]
+    get --> verify["verifySignature"]
+```
 
 上述tmp目錄為本機測試產物，受.gitignore排除且不保證長期留存。正式活動應將完整random、signature、驗證回應及其關聯納入年度封存，不能只保留本文件的摘要表。
 

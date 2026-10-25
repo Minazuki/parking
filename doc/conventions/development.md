@@ -17,6 +17,12 @@
 
 提交格式、語言與scope以[Commit Message規範](commit-messages.md)為唯一來源。僅在使用者要求時提交；push使用已確認的remote及branch。
 
+## Markdown圖表
+
+所有Markdown文件中的流程圖及目錄結構圖統一使用`mermaid` fenced code block。流程使用flowchart等合適圖型，目錄以有標籤的節點與父子連線表示；不使用ASCII／Unicode tree view或以純文字箭頭串列替代流程圖。命令、程式碼、資料範例與數學公式保留各自格式，文字敘述中的編號順序不必改畫圖。
+
+修改文件時同步檢查圖表節點、連線、標籤及相對連結。工具文件的目錄樣板見[工具入口與目錄樣板](tool-layout.md)。
+
 ## 驗證
 
 目前文件檢查包括相對連結、狀態標示、差異與行尾空白。實作階段依風險驗證名單檢查、配位約束、保存與恢復，正式抽籤資料不得作為自動測試輸入。

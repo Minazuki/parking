@@ -13,20 +13,32 @@
 
 ## 發布目錄與年度資料分離
 
-```text
-parking-release-v2026.1026.0346/
-├── parking                 # 編譯好的Go執行檔，內嵌前端與所需資源
-├── start.sh                # 發布包啟動入口、檔頭使用說明與help
-└── README.md               # 本版本啟動、環境與操作說明
-
-停車位抽籤資料/
-├── 116年度/
-│   ├── activity.json
-│   ├── inputs/
-│   ├── checkpoints/
-│   ├── results/
-│   └── exports/
-└── 117年度/
+```mermaid
+flowchart TD
+    t0["parking-release-v2026.1026.0346/"]
+    t1["parking<br/>編譯好的Go執行檔，內嵌前端與所需資源"]
+    t0 --> t1
+    t2["start.sh<br/>發布包啟動入口、檔頭使用說明與help"]
+    t0 --> t2
+    t3["README.md<br/>本版本啟動、環境與操作說明"]
+    t0 --> t3
+    t4["停車位抽籤資料/"]
+    t5["116年度/"]
+    t4 --> t5
+    t6["activity.json"]
+    t5 --> t6
+    t7["inputs/"]
+    t5 --> t7
+    t8["checkpoints/"]
+    t5 --> t8
+    t9["results/"]
+    t5 --> t9
+    t10["logs/"]
+    t5 --> t10
+    t11["exports/"]
+    t5 --> t11
+    t12["117年度/"]
+    t4 --> t12
 ```
 
 以上年度資料結構仍為草案，細節見[工作資料夾與存檔](../design/workspace-storage.md)。正式資料不寫入發布包，也不提交Git。更新程式使用新的發布目錄，年度工作資料保持獨立；封存時保留對應發布包及年度資料。

@@ -12,6 +12,7 @@
 2. 閱讀 [文件地圖](../README.md)、任務相關主題與 [開發規範](../conventions/development.md)。
 3. 先辨識已確認需求與提案；抽籤資格、算法、繳費條件或架構尚未確認時，不自行宣稱定案。
 4. 修改功能或規劃時同步更新其文件，避免同一規則分散維護。
+   Markdown中的流程圖與目錄結構圖一律使用Mermaid，依[開發規範](../conventions/development.md)維護，不使用ASCII目錄樹。
    新增工具必須一併建立`doc/tools/<tool-name>/tool.md`及更新[工具索引](../tools/README.md)；相關文件收在對應工具目錄，遵循[工具樣板](../conventions/tool-layout.md)。
 5. 撰寫commit message前閱讀[Commit Message規範](../conventions/commit-messages.md)，依實際staged內容撰寫英文Conventional Commit。
 

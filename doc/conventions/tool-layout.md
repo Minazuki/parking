@@ -4,31 +4,48 @@
 
 ## Layout
 
-```text
-tools/
-├── <tool-name>.sh          # 日常入口、參數、流程串接與help
-└── <tool-name>/
-    ├── ts/
-    │   └── main.mts        # TS實作
-    ├── py/
-    │   └── main.py         # Python實作（需要時建立）
-    └── go/
-        ├── go.mod         # 獨立Go模組與鎖定版本
-        ├── go.sum
-        ├── main.go
-        └── main_test.go
+```mermaid
+flowchart TD
+    t0["tools/"]
+    t1["&lt;tool-name&gt;.sh<br/>日常入口、參數、流程串接與help"]
+    t0 --> t1
+    t2["&lt;tool-name&gt;/"]
+    t0 --> t2
+    t3["ts/"]
+    t2 --> t3
+    t4["main.mts<br/>TS實作"]
+    t3 --> t4
+    t5["py/"]
+    t2 --> t5
+    t6["main.py<br/>Python實作（需要時建立）"]
+    t5 --> t6
+    t7["go/"]
+    t2 --> t7
+    t8["go.mod<br/>獨立Go模組與鎖定版本"]
+    t7 --> t8
+    t9["go.sum"]
+    t7 --> t9
+    t10["main.go"]
+    t7 --> t10
+    t11["main_test.go"]
+    t7 --> t11
 ```
 
 名稱使用小寫與連字號，入口與目錄同名；依實際需要建立語言子目錄，不建立空目錄。共用輸入／輸出格式由主題文件定義，測試向量放`examples/`，執行產物放`tmp/`等已忽略目錄，不混入程式來源。
 
 工具文件使用對應目錄，新增工具必須一併撰寫，不得只交付程式：
 
-```text
-doc/tools/
-├── README.md              # 全部工具索引
-└── <tool-name>/
-    ├── tool.md            # 必備：定位、前提、操作、參數、輸入／輸出、失敗處理
-    └── testing.md         # 按需：測試方式、實測紀錄、測試向量及限制
+```mermaid
+flowchart TD
+    t0["doc/tools/"]
+    t1["README.md<br/>全部工具索引"]
+    t0 --> t1
+    t2["&lt;tool-name&gt;/"]
+    t0 --> t2
+    t3["tool.md<br/>必備：定位、前提、操作、參數、輸入／輸出、失敗處理"]
+    t2 --> t3
+    t4["testing.md<br/>按需：測試方式、實測紀錄、測試向量及限制"]
+    t2 --> t4
 ```
 
 `tool.md`需包含shell入口與實作連結、完整可執行範例、成功判定、資料保存與覆寫規則，以及正式／測試／原型定位。相關格式規格、測試與維護文件歸入同一工具目錄，由`tool.md`連結。跨工具的產品需求與架構仍由`doc/design/`及`doc/architecture/`維護，透過連結引用，避免重複規格。
