@@ -25,6 +25,7 @@
 | [活動階段與CSV產出](design/activity-states.md) | 階段狀態、分頁轉碼、資料快照與第二輪工作表銜接 |
 | [工作資料夾與存檔](design/workspace-storage.md) | 選資料夾恢復、按階段確認讀CSV、年度封存與錯誤處理 |
 | [清票與第二輪抽選核心](tools/round-two/tool.md) | 已實作的離線工具、輸入契約、驗證與尚未串接功能 |
+| [本機啟動與版本發布](architecture/local-launch.md) | Mac＋Chrome、Go指定工作目錄、發布包與時間版本號 |
 | [架構方向](architecture/overview.md) | 部署、保存與恢復的提案 |
 | [前端技術選型討論](architecture/frontend-options.md) | 從CSV、分段演出與選配靜態查詢回推離線前端 |
 | [首次規劃紀錄](meetings/2026-10-25-kickoff.md) | 討論來源與當時狀態 |
