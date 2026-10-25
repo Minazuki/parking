@@ -1,6 +1,12 @@
 # 清票與第二輪抽選核心
 
-已實作Python標準函式庫工具`tools/round_two.py`，適用機車、大腳踏車、小腳踏車。它是可獨立驗證的核心，不是完整活動狀態機或直播前端，尚未直接串接Google Sheets、CSV或第二輪工作表。
+已實作Python標準函式庫工具[shell入口](../../../tools/round-two.sh)及[Python實作](../../../tools/round-two/py/main.py)，適用機車、大腳踏車、小腳踏車。它是可獨立驗證的核心，不是完整活動狀態機或直播前端，尚未直接串接Google Sheets、CSV或第二輪工作表。
+
+## 目前定位與保留理由
+
+保留為早期清票／第二輪規則原型與回歸測試參考。`prepare`已涵蓋未繳釋出、空位合併及輸入檢查，目前drand／ChaCha20工具僅測試亂數與抽取順序，尚未取代這些功能。
+
+`draw`仍使用SystemRandom，沒有drand證據或seed重現能力，不能當作目前規劃的正式抽選入口。待TS正式核心涵蓋清票、資格輸入、跳過條件及結果約束，並完成測試遷移後，再移除本原型；保留功能並整理為shell入口及`tools/round-two/py/`實作目錄。
 
 ## 已確認規則
 
@@ -20,8 +26,8 @@
 需要Python 3，無額外套件。範例全部使用虛構戶別，產出寫入被Git忽略的`tmp/`。
 
 ```bash
-python3 tools/round_two.py prepare --input examples/round-two-bicycle.json --output tmp/round-two-prepared.json
-python3 tools/round_two.py draw --input tmp/round-two-prepared.json --output tmp/round-two-result.json
+./tools/round-two.sh prepare --input examples/round-two-bicycle.json --output tmp/round-two-prepared.json
+./tools/round-two.sh draw --input tmp/round-two-prepared.json --output tmp/round-two-result.json
 python3 -m unittest discover -s tests -v
 ```
 
@@ -43,4 +49,4 @@ python3 -m unittest discover -s tests -v
 
 ## 尚待接上
 
-正式活動狀態、第一輪抽選、CSV轉碼、第二輪資格核定、試算表產生、操作介面、完整稽核及直播演出。相關規劃見[活動階段與CSV產出](activity-states.md)。
+正式活動狀態、第一輪抽選、CSV轉碼、第二輪資格核定、試算表產生、操作介面、完整稽核及直播演出。相關規劃見[活動階段與CSV產出](../../design/activity-states.md)。

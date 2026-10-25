@@ -1,0 +1,13 @@
+{
+  "name": "parking-lottery",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mts",
+    "drand": "bash tools/drand-seed.sh"
+  },
+  "dependencies": {
+    "@noble/ciphers": "2.4.0",
+    "drand-client": "1.4.2"
+  }
+}

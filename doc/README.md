@@ -6,6 +6,8 @@
 | --- | --- |
 | [AI 共用指示](ai/instructions.md) | 跨 Agent 工作約定與閱讀入口 |
 | [開發規範](conventions/development.md) | 檔案、輸出與提交慣例 |
+| [工具入口與目錄樣板](conventions/tool-layout.md) | Shell入口、語言子目錄、檔頭用法與help慣例 |
+| [工具文件索引](tools/README.md) | 各工具操作、規格、測試及維護文件的歸檔入口 |
 | [Commit Message規範](conventions/commit-messages.md) | 英文Conventional Commits、type及本專案scope |
 | [需求與範圍](planning/requirements.md) | 已知需求、限制與範圍 |
 | [活動流程](planning/workflow.md) | 登記、兩輪抽籤、繳費與結案 |
@@ -13,12 +15,18 @@
 | [機車位與無障礙配置](planning/motorcycle-spaces.md) | 車位編號、分棟範圍、無障礙分配及拆分條件 |
 | [待辦](planning/backlog.md) | 工作順序及待確認事項 |
 | [前端演出](design/presentation.md) | 現場展示流程與建議行為 |
+| [Seed與可重現性](design/randomness.md) | 每段亂數來源、保存時機、故障恢復及算法待決事項 |
+| [ChaCha20交叉驗證](tools/verify-draw/tool.md) | 相同drand seed交給TS／Go抽取1～150，逐筆比對 |
+| [drand v2驗證工具](tools/drand-seed/tool.md) | quicknet簽章驗證、seed推導、round時間與離線重驗 |
+| [第三方seed測試腳本](tools/random-org-seed/tool.md) | TS取得seed、取回歷史紀錄、簽章驗證及離線格式示例 |
 | [資料規劃](design/data.md) | 登記欄位與資料分工草案 |
 | [行政工作表樣板](design/admin-template.md) | 現行五個分頁、保護範圍、年度複製與交接 |
 | [116年度測試工作表](design/test-workbook-116.md) | 獨立測試副本、情境數量與驗證紀錄 |
 | [活動階段與CSV產出](design/activity-states.md) | 階段狀態、分頁轉碼、資料快照與第二輪工作表銜接 |
-| [清票與第二輪抽選核心](design/round-two-core.md) | 已實作的離線工具、輸入契約、驗證與尚未串接功能 |
+| [工作資料夾與存檔](design/workspace-storage.md) | 選資料夾恢復、按階段確認讀CSV、年度封存與錯誤處理 |
+| [清票與第二輪抽選核心](tools/round-two/tool.md) | 已實作的離線工具、輸入契約、驗證與尚未串接功能 |
 | [架構方向](architecture/overview.md) | 部署、保存與恢復的提案 |
+| [前端技術選型討論](architecture/frontend-options.md) | 從CSV、分段演出與選配靜態查詢回推離線前端 |
 | [首次規劃紀錄](meetings/2026-10-25-kickoff.md) | 討論來源與當時狀態 |
 
 ## 維護原則

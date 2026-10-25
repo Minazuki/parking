@@ -1,0 +1,25 @@
+{
+  "exampleOnly": true,
+  "notice": "SYNTHETIC FORMAT EXAMPLE: not generated or signed by RANDOM.ORG",
+  "jsonrpc": "2.0",
+  "id": "offline-example",
+  "result": {
+    "random": {
+      "method": "generateSignedBlobs",
+      "hashedApiKey": "DEMO_HASH_NOT_REAL",
+      "n": 1,
+      "size": 256,
+      "format": "hex",
+      "data": ["0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"],
+      "license": {"type": "DEMO_ONLY", "text": "Synthetic example; no provider license or signature"},
+      "userData": {"purpose": "parking-seed-format-test", "activityYear": 116, "stage": "test-only"},
+      "completionTime": "2026-10-26 02:00:00Z",
+      "serialNumber": 12345
+    },
+    "signature": "DEMO_SIGNATURE_NOT_VALID",
+    "bitsUsed": 256,
+    "bitsLeft": 0,
+    "requestsLeft": 0,
+    "advisoryDelay": 1000
+  }
+}

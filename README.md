@@ -2,7 +2,7 @@
 
 支援社區年度機車與腳踏車停車位的前置登記、現場抽選、繳費清查及第二輪作業。抽選預計在會議室錄影、直播，透過前端展示參與戶別、車位數量與配位結果。
 
-目前已完成行政試算表樣板與需求規劃；已實作獨立的清票及第二輪抽選核心，完整前端、活動狀態管理、CSV轉碼、繳費單及第二輪工作表產生功能尚未實作，也尚未選定框架或部署方式。
+目前已完成行政試算表樣板與需求規劃；已實作獨立的清票及第二輪抽選核心，完整前端、活動狀態管理、CSV轉碼、繳費單及第二輪工作表產生功能尚未實作，前端方向已選Vite＋Vue 3＋TypeScript＋Three.js，尚未建立前端，部署方式待確認。
 
 ## 行政工作表
 
@@ -47,6 +47,10 @@
 
 ## 文件與協作
 
+TS／Go使用同一筆drand seed抽取1～150的驗證：`./tools/verify-draw.sh --output tmp/draw-check-001`。會保存兩邊完整紀錄並比對，操作與固定規格見[ChaCha20交叉驗證](doc/tools/verify-draw/tool.md)。
+
+drand quicknet v2驗證工具可取得seed、驗證BLS簽章、換算round預定時間及保存原始資料，並支援離線重驗。執行`npm ci`後使用`./tools/drand-seed.sh fetch --output tmp/drand-latest-001`；完整指令與實測見[工具說明](doc/tools/drand-seed/tool.md)。TypeScript工具測試執行`npm test`。
+
 本專案採Documentation as Code，以[文件地圖](doc/README.md)作為需求、規則及設計的入口。AI助理從[共用工作指示](doc/ai/instructions.md)開始；開發與提交分別遵循[開發規範](doc/conventions/development.md)及[Commit Message規範](doc/conventions/commit-messages.md)。
 
-正式住戶名冊、繳費資料及抽選結果不提交Git。`data/`、`exports/`、`tmp/`、`logs/`及`bin/`已排除版本控制。獨立工具使用Python標準函式庫，執行方式見[清票與第二輪核心](doc/design/round-two-core.md)。測試執行`python3 -m unittest discover -s tests -v`；文件變更檢查相對連結並執行`git diff --check`。
+正式住戶名冊、繳費資料及抽選結果不提交Git。`data/`、`exports/`、`tmp/`、`logs/`及`bin/`已排除版本控制。獨立工具使用Python標準函式庫，執行方式見[清票與第二輪核心](doc/tools/round-two/tool.md)。測試執行`python3 -m unittest discover -s tests -v`；文件變更檢查相對連結並執行`git diff --check`。

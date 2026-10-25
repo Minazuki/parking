@@ -1,12 +1,16 @@
 import json
 from pathlib import Path
 import subprocess
-import sys
+import importlib.util
 import tempfile
 import unittest
 from unittest.mock import patch
 
-from tools.round_two import draw, prepare
+module_path = Path(__file__).resolve().parents[1] / "tools/round-two/py/main.py"
+spec = importlib.util.spec_from_file_location("round_two_core", module_path)
+round_two = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(round_two)
+draw, prepare = round_two.draw, round_two.prepare
 
 
 class RoundTwoTests(unittest.TestCase):
@@ -16,7 +20,7 @@ class RoundTwoTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(dir=root / "tmp") as directory:
             prepared = Path(directory) / "prepared.json"
             result = Path(directory) / "result.json"
-            base = [sys.executable, str(root / "tools/round_two.py")]
+            base = [str(root / "tools/round-two.sh")]
             subprocess.run(base + ["prepare", "--input", str(root / "examples/round-two-bicycle.json"), "--output", str(prepared)], check=True, capture_output=True)
             command = base + ["draw", "--input", str(prepared), "--output", str(result)]
             subprocess.run(command, check=True, capture_output=True)
@@ -43,7 +47,7 @@ class RoundTwoTests(unittest.TestCase):
                 prepare("bicycle_large", [], [{"household": "TEST-A", "space": "大1", "paid": paid}], [], True)
 
     def test_no_participants_skips_randomness_and_preserves_spaces(self):
-        with patch("tools.round_two.random.SystemRandom", side_effect=AssertionError("Must not draw")):
+        with patch.object(round_two.random, "SystemRandom", side_effect=AssertionError("Must not draw")):
             result = draw("bicycle_small", [], ["小39"])
         self.assertEqual(result["status"], "skipped_no_participants")
         self.assertEqual(result["remaining_spaces"], ["小39"])

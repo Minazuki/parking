@@ -1,8 +1,10 @@
 # 架構方向
 
-狀態：提案，尚未選定框架、部署或 Google API 整合方式。
+狀態：前端方向已選Vite＋Vue 3＋TypeScript＋Three.js；尚未建立前端。部署啟動、存檔及Google API整合方式待確認。
 
 ## 已知條件
+
+使用者傾向離線網頁，第一輪各段獨立輸出CSV，後續按需轉格式上傳Drive；另有低優先序的戶號查詢與選配3D停車場位置展示。從產出回推的技術候選及現場存檔邊界，見[前端技術選型討論](frontend-options.md)。2026-10-26使用者選定Vite＋Vue 3＋TypeScript＋Three.js方向；使用者較熟悉TypeScript，Three.js保留為可選呈現，2D先交付。
 
 每年約執行一次；使用者不希望維護常駐 VPC；已有 Google Drive 帳號，可上傳檔案與下載 Sheets 資料。現場需要錄影與直播展示。
 

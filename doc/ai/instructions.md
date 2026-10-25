@@ -4,7 +4,7 @@
 
 ## 專案現況
 
-本 repository 用於年度機車與腳踏車停車位抽籤工具。目前有規劃文件及Python標準函式庫的清票／第二輪離線核心，尚無完整前端。執行與測試見[核心說明](../design/round-two-core.md)。行政人員正在前置登記，前端演出是近期優先項目。
+本 repository 用於年度機車與腳踏車停車位抽籤工具。目前有規劃文件及Python標準函式庫的清票／第二輪離線核心，尚無完整前端。執行與測試見[核心說明](../tools/round-two/tool.md)。行政人員正在前置登記，前端演出是近期優先項目。
 
 ## 開始工作
 
@@ -12,6 +12,7 @@
 2. 閱讀 [文件地圖](../README.md)、任務相關主題與 [開發規範](../conventions/development.md)。
 3. 先辨識已確認需求與提案；抽籤資格、算法、繳費條件或架構尚未確認時，不自行宣稱定案。
 4. 修改功能或規劃時同步更新其文件，避免同一規則分散維護。
+   新增工具必須一併建立`doc/tools/<tool-name>/tool.md`及更新[工具索引](../tools/README.md)；相關文件收在對應工具目錄，遵循[工具樣板](../conventions/tool-layout.md)。
 5. 撰寫commit message前閱讀[Commit Message規範](../conventions/commit-messages.md)，依實際staged內容撰寫英文Conventional Commit。
 
 ## 工作邊界
