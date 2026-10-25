@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "algorithm": "parking-draw-chacha20-v2",
+  "nonce": "000000000000000000000000",
+  "initialCounter": 0,
+  "uint32Endian": "big",
+  "poolRemoval": "stable",
+  "status": "skipped",
+  "reason": "no_drawable_pools",
+  "streamHex": "",
+  "pools": [
+    {
+      "id": "motorcycle",
+      "status": "skipped",
+      "reason": "no_participants",
+      "assignments": [],
+      "waitlist": [],
+      "unassignedHouseholds": [],
+      "remainingSpaces": [
+        "86"
+      ]
+    },
+    {
+      "id": "bicycle_large",
+      "status": "skipped",
+      "reason": "no_participants_and_no_candidates",
+      "assignments": [],
+      "waitlist": [],
+      "unassignedHouseholds": [],
+      "remainingSpaces": []
+    },
+    {
+      "id": "bicycle_small",
+      "status": "skipped",
+      "reason": "no_participants_and_no_candidates",
+      "assignments": [],
+      "waitlist": [],
+      "unassignedHouseholds": [],
+      "remainingSpaces": []
+    }
+  ]
+}

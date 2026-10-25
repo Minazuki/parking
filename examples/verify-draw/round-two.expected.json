@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "algorithm": "parking-draw-chacha20-v2",
+  "nonce": "000000000000000000000000",
+  "initialCounter": 0,
+  "uint32Endian": "big",
+  "poolRemoval": "stable",
+  "status": "completed",
+  "reason": null,
+  "streamHex": "ae56a439e258b5c7f954f0831cf775eb66f02906d1bc0109",
+  "pools": [
+    {
+      "id": "motorcycle",
+      "status": "completed",
+      "reason": null,
+      "assignments": [
+        {
+          "household": "TEST-A-001",
+          "spaceId": "86"
+        }
+      ],
+      "waitlist": [
+        {
+          "household": "TEST-B-001",
+          "rank": 1
+        },
+        {
+          "household": "TEST-B-002",
+          "rank": 2
+        }
+      ],
+      "unassignedHouseholds": [],
+      "remainingSpaces": []
+    },
+    {
+      "id": "bicycle_large",
+      "status": "completed",
+      "reason": null,
+      "assignments": [],
+      "waitlist": [
+        {
+          "household": "TEST-B-001",
+          "rank": 1
+        },
+        {
+          "household": "TEST-A-001",
+          "rank": 2
+        }
+      ],
+      "unassignedHouseholds": [],
+      "remainingSpaces": []
+    },
+    {
+      "id": "bicycle_small",
+      "status": "skipped",
+      "reason": "no_participants",
+      "assignments": [],
+      "waitlist": [],
+      "unassignedHouseholds": [],
+      "remainingSpaces": [
+        "小39",
+        "小40"
+      ]
+    }
+  ]
+}

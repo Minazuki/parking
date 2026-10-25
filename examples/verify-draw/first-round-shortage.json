@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "drawRound": 1,
+  "pools": [
+    {
+      "id": "motorcycle_a",
+      "households": [],
+      "candidates": []
+    },
+    {
+      "id": "motorcycle_b",
+      "households": [],
+      "candidates": []
+    },
+    {
+      "id": "bicycle_large",
+      "households": [
+        "TEST-A-001",
+        "TEST-B-001"
+      ],
+      "candidates": [
+        {
+          "type": "space",
+          "spaceId": "大1"
+        }
+      ]
+    },
+    {
+      "id": "bicycle_small",
+      "households": [],
+      "candidates": []
+    }
+  ]
+}

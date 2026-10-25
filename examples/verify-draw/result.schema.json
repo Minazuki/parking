@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ChaCha20 double-draw v2 result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "algorithm",
+    "nonce",
+    "initialCounter",
+    "uint32Endian",
+    "poolRemoval",
+    "status",
+    "reason",
+    "streamHex",
+    "pools"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "algorithm": {
+      "const": "parking-draw-chacha20-v2"
+    },
+    "nonce": {
+      "const": "000000000000000000000000"
+    },
+    "initialCounter": {
+      "const": 0
+    },
+    "uint32Endian": {
+      "const": "big"
+    },
+    "poolRemoval": {
+      "const": "stable"
+    },
+    "status": {
+      "enum": [
+        "completed",
+        "skipped"
+      ]
+    },
+    "reason": {
+      "enum": [
+        null,
+        "no_drawable_pools"
+      ]
+    },
+    "streamHex": {
+      "type": "string",
+      "pattern": "^(?:[0-9a-f]{8})*$"
+    },
+    "pools": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "status",
+          "reason",
+          "assignments",
+          "waitlist",
+          "unassignedHouseholds",
+          "remainingSpaces"
+        ],
+        "properties": {
+          "id": {
+            "enum": [
+              "motorcycle_a",
+              "motorcycle_b",
+              "motorcycle",
+              "bicycle_large",
+              "bicycle_small"
+            ]
+          },
+          "status": {
+            "enum": [
+              "completed",
+              "skipped"
+            ]
+          },
+          "reason": {
+            "enum": [
+              null,
+              "no_participants",
+              "no_candidates",
+              "no_participants_and_no_candidates"
+            ]
+          },
+          "assignments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "household",
+                "spaceId"
+              ],
+              "properties": {
+                "household": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "spaceId": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          "waitlist": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "household",
+                "rank"
+              ],
+              "properties": {
+                "household": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "rank": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "unassignedHouseholds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "remainingSpaces": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "drawRound": 2,
+  "pools": [
+    {
+      "id": "motorcycle",
+      "households": [
+        "TEST-A-001",
+        "TEST-B-001",
+        "TEST-B-002"
+      ],
+      "candidates": [
+        {
+          "type": "space",
+          "spaceId": "86"
+        },
+        {
+          "type": "waitlist",
+          "rank": 1
+        },
+        {
+          "type": "waitlist",
+          "rank": 2
+        }
+      ]
+    },
+    {
+      "id": "bicycle_large",
+      "households": [
+        "TEST-A-001",
+        "TEST-B-001"
+      ],
+      "candidates": [
+        {
+          "type": "waitlist",
+          "rank": 1
+        },
+        {
+          "type": "waitlist",
+          "rank": 2
+        }
+      ]
+    },
+    {
+      "id": "bicycle_small",
+      "households": [],
+      "candidates": [
+        {
+          "type": "space",
+          "spaceId": "小39"
+        },
+        {
+          "type": "space",
+          "spaceId": "小40"
+        }
+      ]
+    }
+  ]
+}

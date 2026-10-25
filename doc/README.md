@@ -16,7 +16,7 @@
 | [待辦](planning/backlog.md) | 工作順序及待確認事項 |
 | [前端演出](design/presentation.md) | 現場展示流程與建議行為 |
 | [Seed與可重現性](design/randomness.md) | 每段亂數來源、保存時機、故障恢復及算法待決事項 |
-| [ChaCha20交叉驗證](tools/verify-draw/tool.md) | 相同drand seed交給TS／Go抽取1～150，逐筆比對 |
+| [ChaCha20交叉驗證](tools/verify-draw/tool.md) | 相同seed與有序多池交給TS／Go雙抽，核對串流、配位及候補 |
 | [drand v2驗證工具](tools/drand-seed/tool.md) | quicknet簽章驗證、seed推導、round時間與離線重驗 |
 | [第三方seed測試腳本](tools/random-org-seed/tool.md) | TS取得seed、取回歷史紀錄、簽章驗證及離線格式示例 |
 | [資料規劃](design/data.md) | 登記欄位與資料分工草案 |

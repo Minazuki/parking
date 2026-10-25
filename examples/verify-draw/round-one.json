@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "drawRound": 1,
+  "pools": [
+    {
+      "id": "motorcycle_a",
+      "households": [
+        "TEST-A-001",
+        "TEST-A-002",
+        "TEST-A-003"
+      ],
+      "candidates": [
+        {
+          "type": "space",
+          "spaceId": "86"
+        },
+        {
+          "type": "space",
+          "spaceId": "87"
+        },
+        {
+          "type": "space",
+          "spaceId": "88"
+        }
+      ]
+    },
+    {
+      "id": "motorcycle_b",
+      "households": [
+        "TEST-B-001",
+        "TEST-B-002"
+      ],
+      "candidates": [
+        {
+          "type": "space",
+          "spaceId": "2"
+        },
+        {
+          "type": "space",
+          "spaceId": "2-1"
+        },
+        {
+          "type": "space",
+          "spaceId": "3"
+        },
+        {
+          "type": "space",
+          "spaceId": "3-1"
+        }
+      ]
+    },
+    {
+      "id": "bicycle_large",
+      "households": [
+        "TEST-A-001"
+      ],
+      "candidates": [
+        {
+          "type": "space",
+          "spaceId": "大1"
+        }
+      ]
+    },
+    {
+      "id": "bicycle_small",
+      "households": [],
+      "candidates": [
+        {
+          "type": "space",
+          "spaceId": "小39"
+        }
+      ]
+    }
+  ]
+}

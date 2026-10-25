@@ -6,7 +6,7 @@
 | --- | --- | --- |
 | [drand-seed](drand-seed/tool.md) | quicknet v2 seed取得、BLS驗證與離線重驗 | [測試紀錄](drand-seed/testing.md) |
 | [random-org-seed](random-org-seed/tool.md) | RANDOM.ORG開發測試，非正式來源 | [測試紀錄](random-org-seed/testing.md) |
-| [verify-draw](verify-draw/tool.md) | 同seed的TS／Go ChaCha20抽取交叉驗證 | [測試紀錄](verify-draw/testing.md) |
+| [verify-draw](verify-draw/tool.md) | 同seed的TS／Go ChaCha20抽取交叉驗證 | [測試紀錄](verify-draw/testing.md)、[v2資料契約](verify-draw/v2-contract.md) |
 | [round-two](round-two/tool.md) | 清票與第二輪規則原型，非正式抽選入口 | 測試指令收錄於工具說明 |
 
 新增工具必須同時新增對應`tool.md`，補入本索引，並讓shell檔頭與help指向該文件。文件內容與完成檢查依[工具入口與目錄樣板](../conventions/tool-layout.md)。

@@ -1,0 +1,198 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Prepared draw pools (v2 tool contract draft)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "drawRound",
+    "pools"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "drawRound": {
+      "enum": [
+        1,
+        2
+      ]
+    },
+    "pools": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/pool"
+      }
+    }
+  },
+  "$defs": {
+    "space": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "spaceId"
+      ],
+      "properties": {
+        "type": {
+          "const": "space"
+        },
+        "spaceId": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "waitlist": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "rank"
+      ],
+      "properties": {
+        "type": {
+          "const": "waitlist"
+        },
+        "rank": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "pool": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "households",
+        "candidates"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "households": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "candidates": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/space"
+              },
+              {
+                "$ref": "#/$defs/waitlist"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "drawRound": {
+            "const": 1
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "pools": {
+            "minItems": 4,
+            "maxItems": 4,
+            "prefixItems": [
+              {
+                "properties": {
+                  "id": {
+                    "const": "motorcycle_a"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "id": {
+                    "const": "motorcycle_b"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "id": {
+                    "const": "bicycle_large"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "id": {
+                    "const": "bicycle_small"
+                  }
+                }
+              }
+            ],
+            "items": {
+              "properties": {
+                "candidates": {
+                  "items": {
+                    "$ref": "#/$defs/space"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "drawRound": {
+            "const": 2
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "pools": {
+            "minItems": 3,
+            "maxItems": 3,
+            "prefixItems": [
+              {
+                "properties": {
+                  "id": {
+                    "const": "motorcycle"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "id": {
+                    "const": "bicycle_large"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "id": {
+                    "const": "bicycle_small"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

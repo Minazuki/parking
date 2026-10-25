@@ -56,7 +56,7 @@ flowchart TD
 
 ## 文件與協作
 
-TS／Go使用同一筆drand seed抽取1～150的驗證：`./tools/verify-draw.sh --output tmp/draw-check-001`。會保存兩邊完整紀錄並比對，操作與固定規格見[ChaCha20交叉驗證](doc/tools/verify-draw/tool.md)。
+TS／Go使用同一筆drand seed進行多池雙抽與候補驗證：`./tools/verify-draw.sh --output tmp/draw-check-001`。會保存兩邊實際消耗串流與結果並比對，亦可用--expected核對既有結果，操作與固定規格見[ChaCha20交叉驗證](doc/tools/verify-draw/tool.md)。
 
 drand quicknet v2驗證工具可取得seed、驗證BLS簽章、換算round預定時間及保存原始資料，並支援離線重驗。執行`npm ci`後使用`./tools/drand-seed.sh fetch --output tmp/drand-latest-001`；完整指令與實測見[工具說明](doc/tools/drand-seed/tool.md)。TypeScript工具測試執行`npm test`。
 
