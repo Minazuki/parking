@@ -1,0 +1,18 @@
+# Local inputs and generated outputs
+/data/
+/exports/
+/logs/
+/tmp/
+/bin/
+
+# Credentials and local settings
+.env
+.env.*
+!.env.example
+
+# macOS
+.DS_Store
+
+# Python runtime cache
+__pycache__/
+*.py[cod]

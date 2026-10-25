@@ -1,0 +1,31 @@
+# 文件地圖與 DaC 維護方式
+
+本專案採 Documentation as Code（DaC）：以 repository 內的 Markdown 作為需求、設計與工作規範的可版本追蹤來源。沿用 `~/script` 的薄 Agent 入口、共用指示與分類文件結構，內容依本專案調整。
+
+| 路徑 | 責任 |
+| --- | --- |
+| [AI 共用指示](ai/instructions.md) | 跨 Agent 工作約定與閱讀入口 |
+| [開發規範](conventions/development.md) | 檔案、輸出與提交慣例 |
+| [Commit Message規範](conventions/commit-messages.md) | 英文Conventional Commits、type及本專案scope |
+| [需求與範圍](planning/requirements.md) | 已知需求、限制與範圍 |
+| [活動流程](planning/workflow.md) | 登記、兩輪抽籤、繳費與結案 |
+| [116年度抽選時程](planning/schedule-116.md) | 登記、第一輪抽籤與第一輪繳費日期 |
+| [機車位與無障礙配置](planning/motorcycle-spaces.md) | 車位編號、分棟範圍、無障礙分配及拆分條件 |
+| [待辦](planning/backlog.md) | 工作順序及待確認事項 |
+| [前端演出](design/presentation.md) | 現場展示流程與建議行為 |
+| [資料規劃](design/data.md) | 登記欄位與資料分工草案 |
+| [行政工作表樣板](design/admin-template.md) | 現行五個分頁、保護範圍、年度複製與交接 |
+| [116年度測試工作表](design/test-workbook-116.md) | 獨立測試副本、情境數量與驗證紀錄 |
+| [活動階段與CSV產出](design/activity-states.md) | 階段狀態、分頁轉碼、資料快照與第二輪工作表銜接 |
+| [清票與第二輪抽選核心](design/round-two-core.md) | 已實作的離線工具、輸入契約、驗證與尚未串接功能 |
+| [架構方向](architecture/overview.md) | 部署、保存與恢復的提案 |
+| [首次規劃紀錄](meetings/2026-10-25-kickoff.md) | 討論來源與當時狀態 |
+
+## 維護原則
+
+- 主題文件維護目前有效內容；會議紀錄保留當時的討論與來源，不取代現行規格。
+- 區分「已確認需求」、「提案」及「待確認」，未獲確認的建議不可寫成既定規則。
+- 變更需求或設計時，同步修改對應主題文件及受影響的待辦。
+- 重要技術決策定案後，可在 `doc/architecture/` 新增決策紀錄，記載背景、方案、理由與影響；目前不建立假定已定案的 ADR。
+- 文件使用繁體中文與相對連結。新增主題時更新本索引。
+- 文件只放虛構範例；真實住戶、登記、繳費與抽籤資料不進 Git。

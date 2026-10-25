@@ -1,0 +1,10 @@
+{
+  "category": "bicycle_large",
+  "review_confirmed": true,
+  "participants": ["TEST-C", "TEST-D"],
+  "allocations": [
+    {"household": "TEST-A", "space": "大1", "paid": true},
+    {"household": "TEST-B", "space": "大2", "paid": false}
+  ],
+  "vacant_spaces": ["大3"]
+}
