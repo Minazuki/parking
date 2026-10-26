@@ -9,6 +9,9 @@ export function demoArrivals(floor: ParkingFloor): ArrivalRecord[] {
   return [...targets.map((spaceId, i) => ({ id: `${floor}:${i}`, household: `999-${i + 1}`, stagingIndex: i, spaceId })),
     ...[1, 2].map(rank => ({ id: `${floor}:wait:${rank}`, household: `999-${rank + 6}`, rank }))]
 }
+export function fullArrivalRecords(spaces: ParkingSpace[]): ArrivalRecord[] {
+  return spaces.map((space, i) => ({ id: `coverage:${space.key}`, household: `998-${i + 1}`, spaceId: space.id, stagingIndex: i }))
+}
 export function arrivalBounds(floor: ParkingFloor): Point[] {
   return floor === 'motorcycle' ? [[100, 205], [270, 365]] : [[-75, 100], [130, 290]]
 }
@@ -17,13 +20,20 @@ function approach(space: ParkingSpace): Point[] {
   const x = space.x / layout.scale + layout.origin[0], y = space.z / layout.scale + layout.origin[1]
   if (space.floor === 'bicycle') {
     if (space.category === 'bicycle_small') return [[230, 173], [230, 365], [232, 490], [232, 550], [x, 594], [x, y]]
-    const lane = Number(space.baseId) <= 14 ? 173 : 365
-    return [[230, 173], [230, lane], [x, lane], [x, y]]
+    if (Number(space.baseId) <= 14) return [[x, 173], [x, y]]
+    return [[230, 173], [230, 365], [x, 365], [x, y]]
   }
   const n = Number(space.baseId)
-  if (n >= 4 && n <= 13) return [[470, 420], [365, 420], [365, y], [x, y]]
-  if (n >= 15 && n <= 20 || n === 14) return [[470, 420], [470, 465], [105, 465], [105, 408], [x, 408], [x, y]]
+  if (n >= 4 && n <= 13 && n !== 9) return [[470, 420], [365, 420], [365, y], [x, y]]
+  if (n >= 15 && n <= 20) return [[470, 515], [90, 515], [90, 400], [x, 400], [x, y]]
+  if (n === 14 && space.split) return [[470, 420], [350, 420], [350, 460], [x, 460], [x, y]]
+  if (n === 14) return [[470, 420], [350, 420], [350, y], [x, y]]
   if (n === 1) return [[470, 420], [x, 420], [x, y]]
+  if (space.group === '梯間東側上排' || space.group === '梯間東側中排') return [[470, 420], [885, 420], [885, 296], [x, 296], [x, y]]
+  if (space.group === '右中上列') return [[470, 420], [x, 420], [x, y]]
+  if (space.group === '梯間東側下排') return [[470, 420], [x, 420], [x, y]]
+  if (n === 2 || n === 3) return [[470, 420], [470, 405], [x, 405], [x, y]]
+  if (space.group === '左側島下列') return [[470, 515], [x, 515], [x, y]]
   if (n >= 114 || n === 9) return [[470, 420], [885, 420], [885, y], [x, y]]
   if (n >= 95 && n <= 113 || n === 2 || n === 3) return [[470, 515], [x, 515], [x, y]]
   if (n >= 21 && n <= 33 || n >= 79 && n <= 94) return [[470, 515], [x, 515], [x, y]]
@@ -32,9 +42,17 @@ function approach(space: ParkingSpace): Point[] {
 }
 export function createArrivalCards(floor: ParkingFloor, records: ArrivalRecord[], spaces = createParkingSpaces(floor)): ArrivalCard[] {
   const layout = getParkingLayout(floor)
+  const assignedCount = records.filter(r => !r.rank).length
+  const waitingCount = records.filter(r => r.rank).length
+  const assignedColumns = Math.max(3, Math.ceil(Math.sqrt(assignedCount * 1.4)))
+  const waitingColumns = Math.max(3, Math.ceil(Math.sqrt(waitingCount * 1.4)))
   return records.map((record, i) => {
     const slot = record.rank ? record.rank - 1 : record.stagingIndex ?? i
-    const start: Point = floor === 'motorcycle' ? [140 + slot % 3 * 45, (record.rank ? 225 : 290) + Math.floor(slot / 3) * 32] : [-40 + slot % 3 * 48, (record.rank ? 110 : 175) + Math.floor(slot / 3) * 44]
+    const columns = record.rank ? waitingColumns : assignedColumns
+    const rows = Math.ceil((record.rank ? waitingCount : assignedCount) / columns)
+    const dx = Math.min(floor === 'motorcycle' ? 45 : 48, 140 / Math.max(1, columns - 1))
+    const dy = Math.min(floor === 'motorcycle' ? 32 : 44, (record.rank ? 45 : 85) / Math.max(1, rows - 1))
+    const start: Point = floor === 'motorcycle' ? [120 + slot % columns * dx, (record.rank ? 220 : 280) + Math.floor(slot / columns) * dy] : [-60 + slot % columns * dx, (record.rank ? 110 : 175) + Math.floor(slot / columns) * dy]
     const source: Point[] = [start]
     let parkedHeading = 0
     if (record.spaceId) {
@@ -45,6 +63,12 @@ export function createArrivalCards(floor: ParkingFloor, records: ArrivalRecord[]
     }
     return { ...record, floor, parkedHeading, delay: (record.stagingIndex ?? i) * 0.38, route: source.map(p => worldPoint(layout, p)) }
   })
+}
+export function arrivalDuration(cards: ArrivalCard[]): number {
+  return Math.max(30, ...cards.map(c => 1.2 + c.delay + c.route.slice(1).reduce((total, point, i) => {
+    const previous = c.route[i]!
+    return total + Math.hypot(point[0] - previous[0], point[1] - previous[1])
+  }, 0) / 5 + 0.5))
 }
 export function cardPosition(card: ArrivalCard, seconds: number): { position: [number, number, number]; arrived: boolean; heading: number } {
   const start = card.route[0]!

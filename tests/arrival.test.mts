@@ -33,3 +33,25 @@ test('querying one household preserves its staging location and departure delay'
   const [single] = createArrivalCards('motorcycle', records.filter(r => r.household === '999-3'))
   assert.deepEqual(single, all.find(c => c.household === '999-3'))
 })
+test('east upper and middle rows approach from the aisle without crossing other spaces', () => {
+  const spaces = createParkingSpaces('motorcycle')
+  const targets = spaces.filter(s => ['梯間東側上排', '梯間東側中排'].includes(s.group))
+  for (const target of targets) {
+    const [card] = createArrivalCards('motorcycle', [{ id: 'test', household: '999-3', spaceId: target.id }])
+    const approach = card!.route.slice(-4)
+    for (let i = 1; i < approach.length; i++) {
+      const a = approach[i - 1]!, b = approach[i]!
+      const steps = Math.ceil(Math.hypot(b[0] - a[0], b[1] - a[1]) / 0.05)
+      for (let step = 0; step <= steps; step++) {
+        const t = step / steps, x = a[0] + (b[0] - a[0]) * t, z = a[1] + (b[1] - a[1]) * t
+        for (const other of spaces) {
+          if (other.id === target.id) continue
+          const dx = x - other.x, dz = z - other.z
+          const localX = Math.cos(other.rotation) * dx - Math.sin(other.rotation) * dz
+          const localZ = Math.sin(other.rotation) * dx + Math.cos(other.rotation) * dz
+          assert.ok(Math.abs(localX) >= other.width / 2 || Math.abs(localZ) >= other.depth / 2, `${target.id} crosses ${other.id}`)
+        }
+      }
+    }
+  }
+})

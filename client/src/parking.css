@@ -71,3 +71,14 @@
 .arrival-active-info { padding: 10px; background: #fff8df; border-radius: 8px; }
 .arrival-active-info button, .arrival-select { border: 0; background: transparent; color: #176354; cursor: pointer; text-decoration: underline; font: inherit; }
 .arrival-active-info button { display: block; margin-top: 5px; }
+
+.arrival-source { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.arrival-source label { flex-basis: 100%; }
+.arrival-panel select { padding: 8px; border: 1px solid #cbd7ce; border-radius: 6px; background: white; max-width: 100%; }
+
+.arrival-playback { display: grid; gap: 8px; margin: 14px 0; font-size: 13px; }
+.arrival-playback input { width: 100%; }
+
+@media(min-width:761px) {
+  .parking-stage:not(:fullscreen) { position: sticky; top: 12px; }
+}

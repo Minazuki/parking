@@ -6,6 +6,7 @@ export function useParkingScene() {
   const floor = ref<ParkingFloor>('motorcycle')
   const view = ref<'oblique' | 'top'>('oblique')
   const split = ref(false)
+  const configuredSplits = ref<string[] | null>(null)
   const filter = ref<ParkingCategory | 'all'>('all')
   const selectedKey = ref<string | null>(null)
   const query = ref('')
@@ -14,7 +15,7 @@ export function useParkingScene() {
   const focusSignal = ref(0)
   const webglError = ref(false)
   const layout = computed(() => getParkingLayout(floor.value))
-  const spaces = computed(() => createParkingSpaces(floor.value, split.value ? accessibleIds : []))
+  const spaces = computed(() => createParkingSpaces(floor.value, configuredSplits.value ?? (split.value ? accessibleIds : [])))
   const selected = computed(() => spaces.value.find(s => s.key === selectedKey.value))
   const filters = computed(() => (floor.value === 'motorcycle' ? ['motorcycle_a', 'motorcycle_b'] : ['bicycle_large', 'bicycle_small']).map(id => ({ id: id as ParkingCategory, label: categoryNames[id as ParkingCategory], count: spaces.value.filter(s => s.category === id).length, color: categoryColors[id as ParkingCategory] })))
   const visibleSpaces = computed(() => spaces.value.map(space => ({
@@ -40,5 +41,5 @@ export function useParkingScene() {
   }
   function resetCamera() { resetSignal.value++ }
   return { floor, view, split, filter, selectedKey, query, error, resetSignal, focusSignal, webglError,
-    layout, spaces, visibleSpaces, selected, filters, changeFloor, setSplit, select, locate, resetCamera, categoryNames }
+    configuredSplits, layout, spaces, visibleSpaces, selected, filters, changeFloor, setSplit, select, locate, resetCamera, categoryNames }
 }

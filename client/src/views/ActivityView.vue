@@ -82,6 +82,7 @@ onUnmounted(() => { if (clock) clearInterval(clock) })
           <template v-else-if="vm.selectedPhase === 'first' || vm.selectedPhase === 'second'">
             <div class="pool-tabs" role="group" aria-label="車位類型"><button v-for="pool in vm.pools" :key="pool.id" :class="{ active: pool.id === vm.selectedPool?.id }" :aria-pressed="pool.id === vm.selectedPool?.id" @click="vm.selectPool(pool.id)">{{ vm.poolNames[pool.id] }}</button></div>
             <SeedEvidence :seed="vm.seed" :pending="vm.drawing" :pressed-at="vm.buttonPressedAt" :url="vm.seedUrl" :delay="vm.seedDelaySeconds" />
+            <a v-if="vm.poolResult" class="button" :href="`?view=parking&source=activity&round=${vm.round}&pool=${vm.selectedPool?.id}`">播放此梯次3D進場 ↗</a>
             <PoolOverview v-if="vm.selectedPool" :pool="vm.selectedPool" :result="vm.poolResult" :round="vm.round" :excluded="vm.excludedHouseholds" :accessible="vm.poolAccessible" :space-count="vm.realSpaces.length" :waitlist-count="vm.waitlistSlots.length" />
           </template>
 

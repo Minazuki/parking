@@ -24,7 +24,7 @@ function createBubbleTexture(below: boolean) {
 const texture = createBubbleTexture(false), belowTexture = createBubbleTexture(true)
 const anchor = new Vector3()
 const material = markRaw(new SpriteMaterial({ map: texture, transparent: true, depthTest: false, depthWrite: false, toneMapped: false }))
-const sprite = markRaw(new Sprite(material)); sprite.center.set(0.5, 0); sprite.renderOrder = 1000; sprite.raycast = () => {}
+const sprite = markRaw(new Sprite(material)); sprite.center.set(0.5, 0); sprite.renderOrder = 1000; sprite.raycast = () => {}; sprite.pointerEvents = 'none'
 const { camera, sizes } = useTres()
 const { onBeforeRender } = useLoop()
 onBeforeRender(() => {

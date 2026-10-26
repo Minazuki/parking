@@ -81,3 +81,50 @@ test('real Go API initializes and imports fictional CSV through the Vite proxy w
     await rm(root, { recursive: true, force: true })
   }
 })
+
+test('real Go API replays saved second-round results without changing checkpoint files', async ({ page }) => {
+  test.setTimeout(90_000)
+  const root = await mkdtemp(join(tmpdir(), 'parking-saved-view-'))
+  const binary = join(root, 'parking'), workspace = join(root, 'annual')
+  const children: ReturnType<typeof track>[] = []
+  try {
+    await execute('go', ['build', '-o', binary, './src'], { cwd: fileURLToPath(new URL('../../server', import.meta.url)), timeout: 60_000 })
+    await cp(new URL('../../examples/workspace', import.meta.url), workspace, { recursive: true })
+    const before = await Promise.all(Array.from({ length: 7 }, (_, n) => readFile(join(workspace, `checkpoints/${n}/state.json`), 'utf8')))
+    const frontendPort = await unusedPort(), frontendUrl = `http://127.0.0.1:${frontendPort}`
+    const backend = track(spawn(binary, ['server', '--workspace', workspace, '--addr', '127.0.0.1:0', '--dev-origin', frontendUrl, '--no-browser']))
+    children.push(backend)
+    await expect.poll(() => /Parking backend: (http:\/\/\S+)/.exec(backend.output)?.[1] ?? backend.error).toMatch(/^http:\/\/127\.0\.0\.1:/)
+    const address = /Parking backend: (http:\/\/\S+)/.exec(backend.output)![1]!
+    const viteEntry = join(dirname(require.resolve('vite/package.json')), 'bin/vite.js')
+    const frontend = track(spawn(process.execPath, [viteEntry, '--port', String(frontendPort)], {
+      cwd: fileURLToPath(new URL('../../client', import.meta.url)), env: { ...process.env, PARKING_API_TARGET: address },
+    }))
+    children.push(frontend)
+    await expect.poll(() => frontend.output.includes(frontendUrl) ? 'ready' : frontend.error).toBe('ready')
+    const writes: string[] = []
+    await page.route('**/api/v1/**', async route => {
+      if (route.request().method() !== 'GET') { writes.push(route.request().url()); await route.abort() }
+      else await route.continue()
+    })
+    await page.goto(`${frontendUrl}/?view=parking&source=activity&round=2&pool=motorcycle`)
+    await expect(page.getByLabel('播放梯次')).toHaveValue('motorcycle')
+    await expect(page.locator('.parking-canvas')).toHaveAttribute('data-space-count', '153')
+    await page.getByRole('button', { name: '整批進場', exact: true }).click()
+    await expect(page.locator('.parking-canvas')).toHaveAttribute('data-arrival-count', '4')
+    await page.getByRole('button', { name: '顯示結果', exact: true }).click()
+    await page.getByLabel('查詢戶號（目前梯次）').fill('997-3')
+    await page.getByRole('button', { name: '播放', exact: true }).click()
+    await page.getByRole('button', { name: '顯示結果', exact: true }).click()
+    await expect(page.locator('.arrival-active-info')).toContainText('車位 149')
+    await page.reload()
+    await expect(page.getByLabel('播放梯次')).toHaveValue('motorcycle')
+    await expect(page.locator('.parking-canvas')).toHaveAttribute('data-arrival-enabled', 'false')
+    const after = await Promise.all(Array.from({ length: 7 }, (_, n) => readFile(join(workspace, `checkpoints/${n}/state.json`), 'utf8')))
+    expect(after).toEqual(before)
+    expect(writes).toEqual([])
+  } finally {
+    for (const child of children.reverse()) await child.stop()
+    await rm(root, { recursive: true, force: true })
+  }
+})

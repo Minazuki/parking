@@ -1,0 +1,41 @@
+import { expect, test } from '@playwright/test'
+import { readFileSync } from 'node:fs'
+const load = (stage: number) => JSON.parse(readFileSync(new URL(`../../examples/workspace/checkpoints/${stage}/state.json`, import.meta.url), 'utf8'))
+const activity = JSON.parse(readFileSync(new URL('../../examples/workspace/activity.json', import.meta.url), 'utf8'))
+test('saved results use GET only, switch rounds and pools, and preserve split spaces', async ({ page }) => {
+  const writes: string[] = [], errors: string[] = []
+  page.on('pageerror', e => errors.push(e.message))
+  await page.route('**/api/v1/**', async route => {
+    if (route.request().method() !== 'GET') { writes.push(route.request().url()); await route.abort(); return }
+    const path = new URL(route.request().url()).pathname
+    const value = path.endsWith('/status') ? { version: 'dev', workspace: '/fictional', currentStage: 6, activity } : load(Number(path.split('/').at(-1)))
+    await route.fulfill({ json: value })
+  })
+  await page.goto('/?view=parking&source=activity&round=1&pool=motorcycle_b')
+  const canvas = page.locator('.parking-canvas')
+  await expect(page.getByLabel('播放梯次')).toHaveValue('motorcycle_b')
+  await expect(canvas).toHaveAttribute('data-space-count', '153')
+  await page.getByRole('button', { name: '整批進場', exact: true }).click()
+  await expect(canvas).toHaveAttribute('data-arrival-count', '2')
+  await page.getByLabel('查詢戶號（目前梯次）').fill('997-3')
+  await page.getByRole('button', { name: '播放', exact: true }).click()
+  await expect(canvas).toHaveAttribute('data-active-arrival', '997-3')
+  await page.getByRole('button', { name: '顯示結果', exact: true }).click()
+  await expect(page.locator('.arrival-active-info')).toContainText('車位 8')
+  await page.getByLabel('播放梯次').selectOption('bicycle_small')
+  await expect(canvas).toHaveAttribute('data-floor', 'bicycle')
+  await expect(page.getByRole('button', { name: '整批進場', exact: true })).toBeDisabled()
+  await expect(page.getByText(/此梯次略過/)).toBeVisible()
+  await page.getByLabel('存檔輪次').selectOption('2')
+  await page.getByRole('button', { name: '讀取活動存檔', exact: true }).click()
+  await expect(page.getByLabel('播放梯次')).toHaveValue('motorcycle')
+  await page.getByRole('button', { name: '整批進場', exact: true }).click()
+  await expect(canvas).toHaveAttribute('data-arrival-count', '4')
+  await page.getByRole('button', { name: '顯示結果', exact: true }).click()
+  await page.screenshot({ path: '../tmp/saved-arrivals-second.png' })
+  await page.getByRole('button', { name: '切回示範', exact: true }).click()
+  await expect(page.getByLabel('查詢戶號（示範）')).toBeVisible()
+  await expect(canvas).toHaveAttribute('data-space-count', '150')
+  expect(writes).toEqual([])
+  expect(errors).toEqual([])
+})
