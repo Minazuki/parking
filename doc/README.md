@@ -32,6 +32,7 @@
 | [存檔Schema與唯讀驗證](design/checkpoint-schema.md) | 0至6欄位契約、完整性檢查及存檔重算入口 |
 | [工作資料夾與存檔](design/workspace-storage.md) | 選資料夾恢復、按階段確認讀CSV、年度封存與錯誤處理 |
 | [清票與第二輪抽選核心](tools/round-two/tool.md) | 已實作的離線工具、輸入契約、驗證與尚未串接功能 |
+| [手動CI發布](architecture/ci-release.md) | 指定commit建置macOS arm64、SHA-256、tag與GitHub Release |
 | [本機啟動與版本發布](architecture/local-launch.md) | Mac＋Chrome、Go指定工作目錄、發布包與時間版本號 |
 | [應用程式架構規範](architecture/application-patterns.md) | Gin三層、Vue 3 MVVM及TresJS整合 |
 | [Cobra CLI與版本資訊](architecture/cli.md) | server／version命令、debug／release metadata及Wire組裝 |

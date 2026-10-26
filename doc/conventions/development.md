@@ -33,3 +33,7 @@ Go CLI採Cobra，root command用於help，不預設啟動server；版本與Wire�
 ## 驗證
 
 目前文件檢查包括相對連結、狀態標示、差異與行尾空白。實作階段依風險驗證名單檢查、配位約束、保存與恢復，正式抽籤資料不得作為自動測試輸入。
+
+## GitHub Actions驗證
+
+CI runner與Action設定以官方runner-images文件及各Action的action.yml／README／release為準；使用gh api確認遠端權限、workflow及run／job結果，並以實際建置與發布驗證。actionlint僅輔助靜態檢查，其內建清單落後或忽略警告皆不構成runner可用性證明。發布流程見[手動CI發布](../architecture/ci-release.md)。

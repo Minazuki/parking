@@ -1,0 +1,139 @@
+name: Build release
+run-name: Release commit ${{ inputs.commit }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit:
+        description: 'Full 40-character commit SHA to build from this repository'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: parking-release
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: xcode-27
+    timeout-minutes: 30
+    outputs:
+      commit: ${{ steps.metadata.outputs.commit }}
+      tag: ${{ steps.metadata.outputs.tag }}
+      package: ${{ steps.metadata.outputs.package }}
+    steps:
+      - name: Validate commit input
+        shell: bash
+        env:
+          SOURCE_COMMIT: ${{ inputs.commit }}
+        run: |
+          set -euo pipefail
+          [[ "$SOURCE_COMMIT" =~ ^[0-9a-fA-F]{40}$ ]] || { echo 'Enter a full 40-character commit SHA.' >&2; exit 1; }
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.commit }}
+          persist-credentials: false
+      - name: Fix source and build timestamp
+        id: metadata
+        shell: bash
+        env:
+          SOURCE_COMMIT: ${{ inputs.commit }}
+        run: |
+          set -euo pipefail
+          commit="$(git rev-parse HEAD)"
+          [[ "$commit" == "$(printf '%s' "$SOURCE_COMMIT" | tr 'A-F' 'a-f')" ]]
+          [[ "$(uname -m)" == arm64 ]]
+          epoch="$(date +%s)"
+          version="$(TZ=Asia/Taipei date -r "$epoch" +%Y.%m%d.%H%M)"
+          echo "PARKING_BUILD_EPOCH=$epoch" >> "$GITHUB_ENV"
+          echo "commit=$commit" >> "$GITHUB_OUTPUT"
+          echo "tag=v$version" >> "$GITHUB_OUTPUT"
+          echo "package=parking-release-v$version" >> "$GITHUB_OUTPUT"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: server/go.mod
+          cache-dependency-path: |
+            server/go.sum
+            schemas/go.sum
+      - run: npm ci
+      - name: Build embedded application
+        run: ./script/build-release.sh
+      - name: Package and verify checksums
+        shell: bash
+        env:
+          PACKAGE: ${{ steps.metadata.outputs.package }}
+          SOURCE_COMMIT: ${{ steps.metadata.outputs.commit }}
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'JS'
+          import { readFileSync } from 'node:fs'
+          const manifest = JSON.parse(readFileSync(`dist/${process.env.PACKAGE}/manifest.json`, 'utf8'))
+          if (manifest.gitHash !== process.env.SOURCE_COMMIT || manifest.os !== 'darwin' || manifest.arch !== 'arm64' || manifest.frontendEmbedded !== true) {
+            throw new Error('Release manifest does not match the requested source and platform')
+          }
+          JS
+          mkdir -p dist/release-assets
+          (cd dist && shasum -a 256 "$PACKAGE/parking") > "dist/release-assets/$PACKAGE-darwin-arm64-binary.sha256"
+          COPYFILE_DISABLE=1 tar -czf "dist/release-assets/$PACKAGE-darwin-arm64.tar.gz" -C dist "$PACKAGE"
+          cp "dist/$PACKAGE/manifest.json" dist/release-assets/manifest.json
+          (cd dist/release-assets && shasum -a 256 "$PACKAGE-darwin-arm64.tar.gz" > "$PACKAGE-darwin-arm64.tar.gz.sha256")
+          (cd dist && shasum -a 256 -c "release-assets/$PACKAGE-darwin-arm64-binary.sha256")
+          (cd dist/release-assets && shasum -a 256 -c "$PACKAGE-darwin-arm64.tar.gz.sha256")
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-assets
+          path: dist/release-assets/
+          if-no-files-found: error
+          retention-days: 7
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: release-assets
+          path: release-assets
+      - name: Create tag and release with assets
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          SOURCE_COMMIT: ${{ needs.build.outputs.commit }}
+          TAG: ${{ needs.build.outputs.tag }}
+          PACKAGE: ${{ needs.build.outputs.package }}
+        run: |
+          set -euo pipefail
+          # A tag or release with the same minute version is never overwritten.
+          if gh api "repos/$GH_REPO/git/ref/tags/$TAG" > /dev/null 2> lookup-error.txt; then
+            echo "Tag already exists: $TAG" >&2
+            exit 1
+          elif ! grep -q 'HTTP 404' lookup-error.txt; then
+            cat lookup-error.txt >&2
+            exit 1
+          fi
+          binary_hash="$(cut -d ' ' -f 1 "release-assets/$PACKAGE-darwin-arm64-binary.sha256")"
+          cat > release-notes.md <<EOF
+          Source commit: $SOURCE_COMMIT
+          Platform: macOS arm64
+          Executable SHA-256: $binary_hash
+
+          Extract the archive, then run ./start.sh --workspace /path/to/workspace.
+          Verify the archive with shasum -a 256 -c $PACKAGE-darwin-arm64.tar.gz.sha256.
+          After extraction, verify the executable with shasum -a 256 -c $PACKAGE-darwin-arm64-binary.sha256.
+          EOF
+          # Keep the release a draft until all assets have been uploaded.
+          gh release create "$TAG" release-assets/* --target "$SOURCE_COMMIT" \
+            --title "$PACKAGE" --notes-file release-notes.md --draft
+          gh release edit "$TAG" --draft=false
+          gh release view "$TAG" --json url --jq .url >> "$GITHUB_STEP_SUMMARY"

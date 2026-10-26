@@ -73,3 +73,7 @@ manifest.json包含schemaVersion、version、gitHash、buildTime、os、arch、f
 已實測預設dist產物、帶空白路徑、help／version、同版本拒絕覆寫，以及僅保留系統PATH啟動。Chrome直接連發布包的Go服務，載入內嵌3D及保存結果，沒有Vite proxy、外部資源請求或寫入API；0至6的JSON前後相同。後端race測試涵蓋API與靜態資源邊界。
 
 相關：[CLI與版本](cli.md)、[工作資料夾](../design/workspace-storage.md)、[現場模式](../design/live-operation.md)。
+
+## GitHub手動發布
+
+可由Actions指定完整commit SHA，沿用本機腳本建置macOS arm64，產生tag、壓縮包與執行檔SHA-256並發布GitHub Release，見[手動CI發布](ci-release.md)。PR與push自動測試尚未加入。
