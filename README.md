@@ -71,3 +71,11 @@ drand quicknet v2驗證工具可取得seed、驗證BLS簽章、換算round預定
 本專案採Documentation as Code，以[文件地圖](doc/README.md)作為需求、規則及設計的入口。AI助理從[共用工作指示](doc/ai/instructions.md)開始；開發與提交分別遵循[開發規範](doc/conventions/development.md)及[Commit Message規範](doc/conventions/commit-messages.md)。
 
 正式住戶名冊、繳費資料及抽選結果不提交Git。`data/`、`exports/`、`tmp/`、`logs/`及`bin/`已排除版本控制。獨立工具使用Python標準函式庫，執行方式見[清票與第二輪核心](doc/tools/round-two/tool.md)。測試執行`python3 -m unittest discover -s tests -v`；文件變更檢查相對連結並執行`git diff --check`。
+
+住戶查詢網站可直接從年度JSON存檔離線建置，不需先啟動伺服器：
+
+```sh
+./script/build-query.sh --workspace ~/testwork-waitlist
+```
+
+預設依完整斷點輸出第一輪或兩輪綜合版，產物位於dist的parking-query版本目錄；指定輪次、預覽與上傳方式見[build-query操作說明](doc/tools/build-query/tool.md)。建置不會自動上傳Cloudflare。

@@ -81,6 +81,9 @@
 
 - [ ] 現場Wi-Fi存取drand、投影字級／解析度、完整演練、寫檔失敗及中斷後恢復實測。
 - [ ] 年度資料與對應發布包的備份／還原演練、Drive封存位置及隔年交接說明。
-- [ ] 以最終有效JSON配置產生獨立戶號查詢靜態頁，沿用現有3D模型與進場路線。
+- [x] 確認住戶查詢採Cloudflare Pages免費靜態託管；離線腳本建置、Wrangler CLI手動上傳，第一輪及第二輪兩次更新同一網址，見[查詢發布規格](../design/resident-query.md)。
+- [x] 實作script/build-query.sh、第一輪／兩輪綜合公開資料、獨立Vue查詢頁及3D單戶進場；Go與Chrome驗證完成，尚未部署Pages。
+- [x] 建立115歷年相容性預覽Pages專案parking115、main production及年度子網域，透過Wrangler上傳並驗證靜態查詢。
+- [ ] 建立116年度Pages專案及子網域，活動後實測兩次正式CLI部署與快取更新。
 
 詳細規格由[文件地圖](../README.md)連至各主題；本檔追蹤狀態與工作順序，不重複維護完整規格。

@@ -29,3 +29,9 @@ node_modules/
 
 # Versioned application release packages
 /dist/
+
+# Independent resident query build (normal builds use root dist/)
+/client/query/dist/
+
+# Local historical query fixtures contain real household allocations
+/testdata/previous-year/*.json

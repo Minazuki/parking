@@ -4,6 +4,8 @@
 
 | 入口 | 用途 |
 | --- | --- |
+| ./script/preview-query.sh | 以本機HTTP及Chrome預覽已建置查詢網站，見[操作說明](../doc/tools/preview-query/tool.md) |
+| ./script/build-query.sh | 從年度存檔離線建置獨立住戶查詢網站，見[操作說明](../doc/tools/build-query/tool.md) |
 | ./script/build-release.sh | 完整Vue內嵌Go發布包，預設dist/parking-release-vYYYY.MMDD.HHmm |
 | ./script/run-server.sh | Go debug開發、Cobra help／version／server |
 | ./script/build-server.sh | Go執行檔與版本metadata輔助；完整發布請使用build-release |

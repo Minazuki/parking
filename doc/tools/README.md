@@ -10,3 +10,9 @@
 | [round-two](round-two/tool.md) | 清票與第二輪規則原型，非正式抽選入口 | 測試指令收錄於工具說明 |
 
 新增工具必須同時新增對應`tool.md`，補入本索引，並讓shell檔頭與help指向該文件。文件內容與完成檢查依[工具入口與目錄樣板](../conventions/tool-layout.md)。
+
+## 本機網站建置
+
+- [build-query](build-query/tool.md)：從驗證過的年度存檔離線輸出第一輪或兩輪住戶查詢網站，入口位於script/build-query.sh。
+
+- [preview-query](preview-query/tool.md)：以loopback HTTP及Chrome開啟查詢網站，不直接使用file URL。

@@ -83,3 +83,5 @@ go -C server test -race ./src/...
 `server --test-mode`僅將新活動的預設模式設為test，預設不帶此參數為live；API status回傳`testMode`供UI建立活動時使用。既有活動模式不變。現階段兩者只有標記差異，均會取得drand seed與寫入存檔，詳見[現場模式](../design/live-operation.md)。
 
 新活動預設年度以伺服器啟動時的台灣西元年計算下一個民國年，經`GET /api/v1/status`的`defaultActivityYear`提供給前端；不以重新整理瀏覽器的時間改變既有活動年度。
+
+`export-query --workspace <目錄> --round auto|1|2 --output <新JSON檔>`為唯讀離線轉換子命令，由[build-query](../tools/build-query/tool.md)腳本呼叫，不啟動Gin、不建立年度工作目錄或取得seed。日常操作以shell腳本輸出完整網站。

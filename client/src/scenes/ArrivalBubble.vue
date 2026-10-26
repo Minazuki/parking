@@ -31,11 +31,11 @@ onBeforeRender(() => {
   const cam = camera.value
   if (cam instanceof OrthographicCamera) {
     const unit = (cam.top - cam.bottom) / cam.zoom / Math.max(1, sizes.height.value)
-    const width = Math.min(160, sizes.width.value * 0.45) * 1.8 * unit
+    const width = Math.min(160, sizes.width.value * 0.25) * 1.8 * unit
     sprite.scale.set(width, width / 2, 1)
     sprite.getWorldPosition(anchor).project(cam)
     const screenY = (1 - anchor.y) * sizes.height.value / 2
-    const below = screenY < Math.min(160, sizes.width.value * 0.45) * 1.8 / 2 + 8
+    const below = screenY < Math.min(160, sizes.width.value * 0.25) * 1.8 / 2 + 8
     sprite.center.set(0.5, below ? 1 : 0)
     material.map = below ? belowTexture : texture
   }

@@ -11,7 +11,7 @@ import (
 
 type serverRunner func(context.Context, app.Config, io.Writer, io.Writer) error
 
-// NewRootCommand creates a fresh command tree; only the server command opens a workspace.
+// NewRootCommand creates a fresh command tree; only the server command opens a mutable workspace.
 func NewRootCommand(info buildinfo.Info) *cobra.Command {
 	return newRootCommand(info, app.Run)
 }
@@ -24,6 +24,6 @@ func newRootCommand(info buildinfo.Info, run serverRunner) *cobra.Command {
 		CompletionOptions: cobra.CompletionOptions{DisableDefaultCmd: true},
 	}
 	root.SetVersionTemplate("{{.Version}}\n")
-	root.AddCommand(newVersionCommand(info), newServerCommand(info, run))
+	root.AddCommand(newVersionCommand(info), newServerCommand(info, run), newExportQueryCommand())
 	return root
 }

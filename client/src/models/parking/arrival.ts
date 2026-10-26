@@ -40,10 +40,12 @@ function approach(space: ParkingSpace): Point[] {
   if (n >= 34 && n <= 57 || n >= 70 && n <= 78) return [[470, 635], [x, 635], [x, y]]
   return [[470, 635], [x, 635], [x, y]]
 }
-export function createArrivalCards(floor: ParkingFloor, records: ArrivalRecord[], spaces = createParkingSpaces(floor)): ArrivalCard[] {
+export function createArrivalCards(floor: ParkingFloor, records: ArrivalRecord[], spaces = createParkingSpaces(floor), options: { waitlistSize?: number } = {}): ArrivalCard[] {
   const layout = getParkingLayout(floor)
   const assignedCount = records.filter(r => !r.rank).length
-  const waitingCount = records.filter(r => r.rank).length
+  // A single queried vehicle can still have rank 36. Size the outside queue
+  // for its full rank range, rather than placing it on row 12 of a one-row grid.
+  const waitingCount = Math.max(options.waitlistSize ?? 0, records.filter(r => r.rank).length, ...records.map(r => r.rank ?? 0))
   const assignedColumns = Math.max(3, Math.ceil(Math.sqrt(assignedCount * 1.4)))
   const waitingColumns = Math.max(3, Math.ceil(Math.sqrt(waitingCount * 1.4)))
   return records.map((record, i) => {

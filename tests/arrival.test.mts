@@ -67,3 +67,30 @@ test('playback ends five seconds after the final assigned vehicle parks', () => 
   const waits = createArrivalCards('motorcycle', [{ id: 'wait', household: '999-1', rank: 1, stagingIndex: 100 }])
   assert.equal(arrivalDuration(waits), 5)
 })
+
+test('single high-rank waitlist queries stay inside the outside queue and match the complete queue', () => {
+  for (const floor of ['motorcycle','bicycle'] as const) {
+    const records = Array.from({length:36},(_,i)=>({id:`wait:${i+1}`,household:`999-${i+1}`,rank:i+1}))
+    const spaces = createParkingSpaces(floor)
+    const complete = createArrivalCards(floor,records,spaces)
+    const layout = getParkingLayout(floor)
+    const min = worldPoint(layout,floor === 'motorcycle' ? [120,220] : [-60,110])
+    const max = worldPoint(layout,floor === 'motorcycle' ? [260,265] : [80,155])
+    for (const record of records) {
+      const [single] = createArrivalCards(floor,[record],spaces,{waitlistSize:36})
+      assert.deepEqual(single!.route,complete.find(c=>c.id===record.id)!.route)
+      for (const card of [single!,createArrivalCards(floor,[record],spaces)[0]!]) {
+        const [x,,z] = cardPosition(card,0).position
+        assert.ok(x >= min[0]-1e-9 && x <= max[0]+1e-9 && z >= min[1]-1e-9 && z <= max[1]+1e-9, `rank ${record.rank} left the ${floor} outside queue`)
+        const polygon = layout.outline.map(p => worldPoint(layout,p))
+        let inside = false
+        for (let i=0,j=polygon.length-1;i<polygon.length;j=i++) {
+          const a=polygon[i]!, b=polygon[j]!
+          if ((a[1]>z)!==(b[1]>z) && x<(b[0]-a[0])*(z-a[1])/(b[1]-a[1])+a[0]) inside=!inside
+        }
+        assert.equal(inside,false,`rank ${record.rank} lies inside the ${floor} floor`)
+        assert.deepEqual(cardPosition(card,0).position,cardPosition(card,100).position)
+      }
+    }
+  }
+})
