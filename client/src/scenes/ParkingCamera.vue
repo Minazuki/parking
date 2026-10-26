@@ -27,7 +27,8 @@ function fit(resetZoom: boolean) {
   const aspect = sizes.width.value / Math.max(1, sizes.height.value)
   const half = Math.max(height, width / aspect) * 0.6
   cam.left = -half * aspect; cam.right = half * aspect; cam.top = half; cam.bottom = -half
-  if (resetZoom) cam.zoom = 1
+  // Bring vehicles closer during arrivals while keeping manual zoom available.
+  if (resetZoom) cam.zoom = props.arrivalEnabled ? 1.3 : 1
   cam.updateProjectionMatrix(); invalidate()
 }
 function reset() {

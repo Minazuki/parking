@@ -58,8 +58,10 @@ export function createParkingSpaces(floor: ParkingFloor, splitAccessible: readon
       if (accessible && splitAccessible.includes(baseId)) {
         const width = parkingDimensions.motorcycle.width, depth = parkingDimensions.motorcycle.length
         const offset = base.width / 4
-        spaces.push({ ...base, width, depth, x: base.x - offset, split: true })
-        spaces.push({ ...base, key: `${floor}:${id}-1`, id: `${id}-1`, label: `${id}-1`, width, depth, x: base.x + offset, split: true })
+        const horizontal = baseId === '14'
+        const rotation = horizontal ? Math.PI / 2 : base.rotation
+        spaces.push({ ...base, width, depth, rotation, x: horizontal ? base.x : base.x - offset, z: horizontal ? base.z - offset : base.z, split: true })
+        spaces.push({ ...base, key: `${floor}:${id}-1`, id: `${id}-1`, label: `${id}-1`, width, depth, rotation, x: horizontal ? base.x : base.x + offset, z: horizontal ? base.z + offset : base.z, split: true })
       } else spaces.push(base)
     }
   }

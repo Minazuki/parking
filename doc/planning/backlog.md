@@ -60,7 +60,7 @@
 - [x] 實作session JSONL操作log與錯誤事件，記錄重啟觀察到的回退及寫入失敗。
 - [x] 建立server/src與client/src配置、Go開發啟動器、workspace參數及Chrome啟動。
 - [x] 建立Vue／TS前端骨架與Vite開發流程。
-- [ ] 建立內嵌前端的帶版本發布包。
+- [x] 建立內嵌前端的帶版本發布包：script/build-release.sh、dist時間版本目錄、start.sh、README及SHA-256 manifest；Chrome直接連Go驗證通過。
 - [x] 定義並實作來源CSV契約：對照既有樣板欄位，處理文字選項、核取值、空白、編碼與錯誤訊息，建立可提交的虛構匯入範例。
 - [x] 實作第一輪名單與車位池準備、整輪seed保存及配位，串接已確認的無障礙／拆分／撥補規則。
 - [x] 實作繳費JSON匯入、清票與第二輪名單／車位池、第二輪seed及配位，依已確認資料處理，不代替行政核定。

@@ -33,11 +33,22 @@ test('accessible split variants retain the original footprint and all saved cand
     assert.equal(left.width,0.75)
     assert.equal(right.width,0.75)
     assert.equal(left.depth,1.75)
-    assert.ok(left.x-left.width/2>=base.x-base.width/2)
-    assert.ok(right.x+right.width/2<=base.x+base.width/2)
-    assert.ok(left.depth<=base.depth)
-    assert.ok(Math.abs((left.x+right.x)/2-base.x)<1e-9)
-    assert.equal(left.z,right.z)
+    for (const part of [left, right]) {
+      const halfX = (Math.abs(Math.cos(part.rotation)) * part.width + Math.abs(Math.sin(part.rotation)) * part.depth) / 2
+      const halfZ = (Math.abs(Math.sin(part.rotation)) * part.width + Math.abs(Math.cos(part.rotation)) * part.depth) / 2
+      assert.ok(part.x - halfX >= base.x - base.width / 2 - 1e-9)
+      assert.ok(part.x + halfX <= base.x + base.width / 2 + 1e-9)
+      assert.ok(part.z - halfZ >= base.z - base.depth / 2 - 1e-9)
+      assert.ok(part.z + halfZ <= base.z + base.depth / 2 + 1e-9)
+    }
+    assert.ok(Math.abs((left.x + right.x) / 2 - base.x) < 1e-9)
+    assert.ok(Math.abs((left.z + right.z) / 2 - base.z) < 1e-9)
+    if (id === '14') {
+      assert.equal(left.rotation, original.find(s => s.id === '12')!.rotation)
+      assert.equal(right.rotation, original.find(s => s.id === '13')!.rotation)
+      assert.equal(left.x, right.x)
+      assert.ok(left.z < right.z)
+    }
     assert.ok(left.split && right.split)
   }
   const first=JSON.parse(await readFile(new URL('../examples/workspace/checkpoints/0/state.json',import.meta.url),'utf8'))

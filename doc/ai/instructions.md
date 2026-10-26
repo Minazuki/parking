@@ -4,7 +4,7 @@
 
 ## 專案現況
 
-本 repository 用於年度機車與腳踏車停車位抽籤工具。採server/src（Go後端）與client/src（Vue／TS前端），已建立Gin Controller–Service–Repository與正式Go抽選／清票、0至6存檔提交、API及log，已接上年度inputs CSV匯入，已建立Vue 2D工作台與進度軸；真實API瀏覽器整合已驗證，已加入TresJS公尺單位的定案場景、小型車輛進場與戶號對話框，並支援活動存檔唯讀播放；已串接抽選前名單至seed、3D進場及結果的投影流程；首頁預設黑暗現場模式，兩次現場自動演出、中間獨立清票及手動結果CSV下載已實作；現場校對、其他報表及發布尚待完成。架構及執行見[Go後端](../architecture/backend.md)與[目錄配置](../architecture/repository-layout.md)。Python[規則原型](../tools/round-two/tool.md)保留作參考。行政人員正在前置登記，前端演出是近期優先項目。
+本 repository 用於年度機車與腳踏車停車位抽籤工具。採server/src（Go後端）與client/src（Vue／TS前端），已建立Gin Controller–Service–Repository與正式Go抽選／清票、0至6存檔提交、API及log，已接上年度inputs CSV匯入，已建立Vue 2D工作台與進度軸；真實API瀏覽器整合已驗證，已加入TresJS公尺單位的定案場景、小型車輛進場與戶號對話框，並支援活動存檔唯讀播放；已串接抽選前名單至seed、3D進場及結果的投影流程；首頁預設黑暗現場模式，兩次現場自動演出、中間獨立清票及手動結果CSV下載已實作；完整Vue內嵌Go發布包已實作，repo入口統一在script，產物在dist版本目錄；現場校對與其他報表尚待完成。架構及執行見[Go後端](../architecture/backend.md)與[目錄配置](../architecture/repository-layout.md)。Python[規則原型](../tools/round-two/tool.md)保留作參考。行政人員正在前置登記，前端演出是近期優先項目。
 
 ## 開始工作
 

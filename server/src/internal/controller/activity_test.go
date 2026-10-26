@@ -199,7 +199,7 @@ func TestCSVImportActionsAndStructuredErrors(t *testing.T) {
 		t.Fatal(code, string(body))
 	}
 	directory := filepath.Join(seed.root, "inputs")
-	if err := os.Mkdir(directory, 0700); err != nil {
+	if err := os.MkdirAll(directory, 0700); err != nil {
 		t.Fatal(err)
 	}
 	for _, name := range []string{"A棟資料.csv", "B棟資料.csv", "無障礙車位資料.csv"} {

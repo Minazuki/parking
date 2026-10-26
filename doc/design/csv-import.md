@@ -83,3 +83,9 @@ go -C server test -race ./src/...
 ```
 
 表頭核對來源：[現行行政樣板](https://docs.google.com/spreadsheets/d/1QNEX0ERAbYyOOoFKuz9_oScHIaoW8MPpKMIcA6aXpd4/edit)，2026-10-26只讀取四個操作分頁的A1:K1。
+
+## 預設兩輪測試資料
+
+[testdata/default](../../testdata/default/README.md)提供150戶虛構CSV，包含約3%機車放棄、10%兩輪意願、每棟5戶未繳及大／小腳踏車兩輪登記。將其中`input/*.csv`複製至獨立workspace的`inputs/`後，可完成第一輪、獨立清票與第二輪，四個第一輪池及三個第二輪池皆有配位。自動驗證使用固定公開seed，無需連網；現場模式取得新seed時仍需drand連線。
+
+第二組[waitlist測試資料](../../testdata/waitlist/README.md)維持150戶，第二輪機車18格／28戶、大位8格／18戶、小位6格／16戶，各產生10戶候補。第一輪各池不超額，未繳戶事先固定，因此候補數不受seed影響。完整資料索引見[testdata](../../testdata/README.md)。

@@ -2,6 +2,7 @@
 
 :root {
   color-scheme: dark;
+  font-size: 20px; /* Two 2px steps above the browser default. */
   font-family: Inter,"PingFang TC","Noto Sans TC",system-ui,sans-serif;
   color: var(--ui-text);
   background: var(--ui-bg);
@@ -54,19 +55,19 @@ h1,h2,h3,p {
 }
 
 h1 {
-  font-size: 23px;
+  font-size: 27px;
   font-weight: 700;
   letter-spacing: .02em;
 }
 
 h2 {
-  font-size: 21px;
+  font-size: 25px;
   font-weight: 650;
   line-height: 1.45;
 }
 
 h3 {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 600;
 }
 
@@ -80,7 +81,7 @@ p {
 
 .eyebrow {
   display: block;
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: .16em;
   color: var(--muted);
@@ -89,13 +90,13 @@ p {
 
 .muted {
   color: var(--muted);
-  font-size: 13px;
+  font-size: 17px;
 }
 
 .field-label {
   display: block;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 15px;
   margin-bottom: 5px;
 }
 
@@ -128,7 +129,7 @@ code,.household,.space-value,.round-number {
   justify-content: center;
   position: relative;
   color: var(--accent);
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 700;
 }
 
@@ -139,13 +140,13 @@ code,.household,.space-value,.round-number {
   background: var(--accent);
   border: 3px solid var(--ui-border);
   color: var(--ui-text-highlighted);
-  font-size: 10px;
+  font-size: 14px;
   border-radius: 6px;
   padding: 1px 4px;
 }
 
 .brand-copy .eyebrow {
-  font-size: 11px;
+  font-size: 15px;
   letter-spacing: .1em;
   margin-bottom: 3px;
 }
@@ -161,12 +162,12 @@ code,.household,.space-value,.round-number {
   display: grid;
   gap: 5px;
   text-align: right;
-  font-size: 13px;
+  font-size: 17px;
   font-variant-numeric: tabular-nums;
 }
 
 .clock span {
-  font-size: 10px;
+  font-size: 14px;
   color: var(--muted);
   letter-spacing: .08em;
 }
@@ -178,7 +179,7 @@ code,.household,.space-value,.round-number {
   white-space: nowrap;
   border-radius: 5px;
   padding: 5px 9px;
-  font-size: 11px;
+  font-size: 15px;
   font-weight: 600;
   line-height: 1.4;
 }
@@ -212,7 +213,7 @@ code,.household,.space-value,.round-number {
 }
 
 .workspace-bar code {
-  font-size: 12px;
+  font-size: 16px;
   color: var(--ui-text);
   overflow-wrap: anywhere;
 }
@@ -221,7 +222,7 @@ code,.household,.space-value,.round-number {
   display: flex;
   align-items: center;
   gap: 7px;
-  font-size: 11px;
+  font-size: 15px;
   flex-shrink: 0;
   color: var(--muted);
 }
@@ -256,7 +257,7 @@ code,.household,.space-value,.round-number {
   align-items: center;
   gap: 10px;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 15px;
   margin-bottom: 9px;
 }
 
@@ -269,13 +270,13 @@ code,.household,.space-value,.round-number {
 }
 
 .page-heading h2 {
-  font-size: 32px;
+  font-size: 36px;
   letter-spacing: .025em;
   margin-bottom: 7px;
 }
 
 .page-heading p {
-  font-size: 13px;
+  font-size: 17px;
   color: var(--muted);
 }
 
@@ -288,7 +289,7 @@ code,.household,.space-value,.round-number {
   gap: 18px;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 17px;
   font-weight: 600;
   transition: background .15s;
 }
@@ -358,7 +359,7 @@ code,.household,.space-value,.round-number {
 }
 
 .section-heading h2 {
-  font-size: 18px;
+  font-size: 22px;
 }
 
 .section-heading .eyebrow {
@@ -371,22 +372,22 @@ code,.household,.space-value,.round-number {
 
 .action-panel h2 {
   margin: 9px 0 12px;
-  font-size: 20px;
+  font-size: 24px;
 }
 
 .action-panel>p {
   color: var(--muted);
-  font-size: 13px;
+  font-size: 17px;
 }
 
 .action-panel>.button {
   margin-top: 22px;
   min-height: 47px;
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .status-panel h2 {
-  font-size: 16px;
+  font-size: 20px;
   margin: 8px 0 20px;
 }
 
@@ -396,12 +397,12 @@ dl {
 
 dt {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 16px;
 }
 
 dd {
   margin: 0;
-  font-size: 13px;
+  font-size: 17px;
 }
 
 .status-panel dl {
@@ -410,7 +411,7 @@ dd {
 }
 
 .status-panel dt {
-  font-size: 11px;
+  font-size: 15px;
   margin-bottom: 4px;
 }
 
@@ -419,7 +420,7 @@ dd {
 }
 
 .action-footnote {
-  font-size: 11px!important;
+  font-size: 15px!important;
   margin-top: 17px;
 }
 
@@ -428,7 +429,7 @@ dd {
   padding: 15px;
   margin-top: 20px;
   border-radius: 6px;
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .operation-pending strong {
@@ -438,7 +439,7 @@ dd {
 .operation-pending p {
   margin-top: 8px;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 15px;
 }
 
 .spinner {
@@ -477,7 +478,7 @@ dd {
   display: grid;
   place-items: center;
   border-radius: 13px;
-  font-size: 28px;
+  font-size: 32px;
   margin-bottom: 22px;
 }
 
@@ -486,17 +487,17 @@ dd {
 }
 
 .empty-state h2 {
-  font-size: 24px;
+  font-size: 28px;
   margin-bottom: 12px;
 }
 
 .empty-state p {
-  font-size: 13px;
+  font-size: 17px;
   color: var(--muted);
 }
 
 .empty-state p:last-child {
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .file-list {
@@ -508,7 +509,7 @@ dd {
 }
 
 .file-list span {
-  font-size: 11px;
+  font-size: 15px;
   padding: 8px 10px;
   background: var(--ui-bg-elevated);
   border: 1px solid var(--ui-border);
@@ -530,7 +531,7 @@ dd {
 .setup-form label {
   display: grid;
   gap: 7px;
-  font-size: 12px;
+  font-size: 16px;
   color: var(--muted);
   flex: 1;
   min-width: 125px;
@@ -557,7 +558,7 @@ dd {
 }
 
 .building-summary h2 small {
-  font-size: 13px;
+  font-size: 17px;
   margin-left: 8px;
   color: var(--muted);
 }
@@ -590,7 +591,7 @@ dd {
   padding: 10px 17px;
   border-radius: 6px;
   color: var(--ui-text);
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .pool-tabs button.active {
@@ -616,19 +617,19 @@ dd {
 }
 
 .metric>span {
-  font-size: 12px;
+  font-size: 16px;
   color: var(--muted);
 }
 
 .metric strong {
-  font-size: 33px;
+  font-size: 37px;
   font-weight: 600;
   letter-spacing: -.04em;
   font-variant-numeric: tabular-nums;
 }
 
 .metric small {
-  font-size: 11px;
+  font-size: 15px;
   color: var(--muted);
   margin-left: 9px;
   letter-spacing: 0;
@@ -645,7 +646,7 @@ dd {
 
 .list-block p {
   margin-top: 10px;
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .chips {
@@ -663,7 +664,7 @@ dd {
   border: 1px solid var(--ui-border);
   background: var(--ui-bg-elevated);
   border-radius: 5px;
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .chip.accent {
@@ -686,7 +687,7 @@ dd {
 .space-chips .chip {
   min-width: 38px;
   font-family: "SFMono-Regular",monospace;
-  font-size: 11px;
+  font-size: 15px;
 }
 
 details {
@@ -696,7 +697,7 @@ details {
 }
 
 summary {
-  font-size: 12px;
+  font-size: 16px;
   color: var(--ui-text);
   cursor: pointer;
   line-height: 1.8;
@@ -719,17 +720,17 @@ details>.chips,details>.muted {
 }
 
 .seed-facts dt {
-  font-size: 10px;
+  font-size: 14px;
   margin-bottom: 7px;
 }
 
 .seed-facts dd {
-  font-size: 12px;
+  font-size: 16px;
   font-variant-numeric: tabular-nums;
 }
 
 .seed-facts .round-number {
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 600;
   letter-spacing: .02em;
 }
@@ -740,7 +741,7 @@ details>.chips,details>.muted {
   border: 1px solid var(--ui-border);
   border-radius: 5px;
   padding: 12px 14px;
-  font-size: 13px;
+  font-size: 17px;
   line-height: 1.8;
   word-break: break-all;
   user-select: all;
@@ -749,7 +750,7 @@ details>.chips,details>.muted {
 
 .seed-footer {
   margin-top: 13px;
-  font-size: 10px;
+  font-size: 14px;
   line-height: 1.7;
   color: var(--muted);
   display: flex;
@@ -765,7 +766,7 @@ details>.chips,details>.muted {
   display: flex;
   gap: 24px;
   flex-wrap: wrap;
-  font-size: 12px;
+  font-size: 16px;
   color: var(--muted);
   padding: 0 0 19px;
 }
@@ -785,7 +786,7 @@ details>.chips,details>.muted {
 table {
   border-collapse: collapse;
   width: 100%;
-  font-size: 13px;
+  font-size: 17px;
   white-space: nowrap;
 }
 
@@ -794,7 +795,7 @@ th {
   padding: 11px 14px;
   color: var(--ui-text);
   font-weight: 500;
-  font-size: 11px;
+  font-size: 15px;
   background: var(--ui-bg-elevated);
   position: sticky;
   top: 0;
@@ -811,19 +812,19 @@ tbody tr:last-child td {
 
 .space-value {
   color: var(--accent);
-  font-size: 17px;
+  font-size: 21px;
   font-weight: 600;
 }
 
 .result-panel .household {
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .inline-note {
   background: var(--ui-bg-elevated);
   border-left: 3px solid var(--ui-border);
   padding: 12px 15px;
-  font-size: 12px;
+  font-size: 16px;
   color: var(--ui-text);
   margin-bottom: 20px;
 }
@@ -833,7 +834,7 @@ tbody tr:last-child td {
 }
 
 .review-intro>p {
-  font-size: 13px;
+  font-size: 17px;
   margin-bottom: 18px;
   color: var(--muted);
 }
@@ -846,19 +847,19 @@ tbody tr:last-child td {
   padding: 15px 19px;
   border-radius: 8px;
   margin-bottom: 20px;
-  font-size: 13px;
+  font-size: 17px;
   line-height: 1.7;
 }
 
 .alert p {
-  font-size: 12px;
+  font-size: 16px;
   margin-top: 4px;
 }
 
 .alert ul {
   margin: 10px 0 0;
   padding-left: 20px;
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .error-alert {
@@ -893,7 +894,7 @@ tbody tr:last-child td {
 }
 
 .timeline-caption>span:last-child {
-  font-size: 10px;
+  font-size: 14px;
   color: var(--muted);
 }
 
@@ -938,7 +939,7 @@ tbody tr:last-child td {
   height: 27px;
   border: 1px solid var(--ui-border);
   border-radius: 50%;
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 600;
 }
 
@@ -959,13 +960,13 @@ tbody tr:last-child td {
 }
 
 .step-copy strong {
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 600;
   white-space: nowrap;
 }
 
 .step-copy small {
-  font-size: 9px;
+  font-size: 13px;
   color: var(--muted);
 }
 
@@ -978,7 +979,7 @@ tbody tr:last-child td {
     padding: 29px;
   }
   .page-heading h2 {
-    font-size: 36px;
+    font-size: 40px;
   }
 }
 
@@ -1024,13 +1025,13 @@ tbody tr:last-child td {
   .brand-mark {
     width: 35px;
     height: 40px;
-    font-size: 23px;
+    font-size: 27px;
   }
   .brand-copy h1 {
-    font-size: 18px;
+    font-size: 22px;
   }
   .brand-copy .eyebrow {
-    font-size: 9px;
+    font-size: 13px;
   }
   .header-meta {
     align-items: flex-end;
@@ -1038,13 +1039,13 @@ tbody tr:last-child td {
     gap: 7px;
   }
   .clock {
-    font-size: 9px;
+    font-size: 13px;
   }
   .clock>span {
     display: none;
   }
   .badge {
-    font-size: 9px;
+    font-size: 13px;
     padding: 4px 7px;
   }
   .workspace-bar {
@@ -1053,26 +1054,26 @@ tbody tr:last-child td {
     gap: 10px;
   }
   .workspace-bar code {
-    font-size: 10px;
+    font-size: 14px;
   }
   .connection {
-    font-size: 10px;
+    font-size: 14px;
     gap: 4px;
     flex-wrap: wrap;
     max-width: 95px;
     justify-content: flex-end;
   }
   .version {
-    font-size: 9px;
+    font-size: 13px;
   }
   .page-heading h2 {
-    font-size: 27px;
+    font-size: 31px;
   }
   .page-heading p {
-    font-size: 12px;
+    font-size: 16px;
   }
   .refresh-button {
-    font-size: 10px;
+    font-size: 14px;
     padding: 8px 11px;
     min-height: 36px;
     gap: 9px;
@@ -1096,7 +1097,7 @@ tbody tr:last-child td {
     padding: 21px;
   }
   .action-panel h2 {
-    font-size: 18px;
+    font-size: 22px;
   }
   .action-panel>.button {
     margin-top: 16px;
@@ -1106,7 +1107,7 @@ tbody tr:last-child td {
     padding: 32px 19px;
   }
   .empty-state h2 {
-    font-size: 21px;
+    font-size: 25px;
   }
   .file-list {
     margin: 18px 0;
@@ -1118,7 +1119,7 @@ tbody tr:last-child td {
   }
   .pool-tabs button {
     padding: 9px 10px;
-    font-size: 11px;
+    font-size: 15px;
   }
   .pool-metrics {
     gap: 9px;
@@ -1127,13 +1128,13 @@ tbody tr:last-child td {
     padding: 14px 11px;
   }
   .metric>span {
-    font-size: 10px;
+    font-size: 14px;
   }
   .metric strong {
-    font-size: 27px;
+    font-size: 31px;
   }
   .metric small {
-    font-size: 9px;
+    font-size: 13px;
     margin-left: 4px;
   }
   .building-grid {
@@ -1147,24 +1148,24 @@ tbody tr:last-child td {
     gap: 3px;
   }
   .building-summary dt {
-    font-size: 11px;
+    font-size: 15px;
   }
   .seed-facts {
     grid-template-columns: 1fr;
     gap: 15px;
   }
   .seed-facts dd {
-    font-size: 12px;
+    font-size: 16px;
   }
   .seed-footer {
     flex-wrap: wrap;
   }
   .section-heading h2 {
-    font-size: 17px;
+    font-size: 21px;
   }
   .result-counts {
     gap: 12px;
-    font-size: 11px;
+    font-size: 15px;
   }
   .timeline {
     padding: 11px 10px 14px;
@@ -1186,19 +1187,19 @@ tbody tr:last-child td {
   .step-number {
     width: 22px;
     height: 22px;
-    font-size: 9px;
+    font-size: 13px;
   }
   .step-copy {
     gap: 2px;
   }
   .step-copy strong {
-    font-size: 10px;
+    font-size: 14px;
   }
   .step-copy small {
-    font-size: 8px;
+    font-size: 12px;
   }
   .timeline-caption .eyebrow {
-    font-size: 9px;
+    font-size: 13px;
   }
 }
 
@@ -1221,7 +1222,7 @@ tbody tr:last-child td {
     margin-bottom: 16px;
   }
   .page-heading h2 {
-    font-size: 28px;
+    font-size: 32px;
   }
   .seed-panel {
     padding: 18px 22px;
@@ -1240,16 +1241,29 @@ tbody tr:last-child td {
 .scene-entry-link {
   background: var(--ui-bg-elevated);
   color: var(--ui-text);
-  font-size: 11px;
+  font-size: 15px;
   padding: 8px 11px;
   border-radius: 5px;
   text-decoration: none;
   white-space: nowrap;
 }
 @media(max-width:760px) {
-  .scene-entry-link { font-size: 9px; padding: 6px 8px; }
+  .scene-entry-link { font-size: 13px; padding: 6px 8px; }
 }
 
 .button { background: var(--ui-bg-elevated); color: var(--ui-text); }
 .button.primary { background: var(--ui-primary); color: var(--ui-on-primary); }
 .button.primary:hover { background: var(--ui-primary-hover); }
+
+/* Keep the enlarged seed evidence clear of the workbench's fixed timeline. */
+@media(min-width:1001px) and (max-height:850px) {
+  .workspace-shell .app-header { height: 64px; }
+  .workspace-shell .workspace-bar { margin: 4px 0; }
+  .workspace-shell .page-heading { margin-bottom: 10px; }
+  .workspace-shell .heading-kicker { margin-bottom: 3px; }
+  .workspace-shell .page-heading h2 { margin-bottom: 3px; }
+  .workspace-shell .main-column { gap: 12px; }
+  .workspace-shell .seed-panel { padding: 12px 18px; }
+  .workspace-shell .seed-panel .section-heading { margin-bottom: 8px; }
+  .workspace-shell .seed-footer { margin-top: 8px; }
+}

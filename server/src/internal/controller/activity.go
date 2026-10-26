@@ -9,6 +9,7 @@ import (
 	"mime"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/Minazuki/parking/server/src/internal/inputcsv"
 	"github.com/Minazuki/parking/server/src/internal/service"
@@ -29,7 +30,12 @@ type ActivityService interface {
 
 const APIPrefix = "/api/v1"
 
-type Config struct{ Host, DevOrigin, Version string }
+type Config struct {
+	Host, DevOrigin, Version string
+	Frontend                 http.Handler
+	TestMode                 bool
+	DefaultActivityYear      int
+}
 
 func respond(w http.ResponseWriter, status int, value any) {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
@@ -91,7 +97,13 @@ func Handler(app ActivityService, cfg Config) http.Handler {
 	mux.SetTrustedProxies(nil)
 	mux.HandleMethodNotAllowed = true
 	mux.Use(boundary(cfg))
-	mux.NoRoute(func(c *gin.Context) { respond(c.Writer, 404, gin.H{"error": "resource not found"}) })
+	mux.NoRoute(func(c *gin.Context) {
+		if cfg.Frontend != nil && (c.Request.Method == http.MethodGet || c.Request.Method == http.MethodHead) && !strings.HasPrefix(c.Request.URL.Path, "/api/") {
+			cfg.Frontend.ServeHTTP(c.Writer, c.Request)
+			return
+		}
+		respond(c.Writer, 404, gin.H{"error": "resource not found"})
+	})
 	mux.NoMethod(func(c *gin.Context) { respond(c.Writer, 405, gin.H{"error": "method not allowed"}) })
 
 	api := mux.Group(APIPrefix)
@@ -104,7 +116,13 @@ func Handler(app ActivityService, cfg Config) http.Handler {
 	api.POST("/rounds/:round/draws", ctrl.Draw)
 	api.POST("/csv-imports/registration", ctrl.ImportRegistrationCSV)
 	api.POST("/csv-imports/payments", ctrl.ImportPaymentsCSV)
-	mux.GET("/", ctrl.Index)
+	if cfg.Frontend == nil {
+		mux.GET("/", ctrl.Index)
+	} else {
+		serveFrontend := func(c *gin.Context) { cfg.Frontend.ServeHTTP(c.Writer, c.Request) }
+		mux.GET("/", serveFrontend)
+		mux.HEAD("/", serveFrontend)
+	}
 	return mux
 }
 
@@ -150,7 +168,7 @@ func (ctrl *ActivityController) Status(c *gin.Context) {
 		failure(w, err)
 		return
 	}
-	respond(w, 200, map[string]any{"version": ctrl.config.Version, "workspace": ctrl.service.Root(), "currentStage": snapshot.CurrentStage, "activity": snapshot.Activity})
+	respond(w, 200, map[string]any{"version": ctrl.config.Version, "workspace": ctrl.service.Root(), "currentStage": snapshot.CurrentStage, "activity": snapshot.Activity, "testMode": ctrl.config.TestMode, "defaultActivityYear": ctrl.config.DefaultActivityYear})
 }
 
 func (ctrl *ActivityController) Stage(c *gin.Context) {
@@ -187,6 +205,12 @@ func (ctrl *ActivityController) CreateActivity(c *gin.Context) {
 	if err := decodeRequest(raw, &request); err != nil {
 		invalid(w, err)
 		return
+	}
+	if request.Mode == "" {
+		request.Mode = "live"
+		if ctrl.config.TestMode {
+			request.Mode = "test"
+		}
 	}
 	snapshot, err := ctrl.service.InitActivity(request.ActivityYear, request.Mode)
 	if err != nil {

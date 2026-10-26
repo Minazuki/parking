@@ -14,6 +14,8 @@ export interface Activity {
   createdByAppVersion: string
 }
 export interface Status {
+  testMode?: boolean
+  defaultActivityYear?: number
   version: string
   workspace: string
   currentStage: CurrentStage

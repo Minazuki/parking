@@ -1,4 +1,4 @@
-import { computed, onScopeDispose, reactive, ref } from 'vue'
+import { computed, onScopeDispose, reactive, ref, watch } from 'vue'
 import { useActivity } from './useActivity.ts'
 import type { ActivityApi } from '../api/activity.ts'
 import type { Mode } from '../models/activity.ts'
@@ -8,7 +8,14 @@ import { arrivalDuration, createArrivalCards } from '../models/parking/arrival.t
 export type LiveStep = 'idle' | 'preparing' | 'households' | 'pool' | 'seed' | 'arrival' | 'results' | 'finished' | 'review' | 'error'
 export function useLiveShow(api?: ActivityApi, clock: () => number = () => performance.now()) {
   const activity = reactive(useActivity(api))
-  const year = ref(116), mode = ref<Mode>('test'), round = ref<1 | 2>(1)
+  const localYear = Number(new Intl.DateTimeFormat('en', { timeZone: 'Asia/Taipei', year: 'numeric' }).format(new Date())) - 1910
+  const year = ref(localYear), mode = computed<Mode>(() => activity.status?.testMode ? 'test' : 'live'), round = ref<1 | 2>(1)
+  let yearLoaded = false
+  watch(() => activity.status, status => {
+    if (!status || yearLoaded) return
+    year.value = status.activity?.activityYear ?? (status.defaultActivityYear && status.defaultActivityYear > 0 ? status.defaultActivityYear : localYear)
+    yearLoaded = true
+  }, { flush: 'sync' })
   const step = ref<LiveStep>('idle'), poolIndex = ref(0), elapsed = ref(0), error = ref(''), activeId = ref<string | null>(null)
   const speed = ref(1)
   const running = computed(() => !['idle', 'finished', 'review', 'error'].includes(step.value))
@@ -22,30 +29,54 @@ export function useLiveShow(api?: ActivityApi, clock: () => number = () => perfo
   const spaces = computed(() => createParkingSpaces(floor.value, activity.first ? savedSplitSpaces(activity.first) : []))
   const cards = computed(() => activity.first && result.value && pool.value ? createArrivalCards(floor.value, savedArrivalRecords(activity.first, result.value, pool.value.id), spaces.value) : [])
   const resultRows = computed(() => [
-    ...(poolResult.value?.assignments.map(a => ({ household: a.household, value: a.spaceId, type: '配位' })) ?? []),
+    ...(poolResult.value?.assignments.map(a => ({ household: a.household, value: a.spaceId, type: '抽中車位' })) ?? []),
     ...(poolResult.value?.waitlist.map(w => ({ household: w.household, value: `候補 ${w.rank}`, type: '候補' })) ?? []),
-    ...(poolResult.value?.unassignedHouseholds.map(h => ({ household: h, value: '未配位', type: '未配位' })) ?? []),
+    ...(poolResult.value?.unassignedHouseholds.map(h => ({ household: h, value: '未取得車位', type: '未取得車位' })) ?? []),
   ])
   const participants = computed(() => pool.value?.households ?? [])
   const excluded = computed(() => activity.excludedHouseholds)
   const candidateSpaces = computed(() => pool.value?.candidates.filter(c => c.type === 'space') ?? [])
-  const page = computed(() => Math.floor(elapsed.value / 6))
-  const resultPageSize = 6
-  const resultPages = computed(() => Math.max(1, Math.ceil(resultRows.value.length / resultPageSize)))
+  const quickCheck = computed(() => {
+    const spaces = candidateSpaces.value.length, assigned = poolResult.value?.assignments.length ?? 0
+    const remaining = poolResult.value?.remainingSpaces.length ?? 0, households = participants.value.length
+    const waiting = poolResult.value?.waitlist.length ?? 0
+    return { spaces, assigned, remaining, households, waiting,
+      valid: spaces - assigned === remaining && households === assigned + waiting }
+  })
+  const resultPageSize = ref(6), householdPageSize = ref(24), candidatePageSize = ref(40)
+  const resultTiming = computed(() => {
+    let start = 0
+    return Array.from({ length: Math.max(1, Math.ceil(resultRows.value.length / resultPageSize.value)) }, (_, index) => {
+      const rows = Math.min(resultPageSize.value, Math.max(0, resultRows.value.length - index * resultPageSize.value))
+      const value = { start, rows, duration: 3 + rows + 2 }
+      start += value.duration
+      return value
+    })
+  })
+  const page = computed(() => step.value === 'results' ? Math.max(0, resultTiming.value.findLastIndex(p => elapsed.value >= p.start)) : Math.floor(elapsed.value / 6))
+  const highlightedResult = computed(() => {
+    if (step.value !== 'results') return -1
+    const timing = resultTiming.value[page.value]!
+    const index = Math.floor(elapsed.value - timing.start - 3)
+    return index >= 0 && index < timing.rows ? index : -1
+  })
+  const resultPages = computed(() => Math.max(1, Math.ceil(resultRows.value.length / resultPageSize.value)))
   const householdSlides = computed(() => {
     const slides: { title: string; rows: string[]; total: number }[] = []
     const add = (title: string, rows: string[], showEmpty = false) => {
       if (!rows.length && !showEmpty) return
-      for (let i = 0; i < Math.max(1, rows.length); i += 24) slides.push({ title, rows: rows.slice(i, i + 24), total: rows.length })
+      for (let i = 0; i < Math.max(1, rows.length); i += householdPageSize.value) slides.push({ title, rows: rows.slice(i, i + householdPageSize.value), total: rows.length })
     }
     add('參與住戶', participants.value, true)
-    add(round.value === 2 ? '未登記本類兩輪意願' : pool.value?.id.startsWith('motorcycle') ? '放棄一般機車抽選' : '不參與本類腳踏車', excluded.value)
-    if (round.value === 1) add('無障礙優先配置', activity.poolAccessible.map(a => `${a.household} → ${a.spaceId}`))
+    if (round.value === 1 && pool.value?.id.startsWith('motorcycle')) {
+      add('放棄一般機車抽選', excluded.value)
+      add('無障礙優先配置', activity.poolAccessible.map(a => `${a.household} → ${a.spaceId}`))
+    }
     return slides
   })
   const householdPages = computed(() => householdSlides.value.length)
-  const poolPages = computed(() => Math.max(1, Math.ceil((pool.value?.candidates.length ?? 0) / 40)))
-  const duration = computed(() => step.value === 'households' ? householdPages.value * 6 : step.value === 'pool' ? poolPages.value * 6 : step.value === 'seed' ? 8 : step.value === 'arrival' ? arrivalDuration(cards.value) : step.value === 'results' ? resultPages.value * 6 : Infinity)
+  const poolPages = computed(() => Math.max(1, Math.ceil((pool.value?.candidates.length ?? 0) / candidatePageSize.value)))
+  const duration = computed(() => step.value === 'households' ? householdPages.value * 6 : step.value === 'pool' ? poolPages.value * 6 : step.value === 'seed' ? 8 : step.value === 'arrival' ? arrivalDuration(cards.value) : step.value === 'results' ? resultTiming.value.reduce((total, p) => total + p.duration, 0) : Infinity)
   let disposed = false
   let started = 0, transitioning = false, timer: ReturnType<typeof setInterval> | undefined
   function stopTimer() { if (timer) clearInterval(timer); timer = undefined }
@@ -113,8 +144,31 @@ export function useLiveShow(api?: ActivityApi, clock: () => number = () => perfo
     elapsed.value = Math.max(0, (clock() - started) / 1000 * speed.value)
     if (elapsed.value >= duration.value) await advance()
   }
+  function setPageCapacity(kind: 'results' | 'households' | 'pool', count: number) {
+    const target = kind === 'results' ? resultPageSize : kind === 'households' ? householdPageSize : candidatePageSize
+    const size = Math.max(1, Math.floor(count))
+    if (target.value === size) return
+    const firstVisible = page.value * target.value
+    target.value = size
+    if (step.value === kind) {
+      const nextPage = Math.floor(firstVisible / size)
+      // Household slides include groups of different lengths; restart their
+      // section after resize so no household can be skipped at a group boundary.
+      elapsed.value = kind === 'results' ? resultTiming.value[Math.min(nextPage, resultTiming.value.length - 1)]!.start : 0
+      started = clock() - elapsed.value / speed.value * 1000
+    }
+  }
+  function setSpeed(value: number) {
+    if (![1, 2, 4].includes(value) || value === speed.value) return
+    const now = clock()
+    if (running.value && step.value !== 'preparing') {
+      elapsed.value = Math.max(0, (now - started) / 1000 * speed.value)
+      started = now - elapsed.value / value * 1000
+    }
+    speed.value = value
+  }
   function select(id: string) { activeId.value = activeId.value === id ? null : id }
   onScopeDispose(() => { disposed = true; stopTimer() })
   return { activity, year, mode, round, step, running, poolIndex, pools, pool, result, poolResult, seed, floor, layout, spaces, cards, activeId, select,
-    elapsed, duration, page, resultPageSize, householdSlides, householdPages, resultPages, poolPages, participants, excluded, candidateSpaces, resultRows, speed, error, start, reviewPayments, advance, tick }
+    elapsed, duration, page, resultPageSize, candidatePageSize, setPageCapacity, highlightedResult, quickCheck, householdSlides, householdPages, resultPages, poolPages, participants, excluded, candidateSpaces, resultRows, speed, setSpeed, error, start, reviewPayments, advance, tick }
 }

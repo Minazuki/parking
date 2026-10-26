@@ -35,7 +35,7 @@ CLI、版本輸出與release執行檔建置見[Cobra CLI](cli.md)。
 ## 開發啟動
 
 ```sh
-./server/run.sh server --workspace tmp/server-demo --no-browser
+./script/run-server.sh server --workspace tmp/server-demo --no-browser
 ```
 
 需要Go 1.26以上；script先在暫存目錄建置再執行，不要求Node啟動後端，也不改變使用者相對workspace路徑的基準。預設127.0.0.1:8080，可用--addr 127.0.0.1:0選可用埠。省略--no-browser時，以macOS open -a Google Chrome開本機狀態頁。

@@ -13,6 +13,7 @@ type Config struct {
 	Addr      string
 	DevOrigin string
 	NoBrowser bool
+	TestMode  bool
 	Version   string
 }
 

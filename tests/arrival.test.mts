@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { cardPosition, createArrivalCards, demoArrivals } from '../client/src/models/parking/arrival.ts'
+import { arrivalDuration, cardPosition, createArrivalCards, demoArrivals } from '../client/src/models/parking/arrival.ts'
 import { createParkingSpaces, getParkingLayout, worldPoint } from '../client/src/models/parking/layout.ts'
 
 test('arrival routes reach their assigned spaces and waitlists remain outside', () => {
@@ -54,4 +54,16 @@ test('east upper and middle rows approach from the aisle without crossing other 
       }
     }
   }
+})
+
+test('playback ends five seconds after the final assigned vehicle parks', () => {
+  for (const records of [demoArrivals('motorcycle').slice(0, 1), demoArrivals('motorcycle')]) {
+    const cards = createArrivalCards('motorcycle', records)
+    const end = arrivalDuration(cards)
+    assert.ok(cards.every(card => cardPosition(card, end - 5 + 1e-8).arrived))
+    assert.ok(cards.some(card => !cardPosition(card, end - 5 - 1e-6).arrived))
+  }
+  assert.equal(arrivalDuration([]), 5)
+  const waits = createArrivalCards('motorcycle', [{ id: 'wait', household: '999-1', rank: 1, stagingIndex: 100 }])
+  assert.equal(arrivalDuration(waits), 5)
 })

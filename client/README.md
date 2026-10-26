@@ -8,7 +8,7 @@
 
 ```sh
 npm ci
-./server/run.sh server --workspace tmp/frontend-demo --dev-origin http://127.0.0.1:5173 --no-browser
+./script/run-server.sh server --workspace tmp/frontend-demo --dev-origin http://127.0.0.1:5173 --no-browser
 ```
 
 ```sh
@@ -40,7 +40,7 @@ build先執行vue-tsc型別檢查，再產生client/dist；該目錄不提交。
 - domain/draw.mts：獨立驗證核心；UI只引用其型別，不執行抽選。
 - scenes：TresJS場景、車位、文字與攝影機；models/parking維護位置與公尺尺寸。
 
-前端演出不驅動核心存檔；已完成階段只能回看。自動現場演出與結果CSV已實作；其他行政報表，以及將前端產物內嵌Go與完整發布包尚待完成。Go根頁目前仍是API狀態，不會自動提供本Vue頁面。
+前端演出不驅動核心存檔；已完成階段只能回看。自動現場演出與結果CSV已實作；其他行政報表，另有其他行政報表尚待完成。完整發布已由`./script/build-release.sh`內嵌Vue至Go，預設輸出`dist/parking-release-vYYYY.MMDD.HHmm/`；一般Go開發build根頁仍是API狀態。
 
 完整互動與恢復規則見[2D工作台](../doc/design/client-workbench.md)。
 

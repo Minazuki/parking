@@ -2,7 +2,6 @@
 import { computed, defineAsyncComponent, onMounted, onUnmounted, reactive, ref } from 'vue'
 import { useActivity } from '../viewmodels/useActivity.ts'
 import { intentLabel, taipeiTime } from '../models/activity.ts'
-import type { Mode } from '../models/activity.ts'
 import StageTimeline from '../components/StageTimeline.vue'
 import PoolOverview from '../components/PoolOverview.vue'
 import SeedEvidence from '../components/SeedEvidence.vue'
@@ -11,7 +10,7 @@ const DrawPresentation = defineAsyncComponent(() => import('../components/DrawPr
 const presenting = ref(false)
 const vm = reactive(useActivity())
 const nextPool = computed(() => vm.pools[vm.pools.findIndex(p => p.id === vm.selectedPool?.id) + 1]?.id)
-const form = reactive({ year: '', mode: 'test' as Mode })
+const form = reactive({ year: '' })
 const now = ref(new Date())
 let clock: ReturnType<typeof setInterval> | undefined
 onMounted(() => { void vm.refresh(); clock = setInterval(() => { now.value = new Date() }, 1000) })
@@ -24,8 +23,9 @@ onUnmounted(() => { if (clock) clearInterval(clock) })
       <div class="brand-mark" aria-hidden="true">P<span>抽</span></div>
       <div class="brand-copy"><span class="eyebrow">瑞典月灣 · 年度停車位</span><h1>停車位抽選工作台</h1></div>
       <div class="header-meta">
+        <a class="scene-entry-link" href="/">返回待機</a>
         <a class="scene-entry-link" href="?view=parking">停車場3D ↗</a>
-        <span class="badge" :class="vm.status?.activity?.mode === 'live' ? 'live' : 'neutral'">{{ vm.status?.activity?.mode === 'live' ? '正式活動' : vm.status?.activity?.mode === 'test' ? '演練模式' : '尚未設定活動' }}</span>
+        <span v-if="vm.status?.activity ? vm.status.activity.mode === 'test' : vm.status?.testMode" class="badge neutral">演練模式</span>
         <div class="clock"><span>臺灣時間</span><time>{{ taipeiTime(now) }}</time></div>
       </div>
     </header>
@@ -55,9 +55,9 @@ onUnmounted(() => { if (clock) clearInterval(clock) })
         <div class="main-column">
           <section v-if="vm.requiresActivity" class="panel setup-panel">
             <span class="eyebrow">NEW ACTIVITY</span><h2>建立本年度活動</h2><p class="muted">先指定活動年度與模式，再讀取工作資料夾中的行政登記。</p>
-            <form class="setup-form" @submit.prevent="vm.initialize(Number(form.year), form.mode)">
+            <form class="setup-form" @submit.prevent="vm.initialize(Number(form.year), vm.status?.testMode ? 'test' : 'live')">
               <label>民國活動年度<input v-model="form.year" type="number" min="1" step="1" required placeholder="例如 116" :disabled="!vm.canOperate" /></label>
-              <label>活動模式<select v-model="form.mode" :disabled="!vm.canOperate"><option value="test">演練模式</option><option value="live">正式活動</option></select></label>
+
               <button class="button primary" :disabled="!vm.canOperate || !form.year" type="submit">建立活動</button>
             </form>
           </section>

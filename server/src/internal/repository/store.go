@@ -176,7 +176,7 @@ func Open(root, version string, validator IntegrityValidator) (*Store, error) {
 			lease.Close()
 		}
 	}()
-	if err := ensureDir(filepath.Join(root, "logs")); err != nil {
+	if err := prepareWorkspace(root); err != nil {
 		return nil, err
 	}
 	previous := -1

@@ -77,3 +77,27 @@ func TestServerOptionsAndValidation(t *testing.T) {
 		t.Fatal("server command was not dispatched")
 	}
 }
+
+func TestLaunchModeIsExplicit(t *testing.T) {
+	for _, enabled := range []bool{false, true} {
+		called := false
+		cmd := newRootCommand(buildinfo.Info{}, func(_ context.Context, cfg app.Config, _, _ io.Writer) error {
+			called = true
+			if cfg.TestMode != enabled {
+				t.Fatal(cfg.TestMode, enabled)
+			}
+			return nil
+		})
+		args := []string{"server", "--workspace", "test-workspace", "--no-browser"}
+		if enabled {
+			args = append(args, "--test-mode")
+		}
+		cmd.SetArgs(args)
+		if err := cmd.Execute(); err != nil {
+			t.Fatal(err)
+		}
+		if !called {
+			t.Fatal("server did not run")
+		}
+	}
+}

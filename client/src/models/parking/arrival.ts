@@ -26,7 +26,7 @@ function approach(space: ParkingSpace): Point[] {
   const n = Number(space.baseId)
   if (n >= 4 && n <= 13 && n !== 9) return [[470, 420], [365, 420], [365, y], [x, y]]
   if (n >= 15 && n <= 20) return [[470, 515], [90, 515], [90, 400], [x, 400], [x, y]]
-  if (n === 14 && space.split) return [[470, 420], [350, 420], [350, 460], [x, 460], [x, y]]
+  if (n === 14 && space.split) return [[470, 420], [365, 420], [365, y], [x, y]]
   if (n === 14) return [[470, 420], [350, 420], [350, y], [x, y]]
   if (n === 1) return [[470, 420], [x, 420], [x, y]]
   if (space.group === '梯間東側上排' || space.group === '梯間東側中排') return [[470, 420], [885, 420], [885, 296], [x, 296], [x, y]]
@@ -65,10 +65,12 @@ export function createArrivalCards(floor: ParkingFloor, records: ArrivalRecord[]
   })
 }
 export function arrivalDuration(cards: ArrivalCard[]): number {
-  return Math.max(30, ...cards.map(c => 1.2 + c.delay + c.route.slice(1).reduce((total, point, i) => {
+  // Waitlisted vehicles are already at their outside positions at time zero.
+  const latestArrival = Math.max(0, ...cards.filter(c => !c.rank).map(c => 1.2 + c.delay + c.route.slice(1).reduce((total, point, i) => {
     const previous = c.route[i]!
     return total + Math.hypot(point[0] - previous[0], point[1] - previous[1])
-  }, 0) / 5 + 0.5))
+  }, 0) / 5))
+  return latestArrival + 5
 }
 export function cardPosition(card: ArrivalCard, seconds: number): { position: [number, number, number]; arrived: boolean; heading: number } {
   const start = card.route[0]!

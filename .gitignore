@@ -22,3 +22,10 @@ node_modules/
 
 # Frontend build artifacts
 /client/dist/
+
+# Generated frontend embedding and release build lock
+/server/src/internal/webui/dist/
+/server/src/internal/webui/.build-lock/
+
+# Versioned application release packages
+/dist/

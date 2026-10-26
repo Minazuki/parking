@@ -1,24 +1,24 @@
 .draw-presentation { position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; background: var(--ui-bg-elevated); color: var(--ui-text); padding: 22px 32px; outline: none; }
 .presentation-header, .presentation-footer { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-shrink: 0; }
-.presentation-header h1 { font-size: clamp(24px, 3vw, 38px); margin: 5px 0; }
+.presentation-header h1 { font-size: clamp(28px, 3vw, 42px); margin: 5px 0; }
 .presentation-header > div:last-child, .presentation-footer > div { display: flex; gap: 10px; }
 .presentation-steps { display: flex; list-style: none; padding: 12px 0; gap: 8px; flex-shrink: 0; }
 .presentation-steps li { flex: 1; padding: 10px 12px; border-bottom: 3px solid var(--ui-border); color: var(--ui-text); }
 .presentation-steps .active { color: var(--ui-text); border-color: var(--ui-border); font-weight: 700; }
 .presentation-steps .done { color: var(--ui-text); }
 .presentation-content { flex: 1; overflow: auto; min-height: 0; padding: 10px 6px 22px; }
-.presentation-content h2 { font-size: 28px; margin: 8px 0 20px; }
+.presentation-content h2 { font-size: 32px; margin: 8px 0 20px; }
 .presentation-content h3 { margin-top: 26px; }
-.presentation-content .chip { font-size: 18px; padding: 10px 14px; }
+.presentation-content .chip { font-size: 22px; padding: 10px 14px; }
 .presentation-counts { display: flex; gap: 42px; margin: 22px 0 30px; }
-.presentation-counts strong { font-size: 54px; }.presentation-counts small { display: block; font-size: 18px; font-weight: 500; }
-.presentation-draw { margin-top: 25px; font-size: 22px; padding: 20px 30px; }
-.presentation-footer { padding-top: 14px; border-top: 1px solid var(--ui-border); }.presentation-footer > span { font-size: 12px; color: var(--ui-text); }
+.presentation-counts strong { font-size: 58px; }.presentation-counts small { display: block; font-size: 22px; font-weight: 500; }
+.presentation-draw { margin-top: 25px; font-size: 26px; padding: 20px 30px; }
+.presentation-footer { padding-top: 14px; border-top: 1px solid var(--ui-border); }.presentation-footer > span { font-size: 16px; color: var(--ui-text); }
 .presentation-scene { height: max(260px, calc(100dvh - 400px)); border: 1px solid var(--ui-border); border-radius: 12px; overflow: hidden; }
-.presentation-playback { display: flex; gap: 12px; align-items: center; margin-top: 10px; font-size: 13px; }
-@media(max-width:760px) { .draw-presentation { padding: 12px; }.presentation-header, .presentation-footer { flex-wrap: wrap; }.presentation-steps li { padding: 6px 3px; font-size: 11px; }.presentation-counts { gap: 20px; }.presentation-counts strong { font-size: 34px; }.presentation-counts small { font-size: 13px; }.presentation-footer > span { display: none; }.presentation-content .chip { font-size: 15px; } }
+.presentation-playback { display: flex; gap: 12px; align-items: center; margin-top: 10px; font-size: 17px; }
+@media(max-width:760px) { .draw-presentation { padding: 12px; }.presentation-header, .presentation-footer { flex-wrap: wrap; }.presentation-steps li { padding: 6px 3px; font-size: 15px; }.presentation-counts { gap: 20px; }.presentation-counts strong { font-size: 38px; }.presentation-counts small { font-size: 17px; }.presentation-footer > span { display: none; }.presentation-content .chip { font-size: 19px; } }
 
-.draw-presentation .seed-value { font-size: clamp(14px, 1.55vw, 22px); letter-spacing: 0.025em; }
-.draw-presentation .seed-facts dd { font-size: 18px; }
-.draw-presentation .seed-facts dt { font-size: 12px; }
-.presentation-content .presentation-arrival-heading { font-size: 22px; margin: 4px 0 12px; }
+.draw-presentation .seed-value { font-size: clamp(18px, 1.55vw, 26px); letter-spacing: 0.025em; }
+.draw-presentation .seed-facts dd { font-size: 22px; }
+.draw-presentation .seed-facts dt { font-size: 16px; }
+.presentation-content .presentation-arrival-heading { font-size: 26px; margin: 4px 0 12px; }

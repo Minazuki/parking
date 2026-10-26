@@ -14,6 +14,7 @@ import (
 	"github.com/Minazuki/parking/server/src/internal/controller"
 	"github.com/Minazuki/parking/server/src/internal/repository"
 	"github.com/Minazuki/parking/server/src/internal/service"
+	"github.com/Minazuki/parking/server/src/internal/webui"
 )
 
 type Application struct {
@@ -46,7 +47,7 @@ func (a *Application) Serve(ctx context.Context, out, errOut io.Writer) error {
 	defer listener.Close()
 	address := listener.Addr().String()
 	server := &http.Server{
-		Handler:           controller.Handler(a.activity, controller.Config{Host: address, DevOrigin: a.config.DevOrigin, Version: a.config.Version}),
+		Handler:           controller.Handler(a.activity, controller.Config{Host: address, DevOrigin: a.config.DevOrigin, Version: a.config.Version, TestMode: a.config.TestMode, DefaultActivityYear: nextActivityYear(time.Now()), Frontend: webui.Handler(webui.Files())}),
 		ReadHeaderTimeout: 5 * time.Second, IdleTimeout: 60 * time.Second,
 	}
 	location := "http://" + address

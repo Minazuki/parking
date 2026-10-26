@@ -7,7 +7,7 @@ inputs內四份CSV只含999／997系列的五戶虛構資料，與[年度存檔�
 ```sh
 mkdir -p tmp/csv-demo
 cp -R examples/imports/inputs tmp/csv-demo/
-./server/run.sh server --workspace tmp/csv-demo --no-browser
+./script/run-server.sh server --workspace tmp/csv-demo --no-browser
 ```
 
 另一個terminal確認匯入（不取得seed、不抽選）：

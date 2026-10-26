@@ -19,7 +19,7 @@ import (
 func copyInputs(t *testing.T, root string) map[string][]byte {
 	t.Helper()
 	directory := filepath.Join(root, "inputs")
-	if err := os.Mkdir(directory, 0700); err != nil {
+	if err := os.MkdirAll(directory, 0700); err != nil {
 		t.Fatal(err)
 	}
 	result := map[string][]byte{}
@@ -121,8 +121,8 @@ func TestInvalidOrMissingCSVDoesNotCommitRegistration(t *testing.T) {
 	if !errors.As(err, &detail) || snapshot.CurrentStage != -1 || detail.Column != "機車位" {
 		t.Fatal(snapshot.CurrentStage, err)
 	}
-	if _, err := os.Stat(filepath.Join(root, "checkpoints")); !os.IsNotExist(err) {
-		t.Fatal("failed import created checkpoint directory")
+	if entries, err := os.ReadDir(filepath.Join(root, "checkpoints")); err != nil || len(entries) != 0 {
+		t.Fatal("failed import created checkpoint data", err)
 	}
 	good := files[inputcsv.RegistrationA]
 	if err := os.WriteFile(filepath.Join(root, "inputs", inputcsv.RegistrationA), good, 0600); err != nil {

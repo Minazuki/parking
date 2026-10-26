@@ -21,6 +21,7 @@ func newServerCommand(info buildinfo.Info, run serverRunner) *cobra.Command {
 	command.Flags().StringVar(&cfg.Addr, "addr", "127.0.0.1:8080", "僅允許loopback IP；port 0自選可用埠")
 	command.Flags().StringVar(&cfg.DevOrigin, "dev-origin", "", "允許的本機Vite HTTP origin")
 	command.Flags().BoolVar(&cfg.NoBrowser, "no-browser", false, "不啟動Google Chrome")
+	command.Flags().BoolVar(&cfg.TestMode, "test-mode", false, "以演練模式建立新活動")
 	command.MarkFlagRequired("workspace")
 	return command
 }

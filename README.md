@@ -41,7 +41,7 @@
 
 ## 程式開發方向
 
-應用程式以server/src（Go／Gin，Controller–Service–Repository）與client/src（Vue／TS，MVVM）分離開發；3D採TresJS整合Three.js，正式狀態、取seed、配位及存檔由Go負責，TS保留獨立驗證。Go API開發入口為`./server/run.sh server --workspace tmp/server-demo --no-browser`；Go根頁仍顯示API狀態；Vue以`npm run dev:client`分開啟動，發布打包待接。詳見[目錄配置](doc/architecture/repository-layout.md)與[Go後端](doc/architecture/backend.md)。
+應用程式以server/src（Go／Gin，Controller–Service–Repository）與client/src（Vue／TS，MVVM）分離開發；3D採TresJS整合Three.js，正式狀態、取seed、配位及存檔由Go負責，TS保留獨立驗證。Go API開發入口為`./script/run-server.sh server --workspace tmp/server-demo --no-browser`；開發時Vue以`npm run dev:client`分開啟動；完整發布使用`./script/build-release.sh`，產物為`dist/parking-release-vYYYY.MMDD.HHmm/`，內含Vue的Go執行檔及start.sh，現場不需要Node或Vite。詳見[目錄配置](doc/architecture/repository-layout.md)與[Go後端](doc/architecture/backend.md)。
 
 ```mermaid
 flowchart TD

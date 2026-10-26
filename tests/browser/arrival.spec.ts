@@ -1,3 +1,4 @@
+import { arrivalDuration, createArrivalCards, demoArrivals } from '../../client/src/models/parking/arrival.ts'
 import { expect, test } from '@playwright/test'
 test('fictional arrivals support batch, replay, household lookup and outside waitlists', async ({ page }) => {
   const errors: string[] = []
@@ -11,17 +12,17 @@ test('fictional arrivals support batch, replay, household lookup and outside wai
   await expect.poll(async () => Number(await canvas.getAttribute('data-arrival-seconds'))).toBeGreaterThan(2)
   await page.screenshot({ path: '../tmp/arrival-motorcycle-moving.png' })
   await page.getByRole('button', { name: '顯示結果', exact: true }).click()
-  await expect(canvas).toHaveAttribute('data-arrival-seconds', '30.0')
+  await expect(canvas).toHaveAttribute('data-arrival-seconds', arrivalDuration(createArrivalCards('motorcycle', demoArrivals('motorcycle'))).toFixed(1))
   await page.screenshot({ path: '../tmp/arrival-motorcycle-result.png' })
   // Select the actual vehicle at bay 21 in the fixed default camera view.
   const renderCanvas = canvas.locator('canvas')
   const bounds = await renderCanvas.boundingBox()
-  await renderCanvas.click({ position: { x: bounds!.width * 0.244, y: bounds!.height * 0.372 } })
+  await renderCanvas.click({ position: { x: bounds!.width * 0.1672, y: bounds!.height * 0.3336 } })
   await expect(canvas).toHaveAttribute('data-active-arrival', '999-2')
   await expect(canvas).toHaveAttribute('data-bubble-count', '1')
-  await renderCanvas.click({ position: { x: bounds!.width * 0.244, y: bounds!.height * 0.372 } })
+  await renderCanvas.click({ position: { x: bounds!.width * 0.1672, y: bounds!.height * 0.3336 } })
   await expect(canvas).toHaveAttribute('data-bubble-count', '0')
-  await renderCanvas.click({ position: { x: bounds!.width * 0.244, y: bounds!.height * 0.372 } })
+  await renderCanvas.click({ position: { x: bounds!.width * 0.1672, y: bounds!.height * 0.3336 } })
   await expect(canvas).toHaveAttribute('data-bubble-count', '1')
   await renderCanvas.click({ position: { x: 20, y: 20 } })
   await expect(canvas).toHaveAttribute('data-bubble-count', '0')

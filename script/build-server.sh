@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Go後端release建置入口；完整的內嵌前端發布包尚待完成。
-# 用法：./server/build-release.sh [--output bin/parking]
+# Go執行檔release建置入口；完整發布包改用script/build-release.sh。
+# 用法：./script/build-server.sh [--output bin/parking]
 # 預設輸出：repo/bin/parking-vYYYY.MMDD.HHmm（臺灣時間）；已存在則拒絕覆寫。
-# 範例：./server/build-release.sh --output tmp/parking-release-test
+# 範例：./script/build-server.sh --output tmp/parking-release-test
 # 查版本：./tmp/parking-release-test version
 # 注入version、githash（工作樹異動加-dirty）、UTC buildtime；OS／ARCH由Go編譯目標提供。
 # 依賴：Go 1.26+、Git、BSD/GNU date；首次建置需下載Go modules。
@@ -11,19 +11,22 @@
 # 文件：doc/architecture/cli.md
 set -euo pipefail
 output=""
+with_frontend=false
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --help|-h)
       cat <<'HELP'
-用法：./server/build-release.sh [--output 執行檔路徑]
-例：./server/build-release.sh --output tmp/parking-release-test
+用法：./script/build-server.sh [--output 執行檔路徑]
+例：./script/build-server.sh --output tmp/parking-release-test
     ./tmp/parking-release-test version
 預設輸出repo/bin/parking-vYYYY.MMDD.HHmm，版本採臺灣建置時間。
 注入version、githash、UTC buildtime；OS／ARCH為Go編譯目標。
-拒絕覆寫既有檔案；此腳本只建置後端，完整前端發布包尚待完成。
+拒絕覆寫既有檔案；--with-frontend使用已準備的內嵌前端。
+完整發布包請用repository根目錄的./script/build-release.sh。
 文件：doc/architecture/cli.md
 HELP
       exit 0 ;;
+    --with-frontend) with_frontend=true; shift ;;
     --output)
       if [[ $# -lt 2 || -z "$2" || "$2" == -* ]]; then
         echo '--output需要執行檔路徑' >&2; exit 2
@@ -32,9 +35,11 @@ HELP
     *) echo "未知參數：$1" >&2; exit 2 ;;
   esac
 done
-server_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-repo_dir="$(cd -- "$server_dir/.." && pwd)"
-build_epoch="$(date +%s)"
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+repo_dir="$(cd -- "$script_dir/.." && pwd)"
+server_dir="$repo_dir/server"
+build_epoch="${PARKING_BUILD_EPOCH:-$(date +%s)}"
+if [[ ! "$build_epoch" =~ ^[0-9]+$ ]]; then echo "PARKING_BUILD_EPOCH必須是epoch秒數" >&2; exit 2; fi
 if date -u -r "$build_epoch" +%Y >/dev/null 2>&1; then
   version="$(TZ=Asia/Taipei date -r "$build_epoch" +%Y.%m%d.%H%M)"
   build_time="$(date -u -r "$build_epoch" +%Y-%m-%dT%H:%M:%SZ)"
@@ -54,5 +59,7 @@ fi
 mkdir -p -- "$(dirname -- "$output")"
 metadata_package='github.com/Minazuki/parking/server/src/internal/buildinfo'
 ldflags="-X $metadata_package.Version=$version -X $metadata_package.GitHash=$git_hash -X $metadata_package.BuildTime=$build_time"
-(cd -- "$server_dir" && go build -trimpath -ldflags "$ldflags" -o "$output" ./src)
+build_tags=""
+if [[ "$with_frontend" == true ]]; then build_tags=frontend; fi
+(cd -- "$server_dir" && go build -trimpath -tags "$build_tags" -ldflags "$ldflags" -o "$output" ./src)
 printf 'Built: %s\n' "$output"

@@ -130,3 +130,14 @@ test('short desktop keeps the full seed evidence above the fixed progress timeli
   expect(bounds.overflow).toBe(false)
   await page.screenshot({ path: '../tmp/client-seed-short-desktop.png' })
 })
+
+test('workbench returns to standby at the saved stage without writing data', async ({ page }) => {
+  const mock = await mockBackend(page, 4)
+  await page.goto('/?view=workbench')
+  const back = page.getByRole('link', { name: '返回待機', exact: true })
+  await expect(back).toHaveAttribute('href', '/')
+  await back.click()
+  await expect(page.getByRole('button', { name: '開始第二次抽選', exact: true })).toBeEnabled()
+  await expect(page.locator('.live-history-stage')).toHaveCount(2)
+  expect(mock.apiCalls.every(call => call.startsWith('GET '))).toBe(true)
+})

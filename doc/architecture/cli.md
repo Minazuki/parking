@@ -1,17 +1,17 @@
 # Cobra CLI、版本資訊與依賴組裝
 
-狀態：已實作Cobra指令、debug／release版本欄位、後端release建置腳本及Wire組裝。Vue內嵌與完整發布目錄打包仍待完成。
+狀態：已實作Cobra指令、debug／release版本欄位、後端release建置腳本及Wire組裝。Vue內嵌與完整時間版本發布包亦已實作，repo操作入口集中於script。
 
 ## 指令與來源
 
 ```sh
-./server/run.sh version
-./server/run.sh --version
-./server/run.sh server --workspace tmp/server-demo --no-browser
-./server/run.sh server --help
+./script/run-server.sh version
+./script/run-server.sh --version
+./script/run-server.sh server --workspace tmp/server-demo --no-browser
+./script/run-server.sh server --help
 ```
 
-建置後的執行檔接受相同指令，例如parking version及parking server --workspace。原本直接在根指令傳--workspace的方式改為server子指令。預計發布包start.sh仍接受--workspace，再轉呼叫parking server；發布包入口尚未實作。
+建置後的執行檔接受相同指令，例如parking version及parking server --workspace。原本直接在根指令傳--workspace的方式改為server子指令。發布包start.sh接受--workspace，再轉呼叫parking server；預設自選本機可用埠號。
 
 ```mermaid
 flowchart TD
@@ -25,7 +25,7 @@ flowchart TD
     app --> gin["Gin Controller"]
 ```
 
-Root command不帶參數直接顯示help，不預設啟動server；只有明確server子指令才啟動服務。./server/run.sh不帶參數也顯示用法。
+Root command不帶參數直接顯示help，不預設啟動server；只有明確server子指令才啟動服務。./script/run-server.sh不帶參數也顯示用法。
 
 查詢version及help不開工作目錄、不建立log、不啟動Gin或Chrome、不取得seed。無效參數在開啟工作目錄前失敗。server保留loopback、dev-origin、workspace及no-browser參數；Ctrl+C由main的context傳到app，等待正在執行的操作完成。
 
@@ -46,7 +46,7 @@ OS及ARCH來自runtime.GOOS／GOARCH，表示執行檔編譯目標，不是建�
 Release後端執行檔：
 
 ```sh
-./server/build-release.sh --output tmp/parking-release-test
+./script/build-server.sh --output tmp/parking-release-test
 ./tmp/parking-release-test version
 ```
 
@@ -56,7 +56,7 @@ Release後端執行檔：
 - 腳本透過Go linker -X注入buildinfo的Version、GitHash及BuildTime；OS／ARCH直接由編譯目標提供。
 - --output相對呼叫位置，預設repo/bin/parking-vYYYY.MMDD.HHmm；已存在則拒絕覆寫。
 
-本腳本只建置Go執行檔，尚未包含Vue資源及正式start.sh／README發布包。正式年度資料目錄不受建置影響。發布目錄命名沿用[本機啟動](local-launch.md)。
+`script/build-server.sh`預設只建置Go執行檔，`--with-frontend`使用完整建置入口準備的嵌入資源。完整Vue／start.sh／README／manifest發布包請執行`./script/build-release.sh`，產物位於`dist/parking-release-vYYYY.MMDD.HHmm/`。正式年度資料不受建置影響，詳見[本機啟動](local-launch.md)。
 
 ## Wire
 
@@ -79,3 +79,7 @@ go -C server test -race ./src/...
 涵蓋version／help無副作用、子指令與參數錯誤、context及選項轉交、Wire工作目錄鎖定與cleanup，並沿用既有抽選／存檔測試。Release欄位另以實際build後執行version核對。
 
 已實測debug version為dev／none／none；release的臺灣時間版本與UTC buildtime一致，root與--help輸出一致，--version與version一致，並拒絕覆寫既有執行檔。另以空測試目錄啟動Cobra server，驗證Gin狀態版本及SIGTERM後的workspace_closed事件，未取得seed或建立抽選斷點。
+
+`server --test-mode`僅將新活動的預設模式設為test，預設不帶此參數為live；API status回傳`testMode`供UI建立活動時使用。既有活動模式不變。現階段兩者只有標記差異，均會取得drand seed與寫入存檔，詳見[現場模式](../design/live-operation.md)。
+
+新活動預設年度以伺服器啟動時的台灣西元年計算下一個民國年，經`GET /api/v1/status`的`defaultActivityYear`提供給前端；不以重新整理瀏覽器的時間改變既有活動年度。
