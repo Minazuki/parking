@@ -11,7 +11,7 @@
 - Go負責本機API、活動state、CSV匯入驗證、drand取值、正式雙抽與清票、指定目錄讀寫及log；Vue／TS負責操作、顯示與演出，TS算法保留為獨立驗證。
 - 工作資料夾由啟動參數指定，不要求Chrome再次選資料夾或授予檔案讀寫權限。讀寫範圍限制於指定年度工作資料夾，具體API與存檔提交契約後續設計。
 
-前後端分離開發、單一套件發布已定案，見[後端分工](backend.md)及[Repository Layout](repository-layout.md)。目前已實作Go API與階段提交，Vue與正式發布包仍待完成。
+前後端分離開發、單一套件發布已定案，見[後端分工](backend.md)及[Repository Layout](repository-layout.md)。目前已實作Go API與階段提交，Vue 2D工作台已建立，正式發布包仍待完成；開發啟動方式見[Client](../../client/README.md)。
 
 ## 發布目錄與年度資料分離
 

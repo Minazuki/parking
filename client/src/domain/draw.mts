@@ -34,7 +34,7 @@ export function validatePrepared(value: unknown): asserts value is Prepared {
       text(household)
       if (households.has(household)) throw new Error('Duplicate household in pool')
       households.add(household)
-      if (ids[i].startsWith('motorcycle')) {
+      if (ids[i]!.startsWith('motorcycle')) {
         if (motorHouseholds.has(household)) throw new Error('Household appears in both motorcycle pools')
         motorHouseholds.add(household)
       }
@@ -46,10 +46,10 @@ export function validatePrepared(value: unknown): asserts value is Prepared {
       if (c.type === 'space') {
         object(c, ['type', 'spaceId']); text(c.spaceId)
         if (waiting || spaces.has(c.spaceId)) throw new Error('Space after waitlist or duplicate space')
-        const pattern = ids[i].startsWith('motorcycle') ? /^(?:[1-9][0-9]?|1[0-4][0-9]|150|(?:2|3|14)-1)$/ : ids[i] === 'bicycle_large' ? /^大(?:[1-9]|[12][0-9]|3[0-8])$/ : /^小(?:39|4[0-9]|5[0-7])$/
+        const pattern = ids[i]!.startsWith('motorcycle') ? /^(?:[1-9][0-9]?|1[0-4][0-9]|150|(?:2|3|14)-1)$/ : ids[i] === 'bicycle_large' ? /^大(?:[1-9]|[12][0-9]|3[0-8])$/ : /^小(?:39|4[0-9]|5[0-7])$/
         if (!pattern.test(c.spaceId)) throw new Error('Space does not belong to category')
         spaces.add(c.spaceId)
-        if (ids[i].startsWith('motorcycle')) {
+        if (ids[i]!.startsWith('motorcycle')) {
           if (motorSpaces.has(c.spaceId)) throw new Error('Space appears in both motorcycle pools')
           motorSpaces.add(c.spaceId)
         }
@@ -87,8 +87,8 @@ export function drawRound(seed: string, input: unknown) {
     const reason = !households.length && !candidates.length ? 'no_participants_and_no_candidates' : !households.length ? 'no_participants' : !candidates.length ? 'no_candidates' : null
     const result: PoolResult = { id: pool.id, status: reason ? 'skipped' : 'completed', reason, assignments: [], waitlist: [], unassignedHouseholds: [], remainingSpaces: [] }
     while (households.length && candidates.length) {
-      const candidate = candidates.splice(index(candidates.length), 1)[0]
-      const household = households.splice(index(households.length), 1)[0]
+      const candidate = candidates.splice(index(candidates.length), 1)[0]!
+      const household = households.splice(index(households.length), 1)[0]!
       if (candidate.type === 'space') result.assignments.push({ household, spaceId: candidate.spaceId })
       else result.waitlist.push({ household, rank: candidate.rank })
     }

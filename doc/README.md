@@ -14,6 +14,8 @@
 | [116年度抽選時程](planning/schedule-116.md) | 登記、第一輪抽籤與第一輪繳費日期 |
 | [機車位與無障礙配置](planning/motorcycle-spaces.md) | 車位編號、分棟範圍、無障礙分配及拆分條件 |
 | [待辦](planning/backlog.md) | 工作順序及待確認事項 |
+| [停車場3D場景](design/parking-scene.md) | 圖面來源、公尺尺寸、車位位置、TresJS與模型預覽 |
+| [Vue 2D工作台](design/client-workbench.md) | MVVM操作、進度軸、結果查閱及恢復邊界 |
 | [前端演出](design/presentation.md) | 現場展示流程與建議行為 |
 | [Seed與可重現性](design/randomness.md) | 每段亂數來源、保存時機、故障恢復及算法待決事項 |
 | [ChaCha20交叉驗證](tools/verify-draw/tool.md) | 相同seed與有序多池交給TS／Go雙抽，核對串流、配位及候補 |

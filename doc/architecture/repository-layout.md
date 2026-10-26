@@ -34,6 +34,6 @@ flowchart TD
 - server是獨立Go module，驗證工具用本機replace引用server共用核心。從根目錄執行npm run test:server，或go -C server test ./src/...。
 - Go同套件測試與Go來源放同目錄；TS／跨語言測試在tests。正式資料、log與發布產物留在工作目錄或已忽略的輸出目錄，不放來源樹。
 
-Vue頁面與Vite建置尚未建立；現有client有TS驗證核心及MVVM目錄責任說明。後端API與存檔能力見[Go後端](backend.md)，發布方向見[本機啟動](local-launch.md)。
+Vue頁面、Vite建置與MVVM操作已建立；client包含API、ViewModel、View與可重用元件，TS驗證核心仍保持獨立。後端API與存檔能力見[Go後端](backend.md)，發布方向見[本機啟動](local-launch.md)。
 
 CLI與debug／release版本欄位見[Cobra CLI](cli.md)。

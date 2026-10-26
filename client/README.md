@@ -1,11 +1,47 @@
 # Client
 
-Vue／TypeScript前端來源放在src。目前有獨立TS雙抽驗證核心與models／api／viewmodels／views／scenes目錄責任說明，Vue頁面與Vite開發設定尚待建立。
+已建立Vue 3／TypeScript／Vite的2D MVVM操作頁面，包含活動建立、CSV匯入、兩輪抽選、清票、結果回看與固定底部進度軸。已加入依平面圖建立的TresJS／Three.js模型預覽；正式狀態、seed、配位與檔案提交由Go負責。
 
-架構採Vue 3 MVVM；2D使用Vue，3D以TresJS整合Three.js，共用ViewModel。見[架構規範](../doc/architecture/application-patterns.md)。
+## 開發啟動
 
-正式狀態、seed取得、配位與檔案提交由Go後端負責；client只負責操作與演出，TS算法供獨立重算，不取代Go正式結果。
+從repository根目錄執行，後端與前端各使用一個terminal：
 
-相依使用根目錄npm workspace管理，從repository根執行npm ci及npm test。正式部署預計將前端建置產物內嵌Go，不需要現場分別啟動Vite與Go。
+```sh
+npm ci
+./server/run.sh server --workspace tmp/frontend-demo --dev-origin http://127.0.0.1:5173 --no-browser
+```
 
-見[目錄配置](../doc/architecture/repository-layout.md)與[後端API](../doc/architecture/backend.md)。
+```sh
+npm run dev:client
+```
+
+使用Google Chrome開啟http://127.0.0.1:5173。Vite只監聽127.0.0.1:5173，埠已使用時停止，不自行換埠；/api/v1代理到127.0.0.1:8080。後端須明確允許上述dev-origin。需要其他API埠時，以PARKING_API_TARGET指定代理目標並配合Go --addr。
+
+新活動先由畫面輸入民國年度與模式，預設演練模式；不從電腦時間推定年度。CSV預先放入工作目錄inputs，檔名與範例見[匯入契約](../doc/design/csv-import.md)。不要將正式目錄作測試資料；虛構來源位於examples/imports/inputs。
+
+## 檢查與建置
+
+```sh
+npm run build:client
+npm test
+npm run test:browser
+```
+
+build先執行vue-tsc型別檢查，再產生client/dist；該目錄不提交。Chrome瀏覽器測試使用本機Google Chrome，不下載或改用Chromium。macOS權限尚未授予Ghostty時，先重啟終端並完成授權，再執行瀏覽器或本機服務測試。
+
+已通過6個Chrome瀏覽器情境：4個模擬API操作／版面測試、1個3D場景測試，以及1個經實際Vite proxy連至真正Go API的虛構CSV整合測試。整合測試不取得seed、不操作正式資料。
+
+## MVVM分工
+
+- models/activity.ts：API與各階段型別、顯示格式及階段標籤。
+- api/activity.ts：/api/v1 HTTP封裝，不自動重試寫入。
+- viewmodels/useActivity.ts：恢復、操作、忙碌鎖、階段導覽、請求中斷後的唯讀對帳。
+- views/ActivityView.vue及components：Vue 2D呈現，不計算正式配位。
+- domain/draw.mts：獨立驗證核心；UI只引用其型別，不執行抽選。
+- scenes：TresJS場景、車位、文字與攝影機；models/parking維護位置與公尺尺寸。
+
+前端演出不驅動核心存檔；已完成階段只能回看。戶號卡片動畫、正式CSV／報表匯出，以及將前端產物內嵌Go與完整發布包尚待完成。Go根頁目前仍是API狀態，不會自動提供本Vue頁面。
+
+完整互動與恢復規則見[2D工作台](../doc/design/client-workbench.md)。
+
+模型預覽：Chrome開啟http://127.0.0.1:5173/?view=parking，不需要Go API。規格見[3D場景](../doc/design/parking-scene.md)。

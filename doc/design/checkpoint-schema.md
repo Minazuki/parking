@@ -1,6 +1,6 @@
 # 階段JSON Schema與唯讀驗證
 
-狀態：已建立0至6格式版本1的JSON Schema、TS唯讀讀取器與虛構年度範例。現有驗證工具可直接核對年度存檔；Go後端已接上同一份schema、正式計算、階段提交及操作log；CSV匯入已接上；Vue介面仍待實作，見[Go後端](../architecture/backend.md)。
+狀態：已建立0至6格式版本1的JSON Schema、TS唯讀讀取器與虛構年度範例。現有驗證工具可直接核對年度存檔；Go後端已接上同一份schema、正式計算、階段提交及操作log；CSV匯入已接上；Vue 2D操作與恢復已接上API，見[Go後端](../architecture/backend.md)。
 
 ## 共通原則
 

@@ -1,6 +1,6 @@
 # 驗證工具v2資料契約
 
-狀態：v2驗證工具已實作此輸入與結果契約。正式0至6的schema與唯讀驗證已建立，見[存檔Schema](../../design/checkpoint-schema.md)；正式寫入及計算由Go後端執行，Vue與CSV仍待串接，見[後端分工](../../architecture/backend.md)。舊v1向量與實測另保留作歷史紀錄。
+狀態：v2驗證工具已實作此輸入與結果契約。正式0至6的schema與唯讀驗證已建立，見[存檔Schema](../../design/checkpoint-schema.md)；正式寫入及計算由Go後端執行，Vue 2D操作與CSV匯入已接上API，見[後端分工](../../architecture/backend.md)。舊v1向量與實測另保留作歷史紀錄。
 
 ## 工作範圍
 

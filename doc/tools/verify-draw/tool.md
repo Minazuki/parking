@@ -2,7 +2,7 @@
 
 [Shell入口](../../../tools/verify-draw.sh)／[獨立TS核心](../../../client/src/domain/draw.mts)／[TS worker](../../../tools/verify-draw/ts/main.mts)／[Go正式核心](../../../server/src/draw/draw.go)／[Go驗證worker](../../../tools/verify-draw/go/main.go)。
 
-狀態：已實作`parking-draw-chacha20-v2`。支援有序多池、雙抽、直接mod、各類第二輪候補、skipped、實際消耗串流保存與既有結果比對。已建立0至6 Schema與唯讀存檔驗證，正式Go後端已建立階段提交及API，Vue介面與CSV正規化仍待串接；這是獨立算法驗證工具，不操作正式社區活動。
+狀態：已實作`parking-draw-chacha20-v2`。支援有序多池、雙抽、直接mod、各類第二輪候補、skipped、實際消耗串流保存與既有結果比對。已建立0至6 Schema與唯讀存檔驗證，正式Go後端已建立階段提交及API，Vue 2D操作與CSV正規化已接上API；這是獨立算法驗證工具，不操作正式社區活動。
 
 ## 驗證目的
 

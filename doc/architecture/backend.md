@@ -2,7 +2,7 @@
 
 基礎規範已確定：Go使用Gin RESTful API與Controller–Service–Repository，client使用Vue 3 MVVM，3D透過TresJS整合Three.js。Go已完成Gin與三層拆分；見[應用程式架構規範](application-patterns.md)。
 
-狀態：已建立Gin RESTful API與Controller–Service–Repository、正式雙抽核心、drand v2 BLS驗證、0至6準備／計算／存檔、工作目錄鎖定與session操作log。已接上年度inputs的登記及繳費CSV讀取與正規化；Vue介面、報表匯出及正式發布打包仍待完成。
+狀態：已建立Gin RESTful API與Controller–Service–Repository、正式雙抽核心、drand v2 BLS驗證、0至6準備／計算／存檔、工作目錄鎖定與session操作log。已接上年度inputs的登記及繳費CSV讀取與正規化；Vue 2D工作台已接上API，報表匯出及正式發布打包仍待完成。
 
 ## 已確認分工
 
@@ -17,7 +17,7 @@ flowchart LR
 
 前端傳送操作意圖並讀取後端狀態／結果，不送自己計算的配位作正式結果。Go持有工作目錄及階段進度，按鈕觸發一次整輪操作，依序保存seed及配位。Chrome關閉或HTTP請求取消不取消已啟動的後端階段；Go程序仍存活時繼續保存。Go本身中斷則按已完成斷點恢復。
 
-開發時Vite與Go各自執行，正式發布時由Go內嵌前端靜態資源。目錄配置見[Repository Layout](repository-layout.md)。目前尚未建立Vue介面，啟動後根頁暫時導向API狀態JSON。
+開發時Vite與Go各自執行，正式發布時由Go內嵌前端靜態資源。目錄配置見[Repository Layout](repository-layout.md)。Vue介面已建立，以Vite分開開發；Go啟動後根頁目前仍導向API狀態JSON，尚未內嵌前端資源。操作方式見[Client](../../client/README.md)。
 
 ## 分層實作
 
@@ -105,6 +105,6 @@ npm test
 
 Go測試涵蓋：官方quicknet公開簽章與無重試、整個0至6生命週期對照獨立TS範例、雙開鎖定、提交前中斷、沿用已保存seed、尾端回退與歷史log保留、輸入錯型，以及HTTP來源檢查／瀏覽器取消後仍提交、Gin路由與預檢，以及並行抽選請求只取一次seed。TS與跨語言測試另驗證同一套Go正式核心的串流及全部結果。
 
-尚待完成：社區完整戶號主檔核對、前端操作介面、可靠發布包建置、報表及現場演練。現有JSON範例為縮小的虛構登記，不代表正式行政名冊已核驗。
+尚待完成：社區完整戶號主檔核對、投影抽選演出、可靠發布包建置、報表及現場演練。現有JSON範例為縮小的虛構登記，不代表正式行政名冊已核驗。
 
 實作：[入口](../../server/src/main.go)、[階段儲存](../../server/src/internal/repository/store.go)、[正式抽選](../../server/src/draw/draw.go)、[BLS](../../server/src/internal/beacon/quicknet.go)。來源參考：[drand官方scheme](https://github.com/drand/drand/blob/master/crypto/schemes.go)、[JSON Schema驗證套件](https://github.com/santhosh-tekuri/jsonschema)。

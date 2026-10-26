@@ -1,6 +1,6 @@
 # 應用程式架構規範
 
-狀態：2026-10-26確認並完成Go Gin與Controller–Service–Repository拆分。前端已建立MVVM目錄與責任說明；Vue介面及TresJS場景尚未實作。
+狀態：2026-10-26確認並完成Go Gin與Controller–Service–Repository拆分。前端已建立Vue 3 MVVM操作頁、API封裝與進度軸；TresJS基本模型預覽已建立，戶號動畫尚待實作。
 
 ## Server：Go、Gin、RESTful API
 
@@ -58,6 +58,6 @@ flowchart TD
     client --> scene["scenes／TresJS 3D"]
 ```
 
-Go分層與前端MVVM目錄邊界已建立；實際目錄見[Repository Layout](repository-layout.md)。接下來建立Vue MVVM操作流程，最後依需求加入TresJS；套件版本在導入時固定，不先安裝尚未使用的3D相依。
+Go分層與前端MVVM目錄邊界已建立；實際目錄見[Repository Layout](repository-layout.md)。Vue MVVM操作流程已建立，見[2D工作台](../design/client-workbench.md)；TresJS基本模型見[3D場景](../design/parking-scene.md)，動畫依後續需求加入；套件版本在導入時固定，不先安裝尚未使用的3D相依。
 
 參考：[Gin官方文件](https://gin-gonic.com/en/docs/)、[TresJS官方文件](https://docs.tresjs.org/)、[Vue composables](https://vuejs.org/guide/reusability/composables.html)。

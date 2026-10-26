@@ -1,6 +1,6 @@
 # 工作資料夾、匯入與階段存檔
 
-狀態：已確認啟動操作及以完整階段資料夾為斷點的恢復規則；已建立具體JSON Schema、唯讀存檔檢查與驗證工具串接；Go後端已實作正式階段提交與session log，CSV匯入已接上，Vue仍待串接，見[Go後端](../architecture/backend.md)。格式見[存檔Schema](checkpoint-schema.md)。
+狀態：已確認啟動操作及以完整階段資料夾為斷點的恢復規則；已建立具體JSON Schema、唯讀存檔檢查與驗證工具串接；Go後端已實作正式階段提交與session log，CSV匯入與Vue 2D操作已接上API，見[Go後端](../architecture/backend.md)。格式見[存檔Schema](checkpoint-schema.md)。
 
 ## 各階段共通原則
 
