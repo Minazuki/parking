@@ -1,0 +1,2 @@
+# Preserve upstream skill files, including their trailing blank lines.
+.agents/skills/nuxt-ui/** whitespace=-blank-at-eof

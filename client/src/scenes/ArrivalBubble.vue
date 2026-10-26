@@ -8,12 +8,12 @@ function createBubbleTexture(below: boolean) {
   canvas.width = 512; canvas.height = 256
   const ctx = canvas.getContext('2d')!
   const offset = below ? 44 : 0
-  ctx.fillStyle = '#fffef5'; ctx.strokeStyle = '#254b43'; ctx.lineWidth = 8
+  ctx.fillStyle = '#171717'; ctx.strokeStyle = '#f5f5f5'; ctx.lineWidth = 8
   ctx.beginPath(); ctx.roundRect(8, 8 + offset, 496, 196, 32); ctx.fill(); ctx.stroke()
   ctx.beginPath()
   ctx.lineWidth = 3
   ctx.moveTo(256, below ? 52 : 204); ctx.lineTo(256, below ? 10 : 246); ctx.stroke()
-  ctx.fillStyle = '#254b43'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'
+  ctx.fillStyle = '#f5f5f5'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'
   let font = 66
   while (font > 20) { ctx.font = `700 ${font}px "PingFang TC", sans-serif`; if (ctx.measureText(props.household).width < 450) break; font-- }
   ctx.fillText(props.household, 256, (props.detail ? 75 : 105) + offset)

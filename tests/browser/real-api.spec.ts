@@ -62,7 +62,7 @@ test('real Go API initializes and imports fictional CSV through the Vite proxy w
     let drawRequested = false
     // All ordinary API calls pass through Vite's actual proxy. Block draws only.
     await page.route('**/api/v1/rounds/**', async route => { drawRequested = true; await route.abort() })
-    await page.goto(frontendUrl)
+    await page.goto(`${frontendUrl}/?view=workbench`)
     await page.getByLabel('民國活動年度').fill('116')
     await page.getByRole('button', { name: '建立活動', exact: true }).click()
     await page.getByRole('button', { name: '確認匯入第一輪登記', exact: true }).click()

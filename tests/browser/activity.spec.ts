@@ -52,7 +52,7 @@ test('new activity imports CSV, draws both rounds once, reviews payments, and pr
   const mock = await mockBackend(page, -1, true)
   const errors: string[] = []
   page.on('pageerror', error => errors.push(error.message))
-  await page.goto('/')
+  await page.goto('/?view=workbench')
   await expect(page.getByRole('heading', { name: '建立本年度活動' })).toBeVisible()
   await page.getByLabel('民國活動年度').fill('116')
   await page.getByRole('button', { name: '建立活動', exact: true }).click()
@@ -91,7 +91,7 @@ test('new activity imports CSV, draws both rounds once, reviews payments, and pr
 test('CSV row errors remain visible and do not advance the timeline', async ({ page }) => {
   const mock = await mockBackend(page, -1)
   mock.failImport()
-  await page.goto('/')
+  await page.goto('/?view=workbench')
   await page.getByRole('button', { name: '確認匯入第一輪登記', exact: true }).click()
   await expect(page.getByRole('alert')).toContainText('A棟資料.csv · 第2列 · 機車位')
   expect(mock.stage).toBe(-1)
@@ -102,7 +102,7 @@ test('CSV row errors remain visible and do not advance the timeline', async ({ p
 test('a saved seed resumes without a fresh timestamp; narrow Chrome layout has no page overflow', async ({ page }) => {
   const mock = await mockBackend(page, 1)
   await page.setViewportSize({ width: 390, height: 844 })
-  await page.goto('/')
+  await page.goto('/?view=workbench')
   await expect(page.getByText('簽章已驗證・已保存')).toBeVisible()
   await page.getByRole('button', { name: '沿用種子完成第一輪配位', exact: true }).click()
   await expect(page.getByText('正在沿用已保存種子完成配位', { exact: true })).toBeVisible()
@@ -116,7 +116,7 @@ test('a saved seed resumes without a fresh timestamp; narrow Chrome layout has n
 test('short desktop keeps the full seed evidence above the fixed progress timeline', async ({ page }) => {
   await mockBackend(page, 2)
   await page.setViewportSize({ width: 1280, height: 720 })
-  await page.goto('/')
+  await page.goto('/?view=workbench')
   await page.getByRole('button', { name: /第一輪抽選.*已完成/ }).click()
   await expect(page.getByRole('heading', { name: '公開隨機種子' })).toBeVisible()
   await page.evaluate(() => window.scrollTo(0, 0))

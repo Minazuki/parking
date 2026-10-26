@@ -24,6 +24,8 @@
 | [資料規劃](design/data.md) | 登記欄位與資料分工草案 |
 | [行政工作表樣板](design/admin-template.md) | 現行五個分頁、保護範圍、年度複製與交接 |
 | [116年度測試工作表](design/test-workbook-116.md) | 獨立測試副本、情境數量與驗證紀錄 |
+| [現場模式與獨立清票](design/live-operation.md) | 黑暗首頁、兩次自動現場演出、中間獨立清票與手動下載 |
+| [結果CSV下載](design/result-export.md) | 每輪JSON轉CSV、欄位、來源摘要與手動下載 |
 | [活動階段與CSV產出](design/activity-states.md) | 階段狀態、分頁轉碼、資料快照與第二輪工作表銜接 |
 | [行政CSV匯入契約](design/csv-import.md) | 分階段讀取inputs、欄位與錯誤、虛構輸入範例 |
 | [存檔Schema與唯讀驗證](design/checkpoint-schema.md) | 0至6欄位契約、完整性檢查及存檔重算入口 |

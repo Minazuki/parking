@@ -10,13 +10,13 @@ import ParkingLabel from './ParkingLabel.vue'
 const props = defineProps<{ space: ParkingSpace & { selected: boolean; muted: boolean; color: string }; cube: BoxGeometry; atlas: LabelAtlas }>()
 const emit = defineEmits<{ select: [key: string] }>()
 const { invalidate } = useTres()
-const border = markRaw(new MeshStandardMaterial({ color: '#ffffff', roughness: 1 }))
+const border = markRaw(new MeshStandardMaterial({ color: '#737373', roughness: 1 }))
 const fill = markRaw(new MeshStandardMaterial({ roughness: 0.95 }))
 const labelWidth = computed(() => Math.min((Math.abs(Math.sin(props.space.rotation)) > 0.7 ? props.space.depth : props.space.width) * 0.95, 3.5))
 watchEffect(() => {
   fill.color.set(props.space.color)
-  border.color.set(props.space.selected ? '#df9e21' : props.space.muted ? '#d9dfda' : '#ffffff')
-  fill.emissive.set(props.space.selected ? '#6c4605' : '#000000')
+  border.color.set(props.space.selected ? '#fbbf24' : props.space.muted ? '#525252' : '#737373')
+  fill.emissive.set(props.space.selected ? '#78350f' : '#000000')
   fill.emissiveIntensity = props.space.selected ? 0.12 : 0
   invalidate()
 })

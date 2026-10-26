@@ -43,7 +43,7 @@ const routeIssues = computed(() => source.value === 'demo' && arrival.fullCovera
 function startCoverage() { useDemo(); arrival.coverage(true); arrival.all(); vm.resetCamera() }
 const arrivalSpaces = computed(() => {
   const arrived = new Set(arrival.enabled ? arrival.cards.filter(c => c.spaceId && cardPosition(c, arrival.seconds).arrived).map(c => c.spaceId) : [])
-  return vm.visibleSpaces.map(s => arrived.has(s.id) ? { ...s, selected: true, color: '#ffcf5b' } : s)
+  return vm.visibleSpaces.map(s => arrived.has(s.id) ? { ...s, selected: true, color: '#fbbf24' } : s)
 })
 const activeArrivalDetail = computed(() => {
   const card = arrival.activeRecord
@@ -71,7 +71,7 @@ function changeFloor(floor: 'motorcycle' | 'bicycle') {
 <template>
   <div class="parking-page">
     <header class="parking-header">
-      <a class="parking-back" href="/">← 返回抽選工作台</a>
+      <a class="parking-back" href="/?view=workbench">← 返回抽選工作台</a>
       <div class="parking-title"><span class="eyebrow">瑞典月灣 · PARKING ATLAS</span><h1>停車場空間預覽</h1></div>
       <span class="badge neutral">{{ source === 'activity' && saved.snapshot ? `${saved.snapshot.activity.activityYear}年度 · 第${saved.snapshot.round}輪存檔` : '平面圖描繪 · 配置示意' }}</span>
     </header>

@@ -29,7 +29,7 @@ camera.position.set(45, 105, 85); camera.lookAt(0, 0, 0)
 </script>
 
 <template>
-  <TresCanvas :camera="camera" clear-color="#eff3ee" :alpha="false" :dpr="[1, 1.6]" render-mode="on-demand" @pointermissed="dismiss($event)" @error="emit('error')" @ready="emit('ready')">
+  <TresCanvas :camera="camera" clear-color="#0a0a0a" :alpha="false" :dpr="[1, 1.6]" render-mode="on-demand" @pointermissed="dismiss($event)" @error="emit('error')" @ready="emit('ready')">
     <ParkingCamera :layout="props.layout" :view="view" :reset-signal="resetSignal" :focus-signal="focusSignal" :selected="selected" :arrival-enabled="arrivalEnabled" />
     <TresGroup @click="dismiss($event)">
     <ArrivalCards v-if="arrivalEnabled && cards" :key="arrivalRevision" :cards="cards" :seconds="seconds ?? 0" :active-id="activeArrivalId ?? null" @select="selectVehicle" />

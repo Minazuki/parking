@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, reactive, ref } from 'vue'
+import { computed, defineAsyncComponent, onMounted, onUnmounted, reactive, ref } from 'vue'
 import { useActivity } from '../viewmodels/useActivity.ts'
 import { intentLabel, taipeiTime } from '../models/activity.ts'
 import type { Mode } from '../models/activity.ts'
@@ -7,7 +7,10 @@ import StageTimeline from '../components/StageTimeline.vue'
 import PoolOverview from '../components/PoolOverview.vue'
 import SeedEvidence from '../components/SeedEvidence.vue'
 
+const DrawPresentation = defineAsyncComponent(() => import('../components/DrawPresentation.vue'))
+const presenting = ref(false)
 const vm = reactive(useActivity())
+const nextPool = computed(() => vm.pools[vm.pools.findIndex(p => p.id === vm.selectedPool?.id) + 1]?.id)
 const form = reactive({ year: '', mode: 'test' as Mode })
 const now = ref(new Date())
 let clock: ReturnType<typeof setInterval> | undefined
@@ -16,7 +19,7 @@ onUnmounted(() => { if (clock) clearInterval(clock) })
 </script>
 
 <template>
-  <div class="workspace-shell">
+  <div class="workspace-shell" :inert="presenting || undefined">
     <header class="app-header">
       <div class="brand-mark" aria-hidden="true">P<span>抽</span></div>
       <div class="brand-copy"><span class="eyebrow">瑞典月灣 · 年度停車位</span><h1>停車位抽選工作台</h1></div>
@@ -80,7 +83,7 @@ onUnmounted(() => { if (clock) clearInterval(clock) })
           </template>
 
           <template v-else-if="vm.selectedPhase === 'first' || vm.selectedPhase === 'second'">
-            <div class="pool-tabs" role="group" aria-label="車位類型"><button v-for="pool in vm.pools" :key="pool.id" :class="{ active: pool.id === vm.selectedPool?.id }" :aria-pressed="pool.id === vm.selectedPool?.id" @click="vm.selectPool(pool.id)">{{ vm.poolNames[pool.id] }}</button></div>
+            <div class="pool-tabs" role="group" aria-label="車位類型"><button v-for="pool in vm.pools" :key="pool.id" :class="{ active: pool.id === vm.selectedPool?.id }" :aria-pressed="pool.id === vm.selectedPool?.id" @click="vm.selectPool(pool.id)">{{ vm.poolNames[pool.id] }}</button><button v-if="vm.first && vm.selectedPool" class="button primary" @click="presenting = true">開啟投影演出</button></div>
             <SeedEvidence :seed="vm.seed" :pending="vm.drawing" :pressed-at="vm.buttonPressedAt" :url="vm.seedUrl" :delay="vm.seedDelaySeconds" />
             <a v-if="vm.poolResult" class="button" :href="`?view=parking&source=activity&round=${vm.round}&pool=${vm.selectedPool?.id}`">播放此梯次3D進場 ↗</a>
             <PoolOverview v-if="vm.selectedPool" :pool="vm.selectedPool" :result="vm.poolResult" :round="vm.round" :excluded="vm.excludedHouseholds" :accessible="vm.poolAccessible" :space-count="vm.realSpaces.length" :waitlist-count="vm.waitlistSlots.length" />
@@ -127,4 +130,5 @@ onUnmounted(() => { if (clock) clearInterval(clock) })
     </main>
     <StageTimeline :items="vm.progress" :disabled="!!vm.busy" @select="vm.selectPhase" />
   </div>
+  <DrawPresentation v-if="presenting && vm.first && vm.selectedPool" :year="vm.status?.activity?.activityYear ?? 0" :round="vm.round" :first="vm.first" :pool="vm.selectedPool" :allocation="vm.result" :result="vm.poolResult" :excluded="vm.excludedHouseholds" :accessible="vm.poolAccessible" :seed="vm.seed" :seed-url="vm.seedUrl" :seed-delay="vm.seedDelaySeconds" :pressed-at="vm.buttonPressedAt" :busy="!!vm.busy" :error="vm.error" :can-draw="vm.canRunNext" :next-pool="nextPool" @draw="vm.runNext" @close="presenting = false" @next-pool="vm.selectPool(nextPool!)" />
 </template>

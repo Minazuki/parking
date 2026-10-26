@@ -11,7 +11,7 @@ defineProps<{ seed?: SeedState; pending: boolean; pressedAt: string | null; url:
       <span class="badge" :class="seed ? 'success' : 'pending'">{{ seed ? '簽章已驗證・已保存' : '正在取得與保存' }}</span>
     </div>
     <dl class="seed-facts">
-      <div><dt>按下抽選時間（臺灣）</dt><dd>{{ taipeiTime(seed?.buttonPressedAt ?? pressedAt) }}</dd></div>
+      <div><dt>抽選指令時間（臺灣）</dt><dd>{{ taipeiTime(seed?.buttonPressedAt ?? pressedAt) }}</dd></div>
       <div><dt>Round number</dt><dd class="round-number">{{ seed?.round ?? '等待回應' }}</dd></div>
       <div><dt>Round 預定時間（臺灣）</dt><dd>{{ taipeiTime(seed?.roundScheduledTimeUtc ?? null) }}</dd></div>
     </dl>

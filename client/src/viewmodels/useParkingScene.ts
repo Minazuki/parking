@@ -21,7 +21,7 @@ export function useParkingScene() {
   const visibleSpaces = computed(() => spaces.value.map(space => ({
     ...space, selected: space.key === selectedKey.value,
     muted: filter.value !== 'all' && space.category !== filter.value,
-    color: space.key === selectedKey.value ? '#ffcf5b' : filter.value !== 'all' && space.category !== filter.value ? '#e5e9e5' : space.accessible && !space.split ? '#b4d8e4' : categoryColors[space.category],
+    color: space.key === selectedKey.value ? '#fbbf24' : filter.value !== 'all' && space.category !== filter.value ? '#404040' : space.accessible && !space.split ? '#a3a3a3' : categoryColors[space.category],
   })))
   function changeFloor(value: ParkingFloor) {
     floor.value = value; filter.value = 'all'; selectedKey.value = null; query.value = ''; error.value = ''; resetSignal.value++

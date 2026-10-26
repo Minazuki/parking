@@ -75,5 +75,5 @@ export const categoryNames: Record<ParkingCategory, string> = {
   motorcycle_a: 'A棟基礎車位', motorcycle_b: 'B棟基礎車位', bicycle_large: '大腳踏車', bicycle_small: '小腳踏車',
 }
 export const categoryColors: Record<ParkingCategory, string> = {
-  motorcycle_a: '#f0c699', motorcycle_b: '#a8cdb9', bicycle_large: '#a9c9d9', bicycle_small: '#d5b9cc',
+  motorcycle_a: '#d4d4d4', motorcycle_b: '#a3a3a3', bicycle_large: '#d4d4d4', bicycle_small: '#a3a3a3',
 }

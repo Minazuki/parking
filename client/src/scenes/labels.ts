@@ -8,10 +8,11 @@ export function createLabelAtlas(labels: { key: string; text: string }[]): Label
   canvas.width = columns * cell; canvas.height = rows * cell
   const context = canvas.getContext('2d')
   if (!context) throw new Error('無法建立車位文字圖層')
-  context.textAlign = 'center'; context.textBaseline = 'middle'; context.fillStyle = '#234c43'
+  context.textAlign = 'center'; context.textBaseline = 'middle'; context.fillStyle = '#171717'
   const indices = new Map<string, number>()
   labels.forEach((label, index) => {
     indices.set(label.key, index)
+    context.fillStyle = /^(feature:|annotation:)/.test(label.key) ? '#f5f5f5' : '#171717'
     const lines = label.text.split('\n')
     let size = Math.min(52, Math.floor((cell - 12) / lines.length))
     do { context.font = `700 ${size}px "PingFang TC", sans-serif`; size-- } while (Math.max(...lines.map(line => context.measureText(line).width)) > cell - 12 && size > 10)
