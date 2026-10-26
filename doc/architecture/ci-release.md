@@ -30,7 +30,7 @@ build job只有contents:read且checkout不留憑證；只有publish job具有con
 
 | 附件 | 內容 |
 | --- | --- |
-| parking-release-v版本-darwin-arm64.tar.gz | parking、start.sh、README.md及manifest.json，內層保留parking-release-v版本目錄 |
+| parking-release-v版本-darwin-arm64.tar.gz | parking、start.sh、README.md、LICENSE及manifest.json，內層保留parking-release-v版本目錄 |
 | parking-release-v版本-darwin-arm64-binary.sha256 | parking執行檔SHA-256，路徑相對解壓縮位置 |
 | parking-release-v版本-darwin-arm64.tar.gz.sha256 | 壓縮包SHA-256 |
 | manifest.json | 版本、來源commit、buildtime、OS／ARCH及包內檔案SHA-256 |

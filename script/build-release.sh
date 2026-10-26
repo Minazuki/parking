@@ -3,7 +3,7 @@
 # 用法：./script/build-release.sh [--output-dir dist]
 # 例：./script/build-release.sh --output-dir "tmp/release test"
 # 輸出：<output-dir>/parking-release-vYYYY.MMDD.HHmm/（臺灣建置時間）
-# 包含parking、start.sh、README.md及manifest.json；不含年度資料。
+# 包含parking、start.sh、README.md、LICENSE及manifest.json；不含年度資料。
 # 須先npm ci；建置需要Node、Go 1.26+及Git，首次下載依賴需網路。
 # 已存在的版本目錄拒絕覆寫。同一repo同時僅能進行一次完整發布建置。
 # 版本／help：發布包的./start.sh version或./start.sh --help。
@@ -60,6 +60,7 @@ if [[ ! -f "$webui_dir/dist/index.html" ]]; then echo '前端缺少index.html，
 PARKING_BUILD_EPOCH="$build_epoch" "$repo_dir/script/build-server.sh" --with-frontend --output "$staging/parking"
 cp -- "$repo_dir/script/release/start.sh" "$staging/start.sh"
 cp -- "$repo_dir/script/release/README.md" "$staging/README.md"
+cp -- "$repo_dir/LICENSE" "$staging/LICENSE"
 chmod +x "$staging/start.sh"
 node --input-type=module - "$staging" "$version" <<'NODE'
 import { readFileSync, writeFileSync } from 'node:fs'
@@ -71,7 +72,7 @@ const fields = Object.fromEntries(execFileSync(join(directory, 'parking'), ['ver
   const colon = line.indexOf(':'); return [line.slice(0, colon), line.slice(colon + 1).trim()]
 }))
 if (fields.version !== expected) throw new Error('Release directory and executable versions differ')
-const files = Object.fromEntries(['parking', 'start.sh', 'README.md'].map(name => [name, createHash('sha256').update(readFileSync(join(directory, name))).digest('hex')]))
+const files = Object.fromEntries(['parking', 'start.sh', 'README.md', 'LICENSE'].map(name => [name, createHash('sha256').update(readFileSync(join(directory, name))).digest('hex')]))
 writeFileSync(join(directory, 'manifest.json'), JSON.stringify({ schemaVersion: 1, version: fields.version, gitHash: fields.githash, buildTime: fields.buildtime, os: fields.OS, arch: fields.ARCH, frontendEmbedded: true, files }, null, 2) + '\n')
 NODE
 if [[ -e "$target" || -L "$target" ]]; then echo "拒絕覆寫既有版本：$target" >&2; exit 1; fi

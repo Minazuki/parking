@@ -25,7 +25,7 @@ test('release starts from its package with embedded assets, native metadata and 
     expect(manifest.version).toMatch(/^\d{4}\.\d{4}\.\d{4}$/)
     expect(manifest.gitHash).toMatch(/^[a-f0-9]{40}(?:-dirty)?$/)
     expect(Number.isNaN(Date.parse(manifest.buildTime))).toBe(false)
-    expect(await readdir(directory)).toEqual(['README.md', 'manifest.json', 'parking', 'start.sh'])
+    expect(await readdir(directory)).toEqual(['LICENSE', 'README.md', 'manifest.json', 'parking', 'start.sh'])
     for (const [name, digest] of Object.entries(manifest.files)) expect(createHash('sha256').update(await readFile(join(directory, name))).digest('hex')).toBe(digest)
     const version = await execute(join(directory, 'start.sh'), ['version'], { cwd: output, env: { ...process.env, PATH: '/usr/bin:/bin' } })
     expect(version.stdout).toContain(`version: ${manifest.version}`)

@@ -75,7 +75,7 @@ jobs:
           node --input-type=module <<'JS'
           import { readFileSync } from 'node:fs'
           const manifest = JSON.parse(readFileSync(`dist/${process.env.PACKAGE}/manifest.json`, 'utf8'))
-          if (manifest.gitHash !== process.env.SOURCE_COMMIT || manifest.os !== 'darwin' || manifest.arch !== 'arm64' || manifest.frontendEmbedded !== true) {
+          if (manifest.gitHash !== process.env.SOURCE_COMMIT || manifest.os !== 'darwin' || manifest.arch !== 'arm64' || manifest.frontendEmbedded !== true || !manifest.files.LICENSE) {
             throw new Error('Release manifest does not match the requested source and platform')
           }
           JS

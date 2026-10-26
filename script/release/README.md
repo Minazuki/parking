@@ -14,6 +14,7 @@
 | start.sh | 本機啟動入口與help |
 | manifest.json | 版本、Git hash、建置時間、OS／ARCH及檔案摘要 |
 | README.md | 本說明 |
+| LICENSE | MIT授權及免責聲明 |
 
 程式與年度工作資料分離。把行政CSV放在年度目錄的`inputs/`，不要放在發布包內；既有JSON斷點及logs保留於年度目錄。升版使用新的發布目錄，仍指向原年度目錄。
 

@@ -79,3 +79,7 @@ drand quicknet v2驗證工具可取得seed、驗證BLS簽章、換算round預定
 ```
 
 預設依完整斷點輸出第一輪或兩輪綜合版，產物位於dist的parking-query版本目錄；指定輪次、預覽與上傳方式見[build-query操作說明](doc/tools/build-query/tool.md)。建置不會自動上傳Cloudflare。
+
+## 授權
+
+本專案採用[MIT License](LICENSE)，允許使用、修改、散布及商用；須保留版權與授權聲明。軟體依原樣提供，不提供擔保，完整免責與責任限制見LICENSE。

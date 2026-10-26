@@ -68,7 +68,7 @@ npm run dev:client
 
 ## Manifest與驗證
 
-manifest.json包含schemaVersion、version、gitHash、buildTime、os、arch、frontendEmbedded，以及parking／start.sh／README.md的完整SHA-256。版本資訊以實際執行檔輸出為準，不另產生一組不同時間。完整發布目前針對此Mac原生平台，manifest記錄編譯目標；不宣稱同一執行檔可跨OS或CPU架構使用。
+manifest.json包含schemaVersion、version、gitHash、buildTime、os、arch、frontendEmbedded，以及parking／start.sh／README.md／LICENSE的完整SHA-256。版本資訊以實際執行檔輸出為準，不另產生一組不同時間。完整發布目前針對此Mac原生平台，manifest記錄編譯目標；不宣稱同一執行檔可跨OS或CPU架構使用。
 
 已實測預設dist產物、帶空白路徑、help／version、同版本拒絕覆寫，以及僅保留系統PATH啟動。Chrome直接連發布包的Go服務，載入內嵌3D及保存結果，沒有Vite proxy、外部資源請求或寫入API；0至6的JSON前後相同。後端race測試涵蓋API與靜態資源邊界。
 
@@ -77,3 +77,5 @@ manifest.json包含schemaVersion、version、gitHash、buildTime、os、arch、f
 ## GitHub手動發布
 
 可由Actions指定完整commit SHA，沿用本機腳本建置macOS arm64，產生tag、壓縮包與執行檔SHA-256並發布GitHub Release，見[手動CI發布](ci-release.md)。PR與push自動測試尚未加入。
+
+發布包一併包含根目錄MIT LICENSE，manifest記錄其SHA-256；散布程式時保留授權及版權聲明。
