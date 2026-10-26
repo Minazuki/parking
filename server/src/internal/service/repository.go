@@ -3,6 +3,7 @@ package service
 // Repository is the application's storage port; its implementation owns the lock.
 type Repository interface {
 	Root() string
+	ReadInput(string) ([]byte, error)
 	Snapshot() (Snapshot, error)
 	WithOperation(string, func(Transaction) error) (Snapshot, error)
 }

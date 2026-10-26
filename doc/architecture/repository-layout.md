@@ -12,7 +12,7 @@ flowchart TD
     serverSrc --> main["main.go<br/>程序入口"]
     serverSrc --> cmd["cmd/<br/>root.go、server.go、version.go"]
     serverSrc --> draw["draw/<br/>正式ChaCha20雙抽核心"]
-    serverSrc --> internal["internal/<br/>app、buildinfo、controller、service、repository、domain、beacon"]
+    serverSrc --> internal["internal/<br/>app、buildinfo、controller、service、repository、domain、beacon、inputcsv"]
     server --> build["build-release.sh<br/>注入release metadata"]
     server --> run["run.sh<br/>後端開發入口與help"]
     root --> client["client/"]

@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/Minazuki/parking/server/src/internal/inputcsv"
 	"github.com/Minazuki/parking/server/src/internal/service"
 	"github.com/gin-gonic/gin"
 )
@@ -19,10 +20,15 @@ type ActivityService interface {
 	Snapshot() (service.Snapshot, error)
 	InitActivity(int, string) (service.Snapshot, error)
 	ImportRegistration([]byte) (service.Snapshot, error)
+	ImportRegistrationCSV() (service.Snapshot, error)
+	ImportPaymentsCSV() (service.Snapshot, error)
 	ImportPayments([]byte) (service.Snapshot, error)
 	Review() (service.Snapshot, error)
 	RunRoundAt(int, string) (service.Snapshot, error)
 }
+
+const APIPrefix = "/api/v1"
+
 type Config struct{ Host, DevOrigin, Version string }
 
 func respond(w http.ResponseWriter, status int, value any) {
@@ -39,7 +45,12 @@ func failure(w http.ResponseWriter, err error) {
 	if errors.Is(err, service.ErrConflict) {
 		status = http.StatusConflict
 	}
-	respond(w, status, map[string]any{"error": err.Error()})
+	payload := map[string]any{"error": err.Error()}
+	var issue *inputcsv.Issue
+	if errors.As(err, &issue) {
+		payload["issues"] = []*inputcsv.Issue{issue}
+	}
+	respond(w, status, payload)
 }
 func invalid(w http.ResponseWriter, err error) {
 	respond(w, http.StatusBadRequest, map[string]any{"error": err.Error()})
@@ -83,13 +94,16 @@ func Handler(app ActivityService, cfg Config) http.Handler {
 	mux.NoRoute(func(c *gin.Context) { respond(c.Writer, 404, gin.H{"error": "resource not found"}) })
 	mux.NoMethod(func(c *gin.Context) { respond(c.Writer, 405, gin.H{"error": "method not allowed"}) })
 
-	mux.GET("/api/status", ctrl.Status)
-	mux.GET("/api/stages/:stage", ctrl.Stage)
-	mux.POST("/api/activities", ctrl.CreateActivity)
-	mux.POST("/api/registrations", ctrl.ImportRegistration)
-	mux.POST("/api/payment-imports", ctrl.ImportPayments)
-	mux.POST("/api/payment-reviews", ctrl.Review)
-	mux.POST("/api/rounds/:round/draws", ctrl.Draw)
+	api := mux.Group(APIPrefix)
+	api.GET("/status", ctrl.Status)
+	api.GET("/stages/:stage", ctrl.Stage)
+	api.POST("/activities", ctrl.CreateActivity)
+	api.POST("/registrations", ctrl.ImportRegistration)
+	api.POST("/payment-imports", ctrl.ImportPayments)
+	api.POST("/payment-reviews", ctrl.Review)
+	api.POST("/rounds/:round/draws", ctrl.Draw)
+	api.POST("/csv-imports/registration", ctrl.ImportRegistrationCSV)
+	api.POST("/csv-imports/payments", ctrl.ImportPaymentsCSV)
 	mux.GET("/", ctrl.Index)
 	return mux
 }
@@ -253,5 +267,37 @@ func (ctrl *ActivityController) Draw(c *gin.Context) {
 
 func (ctrl *ActivityController) Index(c *gin.Context) {
 	w, r := c.Writer, c.Request
-	http.Redirect(w, r, "/api/status", http.StatusTemporaryRedirect)
+	http.Redirect(w, r, APIPrefix+"/status", http.StatusTemporaryRedirect)
+}
+
+// CSV actions accept no file content or filesystem paths from HTTP.
+func emptyImportBody(c *gin.Context) bool {
+	raw, err := io.ReadAll(http.MaxBytesReader(c.Writer, c.Request.Body, 1024))
+	if err != nil || len(bytes.TrimSpace(raw)) != 0 {
+		invalid(c.Writer, fmt.Errorf("CSV import reads fixed workspace inputs and requires an empty body"))
+		return false
+	}
+	return true
+}
+func (ctrl *ActivityController) ImportRegistrationCSV(c *gin.Context) {
+	if !emptyImportBody(c) {
+		return
+	}
+	snapshot, err := ctrl.service.ImportRegistrationCSV()
+	if err != nil {
+		failure(c.Writer, err)
+		return
+	}
+	respond(c.Writer, http.StatusCreated, snapshot)
+}
+func (ctrl *ActivityController) ImportPaymentsCSV(c *gin.Context) {
+	if !emptyImportBody(c) {
+		return
+	}
+	snapshot, err := ctrl.service.ImportPaymentsCSV()
+	if err != nil {
+		failure(c.Writer, err)
+		return
+	}
+	respond(c.Writer, http.StatusCreated, snapshot)
 }

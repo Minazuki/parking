@@ -2,7 +2,7 @@
 
 支援社區年度機車與腳踏車停車位的前置登記、現場抽選、繳費清查及第二輪作業。抽選預計在會議室錄影、直播，透過前端展示參與戶別、車位數量與配位結果。
 
-目前已建立Gin RESTful API與三層架構、0至6階段存檔與恢復、清票及兩輪配位，並提供TS／Go可重現性驗證。前端採Vite＋Vue 3＋TypeScript，Three.js為選配；Vue頁面、CSV整合、報表與發布包尚待完成。
+目前已建立Gin RESTful API與三層架構、0至6階段存檔與恢復、清票及兩輪配位，並提供TS／Go可重現性驗證。前端採Vite＋Vue 3＋TypeScript，Three.js為選配；CSV已可從年度inputs分階段匯入；Vue頁面、報表與發布包尚待完成。
 
 ## 行政工作表
 
@@ -41,12 +41,12 @@
 
 ## 程式開發方向
 
-應用程式以server/src（Go／Gin，Controller–Service–Repository）與client/src（Vue／TS，MVVM）分離開發；3D採TresJS整合Three.js，正式狀態、取seed、配位及存檔由Go負責，TS保留獨立驗證。Go API開發入口為`./server/run.sh server --workspace tmp/server-demo --no-browser`；現有根頁顯示API狀態，Vue、CSV及發布打包待接。詳見[目錄配置](doc/architecture/repository-layout.md)與[Go後端](doc/architecture/backend.md)。
+應用程式以server/src（Go／Gin，Controller–Service–Repository）與client/src（Vue／TS，MVVM）分離開發；3D採TresJS整合Three.js，正式狀態、取seed、配位及存檔由Go負責，TS保留獨立驗證。Go API開發入口為`./server/run.sh server --workspace tmp/server-demo --no-browser`；現有根頁顯示API狀態，Vue及發布打包待接。詳見[目錄配置](doc/architecture/repository-layout.md)與[Go後端](doc/architecture/backend.md)。
 
 ```mermaid
 flowchart TD
     p0["登記確認"]
-    p1["保存輸入CSV快照"]
+    p1["匯入CSV並保存JSON"]
     p2["產生名單與車位池"]
     p3["第一輪抽選及結果保存"]
     p4["入帳清查"]
@@ -55,6 +55,8 @@ flowchart TD
 ```
 
 行政表使用文字下拉選單與入帳核取方塊；程式匯出時轉成數字代碼。活動階段另存結構化紀錄，保留各次輸入與結果，讓中斷後能恢復。完整規劃見[活動階段與CSV產出](doc/design/activity-states.md)及[架構方向](doc/architecture/overview.md)。
+
+行政CSV匯入契約與試跑方式見[CSV匯入](doc/design/csv-import.md)及[虛構範例](examples/imports/README.md)。
 
 ## 文件與協作
 

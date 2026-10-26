@@ -66,16 +66,8 @@ func (s *Service) ImportPayments(raw []byte) (Snapshot, error) {
 		if snapshot.CurrentStage != 2 {
 			return ErrConflict
 		}
-		if err := s.validator.Validate(3, raw); err != nil {
-			return fmt.Errorf("%w: %v", ErrInvalid, err)
-		}
-		payment, err := decodeAs[Payments](raw)
-		if err != nil {
-			return fmt.Errorf("%w: %v", ErrInvalid, err)
-		}
-		first, _ := decodeAs[First](snapshot.States[0])
-		if err := domain.ValidatePayments(payment, first); err != nil {
-			return fmt.Errorf("%w: %v", ErrInvalid, err)
+		if err := s.validatePayments(snapshot, raw); err != nil {
+			return err
 		}
 		return tx.Commit(3, map[string][]byte{"state.json": raw})
 	})
@@ -209,4 +201,19 @@ func (s *Service) ImportRegistration(raw []byte) (Snapshot, error) {
 		}
 		return tx.Commit(0, map[string][]byte{"state.json": data})
 	})
+}
+
+func (s *Service) validatePayments(snapshot *Snapshot, raw []byte) error {
+	if err := s.validator.Validate(3, raw); err != nil {
+		return fmt.Errorf("%w: %v", ErrInvalid, err)
+	}
+	payment, err := decodeAs[Payments](raw)
+	if err != nil {
+		return fmt.Errorf("%w: %v", ErrInvalid, err)
+	}
+	first, _ := decodeAs[First](snapshot.States[0])
+	if err := domain.ValidatePayments(payment, first); err != nil {
+		return fmt.Errorf("%w: %v", ErrInvalid, err)
+	}
+	return nil
 }

@@ -23,6 +23,7 @@
 | [行政工作表樣板](design/admin-template.md) | 現行五個分頁、保護範圍、年度複製與交接 |
 | [116年度測試工作表](design/test-workbook-116.md) | 獨立測試副本、情境數量與驗證紀錄 |
 | [活動階段與CSV產出](design/activity-states.md) | 階段狀態、分頁轉碼、資料快照與第二輪工作表銜接 |
+| [行政CSV匯入契約](design/csv-import.md) | 分階段讀取inputs、欄位與錯誤、虛構輸入範例 |
 | [存檔Schema與唯讀驗證](design/checkpoint-schema.md) | 0至6欄位契約、完整性檢查及存檔重算入口 |
 | [工作資料夾與存檔](design/workspace-storage.md) | 選資料夾恢復、按階段確認讀CSV、年度封存與錯誤處理 |
 | [清票與第二輪抽選核心](tools/round-two/tool.md) | 已實作的離線工具、輸入契約、驗證與尚未串接功能 |

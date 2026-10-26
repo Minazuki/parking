@@ -2,7 +2,7 @@
 
 基礎規範已確定：Go使用Gin RESTful API與Controller–Service–Repository，client使用Vue 3 MVVM，3D透過TresJS整合Three.js。Go已完成Gin與三層拆分；見[應用程式架構規範](application-patterns.md)。
 
-狀態：已建立Gin RESTful API與Controller–Service–Repository、正式雙抽核心、drand v2 BLS驗證、0至6準備／計算／存檔、工作目錄鎖定與session操作log。Vue介面、CSV讀取與正規化、報表匯出及正式發布打包仍待串接，不宣稱已可直接操作行政CSV完成整場活動。
+狀態：已建立Gin RESTful API與Controller–Service–Repository、正式雙抽核心、drand v2 BLS驗證、0至6準備／計算／存檔、工作目錄鎖定與session操作log。已接上年度inputs的登記及繳費CSV讀取與正規化；Vue介面、報表匯出及正式發布打包仍待完成。
 
 ## 已確認分工
 
@@ -46,22 +46,28 @@ CLI、版本輸出與release執行檔建置見[Cobra CLI](cli.md)。
 
 ## API骨架
 
+所有業務API統一以`/api/v1`作為版本前綴，由Gin route group管理；根頁目前導向`/api/v1/status`。不提供無版本路徑或v2別名。
+
 | 方法與路徑 | 作用 |
 | --- | --- |
-| GET /api/status | 程式版本、工作目錄、activity與目前完整階段 |
-| GET /api/stages/0至6 | 讀取已完成的state.json；未完成回404 |
-| POST /api/activities | 以activityYear、mode建立一次活動識別，不猜年度或覆寫舊活動 |
-| POST /api/registrations | 接收registrations及accessibleAssignments的標準JSON，Go排序、配置及建立0/ |
-| POST /api/rounds/1/draws | 若在0/，取seed保存1/再計算保存2/；若已有1/，沿用seed完成2/ |
-| POST /api/payment-imports | 接收符合3/契約的標準繳費JSON，完整保存3/，不混入清票 |
-| POST /api/payment-reviews | 由0/、2/、3/計算清票、第二輪名單與候補池，保存4/ |
-| POST /api/rounds/2/draws | 若在4/，取seed保存5/再計算保存6/；已有5/則沿用seed |
+| GET /api/v1/status | 程式版本、工作目錄、activity與目前完整階段 |
+| GET /api/v1/stages/0至6 | 讀取已完成的state.json；未完成回404 |
+| POST /api/v1/activities | 以activityYear、mode建立一次活動識別，不猜年度或覆寫舊活動 |
+| POST /api/v1/csv-imports/registration | 從inputs讀三份登記CSV，驗證與正規化後建立0/ |
+| POST /api/v1/csv-imports/payments | 只在2/讀第一輪繳費狀態CSV，驗證後建立3/ |
+| POST /api/v1/registrations | 接收registrations及accessibleAssignments的標準JSON，Go排序、配置及建立0/ |
+| POST /api/v1/rounds/1/draws | 若在0/，取seed保存1/再計算保存2/；若已有1/，沿用seed完成2/ |
+| POST /api/v1/payment-imports | 接收符合3/契約的標準繳費JSON，完整保存3/，不混入清票 |
+| POST /api/v1/payment-reviews | 由0/、2/、3/計算清票、第二輪名單與候補池，保存4/ |
+| POST /api/v1/rounds/2/draws | 若在4/，取seed保存5/再計算保存6/；已有5/則沿用seed |
 
-registration輸入契約見[registration-input.schema.json](../../schemas/checkpoints/registration-input.schema.json)。payment目前接受JSON而非CSV；後續CSV匯入必須由Go轉碼並驗證，不把正式準備邏輯搬到前端。API沒有刪除、任意跳階、任意結果上傳或自動重抽功能。
+registration輸入契約見[registration-input.schema.json](../../schemas/checkpoints/registration-input.schema.json)。標準JSON API保留，另有空body的CSV匯入API，由Go轉碼並驗證；檔名、欄位及錯誤見[CSV契約](../design/csv-import.md)。API沒有刪除、任意跳階、任意結果上傳或自動重抽功能。
 
 抽選API可傳入JSON `{ "buttonPressedAt": "RFC3339時間" }`，記錄前端按下按鈕的時間；省略時採後端開始操作時間，另保留實際請求及回應時間。已有seed斷點時沿用原證據。
 
 取seed使用drand官方Go crypto套件、固定quicknet鏈與公鑰，驗證BLS後推導seed；不呼叫Node或TS。無可抽池也照常取seed。正式Go核心與TS仍可用[verify-draw](../tools/verify-draw/tool.md)獨立核對。
+
+inputcsv負責CSV解析與正規化，Repository以ReadInput提供來源bytes，Service在序列化操作內確認階段、讀檔與提交。CSV錯值回400並附原檔案列欄位置；非法或缺檔不提交，既有JSON斷點不要求CSV仍存在。
 
 ## 完整提交與故障恢復
 
@@ -99,6 +105,6 @@ npm test
 
 Go測試涵蓋：官方quicknet公開簽章與無重試、整個0至6生命週期對照獨立TS範例、雙開鎖定、提交前中斷、沿用已保存seed、尾端回退與歷史log保留、輸入錯型，以及HTTP來源檢查／瀏覽器取消後仍提交、Gin路由與預檢，以及並行抽選請求只取一次seed。TS與跨語言測試另驗證同一套Go正式核心的串流及全部結果。
 
-尚待完成：社區完整戶號主檔與CSV契約、前端操作介面、可靠發布包建置、報表及現場演練。現有JSON範例為縮小的虛構登記，不代表正式行政名冊已核驗。
+尚待完成：社區完整戶號主檔核對、前端操作介面、可靠發布包建置、報表及現場演練。現有JSON範例為縮小的虛構登記，不代表正式行政名冊已核驗。
 
 實作：[入口](../../server/src/main.go)、[階段儲存](../../server/src/internal/repository/store.go)、[正式抽選](../../server/src/draw/draw.go)、[BLS](../../server/src/internal/beacon/quicknet.go)。來源參考：[drand官方scheme](https://github.com/drand/drand/blob/master/crypto/schemes.go)、[JSON Schema驗證套件](https://github.com/santhosh-tekuri/jsonschema)。

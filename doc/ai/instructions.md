@@ -4,7 +4,7 @@
 
 ## 專案現況
 
-本 repository 用於年度機車與腳踏車停車位抽籤工具。採server/src（Go後端）與client/src（Vue／TS前端），已建立Gin Controller–Service–Repository與正式Go抽選／清票、0至6存檔提交、API及log，Vue與CSV整合尚待完成。架構及執行見[Go後端](../architecture/backend.md)與[目錄配置](../architecture/repository-layout.md)。Python[規則原型](../tools/round-two/tool.md)保留作參考。行政人員正在前置登記，前端演出是近期優先項目。
+本 repository 用於年度機車與腳踏車停車位抽籤工具。採server/src（Go後端）與client/src（Vue／TS前端），已建立Gin Controller–Service–Repository與正式Go抽選／清票、0至6存檔提交、API及log，已接上年度inputs CSV匯入，Vue仍待完成。架構及執行見[Go後端](../architecture/backend.md)與[目錄配置](../architecture/repository-layout.md)。Python[規則原型](../tools/round-two/tool.md)保留作參考。行政人員正在前置登記，前端演出是近期優先項目。
 
 ## 開始工作
 
@@ -20,7 +20,7 @@
 
 Go CLI以Cobra為入口，root command不帶參數顯示help，只有server子指令啟動服務；cmd/server.go及cmd/version.go呼叫各自模組；需要依賴組裝時使用Wire。Debug版本固定dev／none／none，release腳本注入版本、Git hash及buildtime，OS／ARCH為編譯目標；見[CLI規範](../architecture/cli.md)。
 
-Go server使用Gin RESTful API與Controller–Service–Repository；TypeScript client使用Vue 3 MVVM，2D採Vue呈現，3D以TresJS整合Three.js並共用MVVM狀態。分層責任與目前遷移狀態以[應用程式架構規範](../architecture/application-patterns.md)為準；不得把規劃誤報為已完成實作。
+Go server使用Gin RESTful API與Controller–Service–Repository，API統一使用`/api/v1`前綴；TypeScript client使用Vue 3 MVVM，2D採Vue呈現，3D以TresJS整合Three.js並共用MVVM狀態。分層責任與目前遷移狀態以[應用程式架構規範](../architecture/application-patterns.md)為準；不得把規劃誤報為已完成實作。
 
 ## 工作邊界
 
@@ -32,6 +32,6 @@ Go server使用Gin RESTful API與Controller–Service–Repository；TypeScript 
 
 ## 驗證與交付
 
-文件變更確認相對連結有效，執行 `git diff --check` 並檢視變更。新增未追蹤檔案也須檢查內容，不能只依賴 `git diff`。核心測試使用 `python3 -m unittest discover -s tests -v`；修改工具時同步驗證CLI及輸出保護。
+文件變更確認相對連結有效，執行 `git diff --check` 並檢視變更。新增未追蹤檔案也須檢查內容，不能只依賴 `git diff`。後端測試使用 `go -C server test -race ./src/...`，TS與交叉驗證使用 `npm test`；Python原型使用 `python3 -m unittest discover -s tests -v`；修改工具時同步驗證CLI及輸出保護。
 
 交付簡述新增或修改內容、驗證方式與仍待確認事項。

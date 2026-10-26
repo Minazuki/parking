@@ -82,7 +82,8 @@ func householdParts(s string) (int64, int64) {
 	}
 	return a, b
 }
-func houseLess(a, b string) bool {
+// HouseholdLess compares normalized household IDs by door number and floor.
+func HouseholdLess(a, b string) bool {
 	x, y := householdParts(a)
 	z, w := householdParts(b)
 	return x < z || x == z && y < w
@@ -106,7 +107,7 @@ func orderedHouseholds(ids []string) error {
 	seen := map[string]bool{}
 	for i, s := range ids {
 		a, _ := householdParts(s)
-		if a < 1 || seen[s] || i > 0 && !houseLess(ids[i-1], s) {
+		if a < 1 || seen[s] || i > 0 && !HouseholdLess(ids[i-1], s) {
 			return fmt.Errorf("invalid, duplicate or unsorted household %q", s)
 		}
 		seen[s] = true
@@ -128,7 +129,7 @@ func householdIDs(rows []Registration, kind int, round int, excluded map[string]
 			out = append(out, r.Household)
 		}
 	}
-	sort.Slice(out, func(i, j int) bool { return houseLess(out[i], out[j]) })
+	sort.Slice(out, func(i, j int) bool { return HouseholdLess(out[i], out[j]) })
 	return out
 }
 func BuildFirst(reg Registrations, assignments []AccessibleAssignment) (First, error) {
@@ -136,7 +137,7 @@ func BuildFirst(reg Registrations, assignments []AccessibleAssignment) (First, e
 		return First{}, fmt.Errorf("registration arrays required")
 	}
 	sortRows := func(rows []Registration) {
-		sort.Slice(rows, func(i, j int) bool { return houseLess(rows[i].Household, rows[j].Household) })
+		sort.Slice(rows, func(i, j int) bool { return HouseholdLess(rows[i].Household, rows[j].Household) })
 	}
 	sortRows(reg.A)
 	sortRows(reg.B)
@@ -152,7 +153,7 @@ func BuildFirst(reg Registrations, assignments []AccessibleAssignment) (First, e
 	for _, r := range all {
 		ids = append(ids, r.Household)
 	}
-	sort.Slice(ids, func(i, j int) bool { return houseLess(ids[i], ids[j]) })
+	sort.Slice(ids, func(i, j int) bool { return HouseholdLess(ids[i], ids[j]) })
 	if err := orderedHouseholds(ids); err != nil {
 		return First{}, err
 	}
@@ -241,7 +242,7 @@ func ValidatePayments(p Payments, f First) error {
 	for _, r := range allRows(f.Registrations) {
 		wanted = append(wanted, r.Household)
 	}
-	sort.Slice(wanted, func(i, j int) bool { return houseLess(wanted[i], wanted[j]) })
+	sort.Slice(wanted, func(i, j int) bool { return HouseholdLess(wanted[i], wanted[j]) })
 	a, _ := json.Marshal(ids)
 	b, _ := json.Marshal(wanted)
 	if !EqualJSON(a, b) {
