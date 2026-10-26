@@ -6,6 +6,8 @@
 - ParkingGraphics.vue：地板、隔間、柱體、坡道輪廓與車位。
 - ParkingBay.vue／ParkingLabel.vue：車格、選取高亮及離線文字圖層。
 - ParkingCamera.vue：俯視、斜俯視、旋轉、平移、縮放及定位。
+- ArrivalCards.vue／ArrivalVehicle.vue：沿車道進場的小型機車／腳踏車，點擊選取，候補留在場外。
+- ArrivalBubble.vue：單一鏡頭朝向的漫畫對話框，顯示戶號與車位／候補順位，查詢時跟隨物件。
 - labels.ts：Canvas字圖集，不下載字型或模型。
 
 配置在[layouts.json](../models/parking/layouts.json)，尺寸與位置轉換在[layout.ts](../models/parking/layout.ts)，顯示狀態由[useParkingScene](../viewmodels/useParkingScene.ts)管理。

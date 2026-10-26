@@ -4,9 +4,10 @@ import { MOUSE, OrthographicCamera, Vector3 } from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { onMounted, onUnmounted, watch } from 'vue'
 import type { ParkingLayout, ParkingSpace } from '../models/parking/layout.ts'
+import { arrivalBounds } from '../models/parking/arrival.ts'
 import { worldPoint } from '../models/parking/layout.ts'
 
-const props = defineProps<{ layout: ParkingLayout; view: 'oblique' | 'top'; resetSignal: number; focusSignal: number; selected?: ParkingSpace }>()
+const props = defineProps<{ layout: ParkingLayout; view: 'oblique' | 'top'; resetSignal: number; focusSignal: number; selected?: ParkingSpace; arrivalEnabled?: boolean }>()
 const { camera, renderer, sizes, invalidate } = useTres()
 let controls: OrbitControls | undefined
 function fit(resetZoom: boolean) {
@@ -15,7 +16,7 @@ function fit(resetZoom: boolean) {
   const target = controls?.target ?? new Vector3()
   const right = new Vector3(1, 0, 0).applyQuaternion(cam.quaternion)
   const up = new Vector3(0, 1, 0).applyQuaternion(cam.quaternion)
-  const points = [...props.layout.outline, ...props.layout.features.flatMap(f => [[f.x - f.width / 2, f.y - f.depth / 2], [f.x + f.width / 2, f.y + f.depth / 2]] as [number, number][])]
+  const points = [...props.layout.outline, ...(props.arrivalEnabled ? arrivalBounds(props.layout.floor === 'B1' ? 'motorcycle' : 'bicycle') : []), ...props.layout.features.flatMap(f => [[f.x - f.width / 2, f.y - f.depth / 2], [f.x + f.width / 2, f.y + f.depth / 2]] as [number, number][])]
   const projected = points.map(point => {
     const [x, z] = worldPoint(props.layout, point)
     const value = new Vector3(x, 0, z).sub(target)
@@ -58,7 +59,7 @@ onMounted(() => {
   controls.addEventListener('change', invalidate)
   reset()
 })
-watch([() => props.view, () => props.resetSignal], reset)
+watch([() => props.view, () => props.resetSignal, () => props.arrivalEnabled], reset)
 watch(() => props.focusSignal, focus)
 watch([sizes.width, sizes.height], () => fit(false))
 onUnmounted(() => { controls?.removeEventListener('change', invalidate); controls?.dispose() })

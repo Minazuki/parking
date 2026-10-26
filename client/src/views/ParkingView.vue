@@ -1,10 +1,22 @@
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue'
+import { computed, reactive, ref, toRef } from 'vue'
 import ParkingCanvas from '../scenes/ParkingCanvas.vue'
 import { useParkingScene } from '../viewmodels/useParkingScene.ts'
+import { cardPosition } from '../models/parking/arrival.ts'
+import { useArrivalPreview } from '../viewmodels/useArrivalPreview.ts'
 import '../parking.css'
 
 const vm = reactive(useParkingScene())
+const arrival = reactive(useArrivalPreview(toRef(vm, 'floor')))
+const arrivalSpaces = computed(() => {
+  const arrived = new Set(arrival.enabled ? arrival.cards.filter(c => c.spaceId && cardPosition(c, arrival.seconds).arrived).map(c => c.spaceId) : [])
+  return vm.visibleSpaces.map(s => arrived.has(s.id) ? { ...s, selected: true, color: '#ffcf5b' } : s)
+})
+const activeArrivalDetail = computed(() => {
+  const card = arrival.activeRecord
+  if (!card) return ''
+  return card.rank ? `候補 ${card.rank}` : cardPosition(card, arrival.seconds).arrived ? `車位 ${card.spaceId}` : ''
+})
 const ready = ref(false)
 const stageElement = ref<HTMLElement | null>(null)
 async function toggleFullscreen() {
@@ -32,8 +44,8 @@ function changeFloor(floor: 'motorcycle' | 'bicycle') { ready.value = false; vm.
       <div class="parking-grid">
         <section ref="stageElement" class="parking-stage" aria-label="停車場3D模型">
           <div class="parking-canvas-toolbar"><span class="parking-count">{{ vm.spaces.length }}<small>格車位</small></span><div class="parking-camera-switch" role="group" aria-label="模型視角"><button :class="{ active: vm.view === 'oblique' }" @click="vm.view = 'oblique'">斜俯視</button><button :class="{ active: vm.view === 'top' }" @click="vm.view = 'top'">俯視</button><button @click="vm.resetCamera">重設 ↺</button><button @click="toggleFullscreen">全螢幕 ⤢</button></div></div>
-          <div class="parking-canvas" :data-ready="ready" :data-floor="vm.floor" :data-space-count="vm.spaces.length" :data-selected="vm.selected?.id ?? ''">
-            <ParkingCanvas v-if="!vm.webglError" :key="canvasKey" :layout="vm.layout" :spaces="vm.visibleSpaces" :view="vm.view" :reset-signal="vm.resetSignal" :focus-signal="vm.focusSignal" :selected="vm.selected" @select="vm.select" @ready="ready = true" @error="vm.webglError = true" />
+          <div class="parking-canvas" :data-active-arrival="arrival.activeRecord?.household ?? ''" :data-bubble-count="arrival.enabled && arrival.activeRecord ? 1 : 0" :data-arrival-enabled="arrival.enabled" :data-arrival-count="arrival.enabled ? arrival.cards.length : 0" :data-arrival-seconds="arrival.seconds.toFixed(1)" :data-ready="ready" :data-floor="vm.floor" :data-space-count="vm.spaces.length" :data-selected="vm.selected?.id ?? ''">
+            <ParkingCanvas v-if="!vm.webglError" :key="canvasKey" :layout="vm.layout" :spaces="arrivalSpaces" :view="vm.view" :reset-signal="vm.resetSignal" :focus-signal="vm.focusSignal" :selected="vm.selected" :cards="arrival.cards" :seconds="arrival.seconds" :arrival-enabled="arrival.enabled" :arrival-revision="arrival.revision" :active-arrival-id="arrival.activeId" @select-arrival="arrival.select" @select="vm.select" @ready="ready = true" @error="vm.webglError = true" />
             <div v-if="vm.webglError" class="parking-canvas-message" role="alert"><strong>此視窗無法啟用3D繪圖</strong><p>請確認Chrome硬體加速設定，或先使用下方車位清單核對位置。</p></div>
             <div v-else-if="!ready" class="parking-canvas-message"><span class="spinner"></span><span>正在建立場景…</span></div>
             <div class="parking-orientation" aria-hidden="true"><span>◇</span>方位依平面圖</div>
@@ -41,6 +53,15 @@ function changeFloor(floor: 'motorcycle' | 'bicycle') { ready.value = false; vm.
           <div class="parking-stage-footer"><span>{{ vm.view === 'top' ? '拖曳平移' : '拖曳旋轉 · 右鍵平移' }} · 滾輪縮放</span><span>車位編號依原圖位置排列</span></div>
         </section>
         <aside class="parking-sidebar">
+          <section class="panel arrival-panel"><span class="eyebrow">ARRIVAL · DEMO</span><h2>住戶進場演出</h2>
+            <p>虛構配位試播。點擊機車／腳踏車可顯示戶號，同時只開啟一個對話框。</p>
+            <div class="arrival-actions"><button class="button primary" @click="arrival.all(); vm.resetCamera()">整批進場</button><button v-if="arrival.enabled" class="button" @click="arrival.replay(); vm.resetCamera()">重播</button><button v-if="arrival.enabled" class="button" @click="arrival.finish">顯示結果</button><button v-if="arrival.enabled" class="button" @click="arrival.close">收起物件</button></div>
+            <form @submit.prevent="arrival.search(); vm.resetCamera()"><label for="arrival-household">查詢戶號（示範）</label><div class="parking-search"><input id="arrival-household" v-model="arrival.query" placeholder="例如 999-1、999-7" /><button class="button primary" type="submit">播放</button></div></form>
+            <p v-if="arrival.error" role="alert" class="parking-search-error">{{ arrival.error }}</p>
+            <p v-if="arrival.enabled" aria-live="polite">{{ arrival.playing ? '住戶進場中' : '配位展示' }} · {{ arrival.cards.length }} 個物件</p>
+            <p v-if="arrival.enabled && arrival.activeRecord" class="arrival-active-info" role="status">{{ arrival.activeRecord.household }}<span v-if="activeArrivalDetail"> · {{ activeArrivalDetail }}</span><button type="button" @click="arrival.activeId = null">關閉對話框</button></p>
+            <details><summary>示範戶號與配位</summary><ul><li v-for="record in arrival.records" :key="record.id"><button v-if="arrival.enabled && arrival.cards.some(c => c.id === record.id)" class="arrival-select" @click="arrival.select(record.id)">{{ record.household }}</button><span v-else>{{ record.household }}</span> → {{ record.rank ? `候補 ${record.rank}` : record.spaceId }}</li></ul></details>
+          </section>
           <section class="panel parking-locate"><span class="eyebrow">FIND A SPACE</span><h2>定位車位</h2>
             <form @submit.prevent="vm.locate"><label for="parking-space-query">車位編號</label><div class="parking-search"><input id="parking-space-query" v-model="vm.query" :placeholder="vm.floor === 'motorcycle' ? '例如 14、86' : '例如 大1、小39'" /><button class="button primary" type="submit">定位</button></div></form>
             <p v-if="vm.error" class="parking-search-error" role="alert">{{ vm.error }}</p>

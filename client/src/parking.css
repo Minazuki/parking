@@ -61,3 +61,13 @@
 .parking-stage:fullscreen { display: flex; flex-direction: column; width: 100vw; height: 100dvh; border: 0; border-radius: 0; }
 .parking-stage:fullscreen .parking-canvas { flex: 1; height: auto; min-height: 0; }
 @media(min-width:761px) and (max-height:850px) { .parking-header { min-height: 76px; } .parking-main { padding-top: 18px; } .parking-topline { margin-bottom: 17px; } .parking-canvas { height: max(320px,calc(100dvh - 300px)); } }
+
+.arrival-panel h2 { margin: 8px 0 12px; }
+.arrival-panel p, .arrival-panel li { font-size: 13px; line-height: 1.7; }
+.arrival-actions { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+.arrival-panel form { margin: 16px 0; }
+.arrival-panel summary { cursor: pointer; font-size: 13px; }
+
+.arrival-active-info { padding: 10px; background: #fff8df; border-radius: 8px; }
+.arrival-active-info button, .arrival-select { border: 0; background: transparent; color: #176354; cursor: pointer; text-decoration: underline; font: inherit; }
+.arrival-active-info button { display: block; margin-top: 5px; }
