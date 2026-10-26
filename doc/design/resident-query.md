@@ -119,3 +119,7 @@ Wrangler可由repo預先鎖定版本的依賴提供，避免年度操作時依�
 手機在查詢成功、按「重新播放」、「查看位置」或「查看候補位置」後自動收合底部面板，讓出模型視野；桌面維持面板展開狀態。可隨時按展開面板返回操作。
 
 查詢focus與對話框顯示分開：目前觀看車輛持續保留藍色與專用光效，即使住戶點空白處關閉對話框也不消失；切換查詢項目後才換到新的目標。其他車輛維持淺灰。
+
+## 原始碼連結
+
+左上公告警語下方提供GitHub圖示，另開分頁連至https://github.com/Minazuki/parking。沿用輸入戶號前鎖定操作的流程，查詢後可點擊。使用官方[品牌資源](https://brand.github.com/foundations/logo)下載包中的白色Invertocat SVG，原檔保留於client/src/assets/brand，隨靜態網站打包、不依賴外部圖檔請求。圖示28px、點擊區44px，半透明深色底與鍵盤focus輪廓；連結具備輔助標籤及noopener noreferrer。GitHub標誌為其商標，不適用本專案MIT授權。

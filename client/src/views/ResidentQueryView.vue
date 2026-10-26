@@ -3,6 +3,7 @@ import { defineAsyncComponent, nextTick, onMounted, reactive, ref, watch } from 
 import { useResidentQuery } from '../viewmodels/useResidentQuery.ts'
 import { queryCategories, type QueryRecord } from '../models/resident-query.ts'
 import '../resident-query.css'
+import githubLogo from '../assets/brand/github-invertocat-white.svg'
 const ParkingCanvas = defineAsyncComponent(() => import('../scenes/ParkingCanvas.vue'))
 const vm = reactive(useResidentQuery(`${import.meta.env.BASE_URL}${import.meta.env.VITE_QUERY_DATA_FILE ?? 'query-data.json'}`))
 const webglError = ref(false), panelOpen = ref(true), inputElement = ref<HTMLInputElement>()
@@ -29,7 +30,7 @@ onMounted(vm.load)
       <ParkingCanvas v-if="!webglError" :key="vm.floor" :layout="vm.layout" :spaces="vm.spaces" :cards="vm.cards" :seconds="vm.seconds" :view="vm.view" :reset-signal="vm.reset" :focus-signal="vm.focus" :selected="vm.selectedSpace" :active-arrival-id="vm.activeId" :focused-arrival-id="vm.record ? 'resident' : undefined" :arrival-enabled="!!vm.record" :arrival-revision="vm.revision" :interactive="!!vm.household" :follow-target="vm.followTarget" :follow-enabled="!!vm.household && vm.followCamera" @camera-interact="vm.followCamera = false" @select-arrival="vm.activeId = vm.activeId ? null : 'resident'" @dismiss-arrival="vm.activeId = null" @error="webglError = true" />
       <div v-else class="resident-no-webgl">此裝置無法顯示3D，查詢結果仍可查看。</div>
     </div>
-    <header class="resident-brand"><div class="resident-heading-panel"><span class="eyebrow">瑞典月灣 · {{ vm.data?.activityYear ?? '—' }}年度</span><h1>住戶停車位查詢</h1><p v-if="vm.data">已公布至第{{ vm.data.throughRound }}輪抽選</p></div><p class="resident-preview-notice">查詢結果僅供即時預覽，實際車位請以社區公告為主。</p></header>
+    <header class="resident-brand"><div class="resident-heading-panel"><span class="eyebrow">瑞典月灣 · {{ vm.data?.activityYear ?? '—' }}年度</span><h1>住戶停車位查詢</h1><p v-if="vm.data">已公布至第{{ vm.data.throughRound }}輪抽選</p></div><p class="resident-preview-notice">查詢結果僅供即時預覽，實際車位請以社區公告為主。</p><a class="resident-source-link" href="https://github.com/Minazuki/parking" target="_blank" rel="noopener noreferrer" aria-label="查看 GitHub 原始碼（另開分頁）" title="查看 GitHub 原始碼" :inert="!vm.household || undefined"><img :src="githubLogo" alt="" width="28" height="28" /></a></header>
     <div v-if="!vm.household" class="resident-gate" role="dialog" aria-modal="true" aria-labelledby="resident-gate-title" @keydown="trapInput">
       <form class="panel resident-search" @submit.prevent="search"><h2 id="resident-gate-title">請輸入戶號</h2><label for="household">戶號</label><input id="household" ref="inputElement" v-model="vm.input" placeholder="例如 151-2" autocomplete="off" :disabled="vm.loading || !vm.data" /><p v-if="vm.error" class="error-alert" role="alert">{{ vm.error }}</p><button class="button primary" :disabled="vm.loading || !vm.data">{{ vm.loading ? '載入中…' : '查詢' }}</button></form>
     </div>

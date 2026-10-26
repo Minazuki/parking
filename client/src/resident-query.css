@@ -59,3 +59,8 @@
 
 .resident-playback-actions { display: flex; align-items: center; gap: 18px; }
 .resident-playback-actions .resident-immediate { margin: 0; white-space: nowrap; }
+
+.resident-source-link { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; background: rgb(10 10 10 / .8); pointer-events: auto; text-shadow: none; }
+.resident-source-link img { display: block; width: 28px; height: 28px; object-fit: contain; }
+.resident-source-link:hover { background: var(--ui-bg-elevated); }
+.resident-source-link:focus-visible { outline: 2px solid var(--ui-primary); outline-offset: 3px; }

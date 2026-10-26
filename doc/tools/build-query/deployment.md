@@ -70,3 +70,7 @@ Cloudflare API最後確認：domain status、verification_data.status、validati
 ## 2026-10-27第四次115預覽更新
 
 更新至`dist/parking-query-115-round2-v2026.1027.0202/`，deployment為https://fc9ab37c.parking115.pages.dev/。一般車輛恢復淺灰；只有focus車輛使用藍色車身、白色條紋、聚光燈、可見光柱與白色呼吸光圈。查詢目標保持focus，即使收起對話框；抽選演出則僅點選車輛有特效，取消選取即移除。尊重減少動態效果設定。Chrome已驗證正式網址載入此包、手機查詢後自動收合，無JavaScript錯誤；本機查詢／抽選／點選瀏覽器測試10項通過。
+
+## 2026-10-27 GitHub原始碼連結
+
+更新至`dist/parking-query-115-round2-v2026.1027.0511/`，deployment為https://b2e2c7c0.parking115.pages.dev/。公告警語下加入官方白色Invertocat連結至本repository，保留戶號查詢前的操作鎖定。Chrome已確認正式網址手機查詢後圖檔正常載入、連結可點擊且目標正確；桌面／手機獨立查詢整合測試通過。
