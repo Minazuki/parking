@@ -1,0 +1,927 @@
+{
+  "schemaVersion": 1,
+  "registrations": {
+    "A": [
+      {
+        "household": "999-2",
+        "motorcycle": 2,
+        "bicycleLarge": 2,
+        "bicycleSmall": 0
+      },
+      {
+        "household": "999-3",
+        "motorcycle": 1,
+        "bicycleLarge": 0,
+        "bicycleSmall": 0
+      },
+      {
+        "household": "999-4",
+        "motorcycle": 2,
+        "bicycleLarge": 0,
+        "bicycleSmall": 0
+      }
+    ],
+    "B": [
+      {
+        "household": "997-2",
+        "motorcycle": 2,
+        "bicycleLarge": 2,
+        "bicycleSmall": 0
+      },
+      {
+        "household": "997-3",
+        "motorcycle": 2,
+        "bicycleLarge": 0,
+        "bicycleSmall": 0
+      }
+    ]
+  },
+  "accessible": {
+    "assignments": [],
+    "splitSpaces": [
+      "2",
+      "2-1",
+      "3",
+      "3-1",
+      "14",
+      "14-1"
+    ],
+    "transferredSpaces": []
+  },
+  "pools": [
+    {
+      "id": "motorcycle_a",
+      "households": [
+        "999-2",
+        "999-3",
+        "999-4"
+      ],
+      "candidates": [
+        {
+          "type": "space",
+          "spaceId": "86"
+        },
+        {
+          "type": "space",
+          "spaceId": "87"
+        },
+        {
+          "type": "space",
+          "spaceId": "88"
+        },
+        {
+          "type": "space",
+          "spaceId": "89"
+        },
+        {
+          "type": "space",
+          "spaceId": "90"
+        },
+        {
+          "type": "space",
+          "spaceId": "91"
+        },
+        {
+          "type": "space",
+          "spaceId": "92"
+        },
+        {
+          "type": "space",
+          "spaceId": "93"
+        },
+        {
+          "type": "space",
+          "spaceId": "94"
+        },
+        {
+          "type": "space",
+          "spaceId": "95"
+        },
+        {
+          "type": "space",
+          "spaceId": "96"
+        },
+        {
+          "type": "space",
+          "spaceId": "97"
+        },
+        {
+          "type": "space",
+          "spaceId": "98"
+        },
+        {
+          "type": "space",
+          "spaceId": "99"
+        },
+        {
+          "type": "space",
+          "spaceId": "100"
+        },
+        {
+          "type": "space",
+          "spaceId": "101"
+        },
+        {
+          "type": "space",
+          "spaceId": "102"
+        },
+        {
+          "type": "space",
+          "spaceId": "103"
+        },
+        {
+          "type": "space",
+          "spaceId": "104"
+        },
+        {
+          "type": "space",
+          "spaceId": "105"
+        },
+        {
+          "type": "space",
+          "spaceId": "106"
+        },
+        {
+          "type": "space",
+          "spaceId": "107"
+        },
+        {
+          "type": "space",
+          "spaceId": "108"
+        },
+        {
+          "type": "space",
+          "spaceId": "109"
+        },
+        {
+          "type": "space",
+          "spaceId": "110"
+        },
+        {
+          "type": "space",
+          "spaceId": "111"
+        },
+        {
+          "type": "space",
+          "spaceId": "112"
+        },
+        {
+          "type": "space",
+          "spaceId": "113"
+        },
+        {
+          "type": "space",
+          "spaceId": "114"
+        },
+        {
+          "type": "space",
+          "spaceId": "115"
+        },
+        {
+          "type": "space",
+          "spaceId": "116"
+        },
+        {
+          "type": "space",
+          "spaceId": "117"
+        },
+        {
+          "type": "space",
+          "spaceId": "118"
+        },
+        {
+          "type": "space",
+          "spaceId": "119"
+        },
+        {
+          "type": "space",
+          "spaceId": "120"
+        },
+        {
+          "type": "space",
+          "spaceId": "121"
+        },
+        {
+          "type": "space",
+          "spaceId": "122"
+        },
+        {
+          "type": "space",
+          "spaceId": "123"
+        },
+        {
+          "type": "space",
+          "spaceId": "124"
+        },
+        {
+          "type": "space",
+          "spaceId": "125"
+        },
+        {
+          "type": "space",
+          "spaceId": "126"
+        },
+        {
+          "type": "space",
+          "spaceId": "127"
+        },
+        {
+          "type": "space",
+          "spaceId": "128"
+        },
+        {
+          "type": "space",
+          "spaceId": "129"
+        },
+        {
+          "type": "space",
+          "spaceId": "130"
+        },
+        {
+          "type": "space",
+          "spaceId": "131"
+        },
+        {
+          "type": "space",
+          "spaceId": "132"
+        },
+        {
+          "type": "space",
+          "spaceId": "133"
+        },
+        {
+          "type": "space",
+          "spaceId": "134"
+        },
+        {
+          "type": "space",
+          "spaceId": "135"
+        },
+        {
+          "type": "space",
+          "spaceId": "136"
+        },
+        {
+          "type": "space",
+          "spaceId": "137"
+        },
+        {
+          "type": "space",
+          "spaceId": "138"
+        },
+        {
+          "type": "space",
+          "spaceId": "139"
+        },
+        {
+          "type": "space",
+          "spaceId": "140"
+        },
+        {
+          "type": "space",
+          "spaceId": "141"
+        },
+        {
+          "type": "space",
+          "spaceId": "142"
+        },
+        {
+          "type": "space",
+          "spaceId": "143"
+        },
+        {
+          "type": "space",
+          "spaceId": "144"
+        },
+        {
+          "type": "space",
+          "spaceId": "145"
+        },
+        {
+          "type": "space",
+          "spaceId": "146"
+        },
+        {
+          "type": "space",
+          "spaceId": "147"
+        },
+        {
+          "type": "space",
+          "spaceId": "148"
+        },
+        {
+          "type": "space",
+          "spaceId": "149"
+        },
+        {
+          "type": "space",
+          "spaceId": "150"
+        }
+      ]
+    },
+    {
+      "id": "motorcycle_b",
+      "households": [
+        "997-2",
+        "997-3"
+      ],
+      "candidates": [
+        {
+          "type": "space",
+          "spaceId": "1"
+        },
+        {
+          "type": "space",
+          "spaceId": "2"
+        },
+        {
+          "type": "space",
+          "spaceId": "2-1"
+        },
+        {
+          "type": "space",
+          "spaceId": "3"
+        },
+        {
+          "type": "space",
+          "spaceId": "3-1"
+        },
+        {
+          "type": "space",
+          "spaceId": "4"
+        },
+        {
+          "type": "space",
+          "spaceId": "5"
+        },
+        {
+          "type": "space",
+          "spaceId": "6"
+        },
+        {
+          "type": "space",
+          "spaceId": "7"
+        },
+        {
+          "type": "space",
+          "spaceId": "8"
+        },
+        {
+          "type": "space",
+          "spaceId": "9"
+        },
+        {
+          "type": "space",
+          "spaceId": "10"
+        },
+        {
+          "type": "space",
+          "spaceId": "11"
+        },
+        {
+          "type": "space",
+          "spaceId": "12"
+        },
+        {
+          "type": "space",
+          "spaceId": "13"
+        },
+        {
+          "type": "space",
+          "spaceId": "14"
+        },
+        {
+          "type": "space",
+          "spaceId": "14-1"
+        },
+        {
+          "type": "space",
+          "spaceId": "15"
+        },
+        {
+          "type": "space",
+          "spaceId": "16"
+        },
+        {
+          "type": "space",
+          "spaceId": "17"
+        },
+        {
+          "type": "space",
+          "spaceId": "18"
+        },
+        {
+          "type": "space",
+          "spaceId": "19"
+        },
+        {
+          "type": "space",
+          "spaceId": "20"
+        },
+        {
+          "type": "space",
+          "spaceId": "21"
+        },
+        {
+          "type": "space",
+          "spaceId": "22"
+        },
+        {
+          "type": "space",
+          "spaceId": "23"
+        },
+        {
+          "type": "space",
+          "spaceId": "24"
+        },
+        {
+          "type": "space",
+          "spaceId": "25"
+        },
+        {
+          "type": "space",
+          "spaceId": "26"
+        },
+        {
+          "type": "space",
+          "spaceId": "27"
+        },
+        {
+          "type": "space",
+          "spaceId": "28"
+        },
+        {
+          "type": "space",
+          "spaceId": "29"
+        },
+        {
+          "type": "space",
+          "spaceId": "30"
+        },
+        {
+          "type": "space",
+          "spaceId": "31"
+        },
+        {
+          "type": "space",
+          "spaceId": "32"
+        },
+        {
+          "type": "space",
+          "spaceId": "33"
+        },
+        {
+          "type": "space",
+          "spaceId": "34"
+        },
+        {
+          "type": "space",
+          "spaceId": "35"
+        },
+        {
+          "type": "space",
+          "spaceId": "36"
+        },
+        {
+          "type": "space",
+          "spaceId": "37"
+        },
+        {
+          "type": "space",
+          "spaceId": "38"
+        },
+        {
+          "type": "space",
+          "spaceId": "39"
+        },
+        {
+          "type": "space",
+          "spaceId": "40"
+        },
+        {
+          "type": "space",
+          "spaceId": "41"
+        },
+        {
+          "type": "space",
+          "spaceId": "42"
+        },
+        {
+          "type": "space",
+          "spaceId": "43"
+        },
+        {
+          "type": "space",
+          "spaceId": "44"
+        },
+        {
+          "type": "space",
+          "spaceId": "45"
+        },
+        {
+          "type": "space",
+          "spaceId": "46"
+        },
+        {
+          "type": "space",
+          "spaceId": "47"
+        },
+        {
+          "type": "space",
+          "spaceId": "48"
+        },
+        {
+          "type": "space",
+          "spaceId": "49"
+        },
+        {
+          "type": "space",
+          "spaceId": "50"
+        },
+        {
+          "type": "space",
+          "spaceId": "51"
+        },
+        {
+          "type": "space",
+          "spaceId": "52"
+        },
+        {
+          "type": "space",
+          "spaceId": "53"
+        },
+        {
+          "type": "space",
+          "spaceId": "54"
+        },
+        {
+          "type": "space",
+          "spaceId": "55"
+        },
+        {
+          "type": "space",
+          "spaceId": "56"
+        },
+        {
+          "type": "space",
+          "spaceId": "57"
+        },
+        {
+          "type": "space",
+          "spaceId": "58"
+        },
+        {
+          "type": "space",
+          "spaceId": "59"
+        },
+        {
+          "type": "space",
+          "spaceId": "60"
+        },
+        {
+          "type": "space",
+          "spaceId": "61"
+        },
+        {
+          "type": "space",
+          "spaceId": "62"
+        },
+        {
+          "type": "space",
+          "spaceId": "63"
+        },
+        {
+          "type": "space",
+          "spaceId": "64"
+        },
+        {
+          "type": "space",
+          "spaceId": "65"
+        },
+        {
+          "type": "space",
+          "spaceId": "66"
+        },
+        {
+          "type": "space",
+          "spaceId": "67"
+        },
+        {
+          "type": "space",
+          "spaceId": "68"
+        },
+        {
+          "type": "space",
+          "spaceId": "69"
+        },
+        {
+          "type": "space",
+          "spaceId": "70"
+        },
+        {
+          "type": "space",
+          "spaceId": "71"
+        },
+        {
+          "type": "space",
+          "spaceId": "72"
+        },
+        {
+          "type": "space",
+          "spaceId": "73"
+        },
+        {
+          "type": "space",
+          "spaceId": "74"
+        },
+        {
+          "type": "space",
+          "spaceId": "75"
+        },
+        {
+          "type": "space",
+          "spaceId": "76"
+        },
+        {
+          "type": "space",
+          "spaceId": "77"
+        },
+        {
+          "type": "space",
+          "spaceId": "78"
+        },
+        {
+          "type": "space",
+          "spaceId": "79"
+        },
+        {
+          "type": "space",
+          "spaceId": "80"
+        },
+        {
+          "type": "space",
+          "spaceId": "81"
+        },
+        {
+          "type": "space",
+          "spaceId": "82"
+        },
+        {
+          "type": "space",
+          "spaceId": "83"
+        },
+        {
+          "type": "space",
+          "spaceId": "84"
+        },
+        {
+          "type": "space",
+          "spaceId": "85"
+        }
+      ]
+    },
+    {
+      "id": "bicycle_large",
+      "households": [
+        "997-2",
+        "999-2"
+      ],
+      "candidates": [
+        {
+          "type": "space",
+          "spaceId": "大1"
+        },
+        {
+          "type": "space",
+          "spaceId": "大2"
+        },
+        {
+          "type": "space",
+          "spaceId": "大3"
+        },
+        {
+          "type": "space",
+          "spaceId": "大4"
+        },
+        {
+          "type": "space",
+          "spaceId": "大5"
+        },
+        {
+          "type": "space",
+          "spaceId": "大6"
+        },
+        {
+          "type": "space",
+          "spaceId": "大7"
+        },
+        {
+          "type": "space",
+          "spaceId": "大8"
+        },
+        {
+          "type": "space",
+          "spaceId": "大9"
+        },
+        {
+          "type": "space",
+          "spaceId": "大10"
+        },
+        {
+          "type": "space",
+          "spaceId": "大11"
+        },
+        {
+          "type": "space",
+          "spaceId": "大12"
+        },
+        {
+          "type": "space",
+          "spaceId": "大13"
+        },
+        {
+          "type": "space",
+          "spaceId": "大14"
+        },
+        {
+          "type": "space",
+          "spaceId": "大15"
+        },
+        {
+          "type": "space",
+          "spaceId": "大16"
+        },
+        {
+          "type": "space",
+          "spaceId": "大17"
+        },
+        {
+          "type": "space",
+          "spaceId": "大18"
+        },
+        {
+          "type": "space",
+          "spaceId": "大19"
+        },
+        {
+          "type": "space",
+          "spaceId": "大20"
+        },
+        {
+          "type": "space",
+          "spaceId": "大21"
+        },
+        {
+          "type": "space",
+          "spaceId": "大22"
+        },
+        {
+          "type": "space",
+          "spaceId": "大23"
+        },
+        {
+          "type": "space",
+          "spaceId": "大24"
+        },
+        {
+          "type": "space",
+          "spaceId": "大25"
+        },
+        {
+          "type": "space",
+          "spaceId": "大26"
+        },
+        {
+          "type": "space",
+          "spaceId": "大27"
+        },
+        {
+          "type": "space",
+          "spaceId": "大28"
+        },
+        {
+          "type": "space",
+          "spaceId": "大29"
+        },
+        {
+          "type": "space",
+          "spaceId": "大30"
+        },
+        {
+          "type": "space",
+          "spaceId": "大31"
+        },
+        {
+          "type": "space",
+          "spaceId": "大32"
+        },
+        {
+          "type": "space",
+          "spaceId": "大33"
+        },
+        {
+          "type": "space",
+          "spaceId": "大34"
+        },
+        {
+          "type": "space",
+          "spaceId": "大35"
+        },
+        {
+          "type": "space",
+          "spaceId": "大36"
+        },
+        {
+          "type": "space",
+          "spaceId": "大37"
+        },
+        {
+          "type": "space",
+          "spaceId": "大38"
+        }
+      ]
+    },
+    {
+      "id": "bicycle_small",
+      "households": [],
+      "candidates": [
+        {
+          "type": "space",
+          "spaceId": "小39"
+        },
+        {
+          "type": "space",
+          "spaceId": "小40"
+        },
+        {
+          "type": "space",
+          "spaceId": "小41"
+        },
+        {
+          "type": "space",
+          "spaceId": "小42"
+        },
+        {
+          "type": "space",
+          "spaceId": "小43"
+        },
+        {
+          "type": "space",
+          "spaceId": "小44"
+        },
+        {
+          "type": "space",
+          "spaceId": "小45"
+        },
+        {
+          "type": "space",
+          "spaceId": "小46"
+        },
+        {
+          "type": "space",
+          "spaceId": "小47"
+        },
+        {
+          "type": "space",
+          "spaceId": "小48"
+        },
+        {
+          "type": "space",
+          "spaceId": "小49"
+        },
+        {
+          "type": "space",
+          "spaceId": "小50"
+        },
+        {
+          "type": "space",
+          "spaceId": "小51"
+        },
+        {
+          "type": "space",
+          "spaceId": "小52"
+        },
+        {
+          "type": "space",
+          "spaceId": "小53"
+        },
+        {
+          "type": "space",
+          "spaceId": "小54"
+        },
+        {
+          "type": "space",
+          "spaceId": "小55"
+        },
+        {
+          "type": "space",
+          "spaceId": "小56"
+        },
+        {
+          "type": "space",
+          "spaceId": "小57"
+        }
+      ]
+    }
+  ]
+}

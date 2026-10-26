@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises'
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { chacha20 } from '@noble/ciphers/chacha.js'
-import { drawRound, validatePrepared, type Prepared } from '../tools/verify-draw/ts/core.mts'
+import { drawRound, validatePrepared, type Prepared } from '../client/src/domain/draw.mts'
 
 const fixture = async (name: string): Promise<Prepared> => JSON.parse(await readFile(new URL(`../examples/verify-draw/${name}.json`, import.meta.url), 'utf8'))
 const seeds = ['00'.repeat(32), 'ff'.repeat(32), '7010277ecb91976aba93d63d298503889de63e291a5a49f7c1b8d2cce2b3e858']

@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:parking:schema:stage-5",
+  "title": "Stage 5: seed receipt",
+  "$ref": "urn:parking:schema:seed"
+}

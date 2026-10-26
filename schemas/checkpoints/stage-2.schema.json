@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:parking:schema:stage-2",
+  "title": "Stage 2: round 1 allocations",
+  "allOf": [
+    {
+      "$ref": "urn:parking:schema:draw-result"
+    },
+    {
+      "properties": {
+        "pools": {
+          "minItems": 4,
+          "maxItems": 4,
+          "prefixItems": [
+            {
+              "properties": {
+                "id": {
+                  "const": "motorcycle_a"
+                }
+              }
+            },
+            {
+              "properties": {
+                "id": {
+                  "const": "motorcycle_b"
+                }
+              }
+            },
+            {
+              "properties": {
+                "id": {
+                  "const": "bicycle_large"
+                }
+              }
+            },
+            {
+              "properties": {
+                "id": {
+                  "const": "bicycle_small"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

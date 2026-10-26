@@ -4,10 +4,15 @@
   "type": "module",
   "scripts": {
     "test": "node --test tests/*.test.mts",
-    "drand": "bash tools/drand-seed.sh"
+    "drand": "bash tools/drand-seed.sh",
+    "test:server": "go -C server test ./src/..."
   },
   "dependencies": {
-    "@noble/ciphers": "2.4.0",
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
     "drand-client": "1.4.2"
-  }
+  },
+  "workspaces": [
+    "client"
+  ]
 }

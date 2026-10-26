@@ -1,0 +1,179 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:parking:schema:stage-4",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "review",
+    "pools",
+    "spaceOrigins"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "review": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "category",
+          "retained",
+          "released",
+          "vacantSpaces"
+        ],
+        "properties": {
+          "category": {
+            "enum": [
+              "motorcycle",
+              "bicycle_large",
+              "bicycle_small"
+            ]
+          },
+          "retained": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "household",
+                "spaceId"
+              ],
+              "properties": {
+                "household": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]*-[1-9][0-9]*$"
+                },
+                "spaceId": {
+                  "type": "string",
+                  "pattern": "^(?:[1-9][0-9]?|1[0-4][0-9]|150|(?:2|3|14)-1|大(?:[1-9]|[12][0-9]|3[0-8])|小(?:39|4[0-9]|5[0-7]))$"
+                }
+              }
+            }
+          },
+          "released": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "household",
+                "spaceId",
+                "reason"
+              ],
+              "properties": {
+                "household": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]*-[1-9][0-9]*$"
+                },
+                "spaceId": {
+                  "type": "string",
+                  "pattern": "^(?:[1-9][0-9]?|1[0-4][0-9]|150|(?:2|3|14)-1|大(?:[1-9]|[12][0-9]|3[0-8])|小(?:39|4[0-9]|5[0-7]))$"
+                },
+                "reason": {
+                  "const": "unpaid_after_deadline"
+                }
+              }
+            }
+          },
+          "vacantSpaces": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^(?:[1-9][0-9]?|1[0-4][0-9]|150|(?:2|3|14)-1|大(?:[1-9]|[12][0-9]|3[0-8])|小(?:39|4[0-9]|5[0-7]))$"
+            }
+          }
+        }
+      },
+      "prefixItems": [
+        {
+          "properties": {
+            "category": {
+              "const": "motorcycle"
+            }
+          }
+        },
+        {
+          "properties": {
+            "category": {
+              "const": "bicycle_large"
+            }
+          }
+        },
+        {
+          "properties": {
+            "category": {
+              "const": "bicycle_small"
+            }
+          }
+        }
+      ]
+    },
+    "pools": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:parking:schema:draw-pools#/$defs/pool"
+      },
+      "minItems": 3,
+      "maxItems": 3,
+      "prefixItems": [
+        {
+          "properties": {
+            "id": {
+              "const": "motorcycle"
+            }
+          }
+        },
+        {
+          "properties": {
+            "id": {
+              "const": "bicycle_large"
+            }
+          }
+        },
+        {
+          "properties": {
+            "id": {
+              "const": "bicycle_small"
+            }
+          }
+        }
+      ]
+    },
+    "spaceOrigins": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "category",
+          "spaceId",
+          "source"
+        ],
+        "properties": {
+          "category": {
+            "enum": [
+              "motorcycle",
+              "bicycle_large",
+              "bicycle_small"
+            ]
+          },
+          "spaceId": {
+            "type": "string",
+            "pattern": "^(?:[1-9][0-9]?|1[0-4][0-9]|150|(?:2|3|14)-1|大(?:[1-9]|[12][0-9]|3[0-8])|小(?:39|4[0-9]|5[0-7]))$"
+          },
+          "source": {
+            "enum": [
+              "first_round_vacant",
+              "unpaid_after_deadline"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

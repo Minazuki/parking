@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:parking:schema:registration-input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "registrations",
+    "accessibleAssignments"
+  ],
+  "properties": {
+    "registrations": {
+      "$ref": "urn:parking:schema:stage-0#/properties/registrations"
+    },
+    "accessibleAssignments": {
+      "$ref": "urn:parking:schema:stage-0#/properties/accessible/properties/assignments"
+    }
+  }
+}

@@ -1,0 +1,2138 @@
+{
+  "schemaVersion": 1,
+  "review": [
+    {
+      "category": "motorcycle",
+      "retained": [
+        {
+          "household": "997-3",
+          "spaceId": "8"
+        },
+        {
+          "household": "997-2",
+          "spaceId": "63"
+        },
+        {
+          "household": "999-4",
+          "spaceId": "89"
+        },
+        {
+          "household": "999-3",
+          "spaceId": "127"
+        }
+      ],
+      "released": [
+        {
+          "household": "999-2",
+          "spaceId": "104",
+          "reason": "unpaid_after_deadline"
+        }
+      ],
+      "vacantSpaces": [
+        "1",
+        "2",
+        "2-1",
+        "3",
+        "3-1",
+        "4",
+        "5",
+        "6",
+        "7",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "14-1",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+        "32",
+        "33",
+        "34",
+        "35",
+        "36",
+        "37",
+        "38",
+        "39",
+        "40",
+        "41",
+        "42",
+        "43",
+        "44",
+        "45",
+        "46",
+        "47",
+        "48",
+        "49",
+        "50",
+        "51",
+        "52",
+        "53",
+        "54",
+        "55",
+        "56",
+        "57",
+        "58",
+        "59",
+        "60",
+        "61",
+        "62",
+        "64",
+        "65",
+        "66",
+        "67",
+        "68",
+        "69",
+        "70",
+        "71",
+        "72",
+        "73",
+        "74",
+        "75",
+        "76",
+        "77",
+        "78",
+        "79",
+        "80",
+        "81",
+        "82",
+        "83",
+        "84",
+        "85",
+        "86",
+        "87",
+        "88",
+        "90",
+        "91",
+        "92",
+        "93",
+        "94",
+        "95",
+        "96",
+        "97",
+        "98",
+        "99",
+        "100",
+        "101",
+        "102",
+        "103",
+        "105",
+        "106",
+        "107",
+        "108",
+        "109",
+        "110",
+        "111",
+        "112",
+        "113",
+        "114",
+        "115",
+        "116",
+        "117",
+        "118",
+        "119",
+        "120",
+        "121",
+        "122",
+        "123",
+        "124",
+        "125",
+        "126",
+        "128",
+        "129",
+        "130",
+        "131",
+        "132",
+        "133",
+        "134",
+        "135",
+        "136",
+        "137",
+        "138",
+        "139",
+        "140",
+        "141",
+        "142",
+        "143",
+        "144",
+        "145",
+        "146",
+        "147",
+        "148",
+        "149",
+        "150"
+      ]
+    },
+    {
+      "category": "bicycle_large",
+      "retained": [
+        {
+          "household": "999-2",
+          "spaceId": "大33"
+        }
+      ],
+      "released": [
+        {
+          "household": "997-2",
+          "spaceId": "大26",
+          "reason": "unpaid_after_deadline"
+        }
+      ],
+      "vacantSpaces": [
+        "大1",
+        "大2",
+        "大3",
+        "大4",
+        "大5",
+        "大6",
+        "大7",
+        "大8",
+        "大9",
+        "大10",
+        "大11",
+        "大12",
+        "大13",
+        "大14",
+        "大15",
+        "大16",
+        "大17",
+        "大18",
+        "大19",
+        "大20",
+        "大21",
+        "大22",
+        "大23",
+        "大24",
+        "大25",
+        "大27",
+        "大28",
+        "大29",
+        "大30",
+        "大31",
+        "大32",
+        "大34",
+        "大35",
+        "大36",
+        "大37",
+        "大38"
+      ]
+    },
+    {
+      "category": "bicycle_small",
+      "retained": [],
+      "released": [],
+      "vacantSpaces": [
+        "小39",
+        "小40",
+        "小41",
+        "小42",
+        "小43",
+        "小44",
+        "小45",
+        "小46",
+        "小47",
+        "小48",
+        "小49",
+        "小50",
+        "小51",
+        "小52",
+        "小53",
+        "小54",
+        "小55",
+        "小56",
+        "小57"
+      ]
+    }
+  ],
+  "pools": [
+    {
+      "id": "motorcycle",
+      "households": [
+        "997-2",
+        "997-3",
+        "999-2",
+        "999-4"
+      ],
+      "candidates": [
+        {
+          "type": "space",
+          "spaceId": "1"
+        },
+        {
+          "type": "space",
+          "spaceId": "2"
+        },
+        {
+          "type": "space",
+          "spaceId": "2-1"
+        },
+        {
+          "type": "space",
+          "spaceId": "3"
+        },
+        {
+          "type": "space",
+          "spaceId": "3-1"
+        },
+        {
+          "type": "space",
+          "spaceId": "4"
+        },
+        {
+          "type": "space",
+          "spaceId": "5"
+        },
+        {
+          "type": "space",
+          "spaceId": "6"
+        },
+        {
+          "type": "space",
+          "spaceId": "7"
+        },
+        {
+          "type": "space",
+          "spaceId": "9"
+        },
+        {
+          "type": "space",
+          "spaceId": "10"
+        },
+        {
+          "type": "space",
+          "spaceId": "11"
+        },
+        {
+          "type": "space",
+          "spaceId": "12"
+        },
+        {
+          "type": "space",
+          "spaceId": "13"
+        },
+        {
+          "type": "space",
+          "spaceId": "14"
+        },
+        {
+          "type": "space",
+          "spaceId": "14-1"
+        },
+        {
+          "type": "space",
+          "spaceId": "15"
+        },
+        {
+          "type": "space",
+          "spaceId": "16"
+        },
+        {
+          "type": "space",
+          "spaceId": "17"
+        },
+        {
+          "type": "space",
+          "spaceId": "18"
+        },
+        {
+          "type": "space",
+          "spaceId": "19"
+        },
+        {
+          "type": "space",
+          "spaceId": "20"
+        },
+        {
+          "type": "space",
+          "spaceId": "21"
+        },
+        {
+          "type": "space",
+          "spaceId": "22"
+        },
+        {
+          "type": "space",
+          "spaceId": "23"
+        },
+        {
+          "type": "space",
+          "spaceId": "24"
+        },
+        {
+          "type": "space",
+          "spaceId": "25"
+        },
+        {
+          "type": "space",
+          "spaceId": "26"
+        },
+        {
+          "type": "space",
+          "spaceId": "27"
+        },
+        {
+          "type": "space",
+          "spaceId": "28"
+        },
+        {
+          "type": "space",
+          "spaceId": "29"
+        },
+        {
+          "type": "space",
+          "spaceId": "30"
+        },
+        {
+          "type": "space",
+          "spaceId": "31"
+        },
+        {
+          "type": "space",
+          "spaceId": "32"
+        },
+        {
+          "type": "space",
+          "spaceId": "33"
+        },
+        {
+          "type": "space",
+          "spaceId": "34"
+        },
+        {
+          "type": "space",
+          "spaceId": "35"
+        },
+        {
+          "type": "space",
+          "spaceId": "36"
+        },
+        {
+          "type": "space",
+          "spaceId": "37"
+        },
+        {
+          "type": "space",
+          "spaceId": "38"
+        },
+        {
+          "type": "space",
+          "spaceId": "39"
+        },
+        {
+          "type": "space",
+          "spaceId": "40"
+        },
+        {
+          "type": "space",
+          "spaceId": "41"
+        },
+        {
+          "type": "space",
+          "spaceId": "42"
+        },
+        {
+          "type": "space",
+          "spaceId": "43"
+        },
+        {
+          "type": "space",
+          "spaceId": "44"
+        },
+        {
+          "type": "space",
+          "spaceId": "45"
+        },
+        {
+          "type": "space",
+          "spaceId": "46"
+        },
+        {
+          "type": "space",
+          "spaceId": "47"
+        },
+        {
+          "type": "space",
+          "spaceId": "48"
+        },
+        {
+          "type": "space",
+          "spaceId": "49"
+        },
+        {
+          "type": "space",
+          "spaceId": "50"
+        },
+        {
+          "type": "space",
+          "spaceId": "51"
+        },
+        {
+          "type": "space",
+          "spaceId": "52"
+        },
+        {
+          "type": "space",
+          "spaceId": "53"
+        },
+        {
+          "type": "space",
+          "spaceId": "54"
+        },
+        {
+          "type": "space",
+          "spaceId": "55"
+        },
+        {
+          "type": "space",
+          "spaceId": "56"
+        },
+        {
+          "type": "space",
+          "spaceId": "57"
+        },
+        {
+          "type": "space",
+          "spaceId": "58"
+        },
+        {
+          "type": "space",
+          "spaceId": "59"
+        },
+        {
+          "type": "space",
+          "spaceId": "60"
+        },
+        {
+          "type": "space",
+          "spaceId": "61"
+        },
+        {
+          "type": "space",
+          "spaceId": "62"
+        },
+        {
+          "type": "space",
+          "spaceId": "64"
+        },
+        {
+          "type": "space",
+          "spaceId": "65"
+        },
+        {
+          "type": "space",
+          "spaceId": "66"
+        },
+        {
+          "type": "space",
+          "spaceId": "67"
+        },
+        {
+          "type": "space",
+          "spaceId": "68"
+        },
+        {
+          "type": "space",
+          "spaceId": "69"
+        },
+        {
+          "type": "space",
+          "spaceId": "70"
+        },
+        {
+          "type": "space",
+          "spaceId": "71"
+        },
+        {
+          "type": "space",
+          "spaceId": "72"
+        },
+        {
+          "type": "space",
+          "spaceId": "73"
+        },
+        {
+          "type": "space",
+          "spaceId": "74"
+        },
+        {
+          "type": "space",
+          "spaceId": "75"
+        },
+        {
+          "type": "space",
+          "spaceId": "76"
+        },
+        {
+          "type": "space",
+          "spaceId": "77"
+        },
+        {
+          "type": "space",
+          "spaceId": "78"
+        },
+        {
+          "type": "space",
+          "spaceId": "79"
+        },
+        {
+          "type": "space",
+          "spaceId": "80"
+        },
+        {
+          "type": "space",
+          "spaceId": "81"
+        },
+        {
+          "type": "space",
+          "spaceId": "82"
+        },
+        {
+          "type": "space",
+          "spaceId": "83"
+        },
+        {
+          "type": "space",
+          "spaceId": "84"
+        },
+        {
+          "type": "space",
+          "spaceId": "85"
+        },
+        {
+          "type": "space",
+          "spaceId": "86"
+        },
+        {
+          "type": "space",
+          "spaceId": "87"
+        },
+        {
+          "type": "space",
+          "spaceId": "88"
+        },
+        {
+          "type": "space",
+          "spaceId": "90"
+        },
+        {
+          "type": "space",
+          "spaceId": "91"
+        },
+        {
+          "type": "space",
+          "spaceId": "92"
+        },
+        {
+          "type": "space",
+          "spaceId": "93"
+        },
+        {
+          "type": "space",
+          "spaceId": "94"
+        },
+        {
+          "type": "space",
+          "spaceId": "95"
+        },
+        {
+          "type": "space",
+          "spaceId": "96"
+        },
+        {
+          "type": "space",
+          "spaceId": "97"
+        },
+        {
+          "type": "space",
+          "spaceId": "98"
+        },
+        {
+          "type": "space",
+          "spaceId": "99"
+        },
+        {
+          "type": "space",
+          "spaceId": "100"
+        },
+        {
+          "type": "space",
+          "spaceId": "101"
+        },
+        {
+          "type": "space",
+          "spaceId": "102"
+        },
+        {
+          "type": "space",
+          "spaceId": "103"
+        },
+        {
+          "type": "space",
+          "spaceId": "104"
+        },
+        {
+          "type": "space",
+          "spaceId": "105"
+        },
+        {
+          "type": "space",
+          "spaceId": "106"
+        },
+        {
+          "type": "space",
+          "spaceId": "107"
+        },
+        {
+          "type": "space",
+          "spaceId": "108"
+        },
+        {
+          "type": "space",
+          "spaceId": "109"
+        },
+        {
+          "type": "space",
+          "spaceId": "110"
+        },
+        {
+          "type": "space",
+          "spaceId": "111"
+        },
+        {
+          "type": "space",
+          "spaceId": "112"
+        },
+        {
+          "type": "space",
+          "spaceId": "113"
+        },
+        {
+          "type": "space",
+          "spaceId": "114"
+        },
+        {
+          "type": "space",
+          "spaceId": "115"
+        },
+        {
+          "type": "space",
+          "spaceId": "116"
+        },
+        {
+          "type": "space",
+          "spaceId": "117"
+        },
+        {
+          "type": "space",
+          "spaceId": "118"
+        },
+        {
+          "type": "space",
+          "spaceId": "119"
+        },
+        {
+          "type": "space",
+          "spaceId": "120"
+        },
+        {
+          "type": "space",
+          "spaceId": "121"
+        },
+        {
+          "type": "space",
+          "spaceId": "122"
+        },
+        {
+          "type": "space",
+          "spaceId": "123"
+        },
+        {
+          "type": "space",
+          "spaceId": "124"
+        },
+        {
+          "type": "space",
+          "spaceId": "125"
+        },
+        {
+          "type": "space",
+          "spaceId": "126"
+        },
+        {
+          "type": "space",
+          "spaceId": "128"
+        },
+        {
+          "type": "space",
+          "spaceId": "129"
+        },
+        {
+          "type": "space",
+          "spaceId": "130"
+        },
+        {
+          "type": "space",
+          "spaceId": "131"
+        },
+        {
+          "type": "space",
+          "spaceId": "132"
+        },
+        {
+          "type": "space",
+          "spaceId": "133"
+        },
+        {
+          "type": "space",
+          "spaceId": "134"
+        },
+        {
+          "type": "space",
+          "spaceId": "135"
+        },
+        {
+          "type": "space",
+          "spaceId": "136"
+        },
+        {
+          "type": "space",
+          "spaceId": "137"
+        },
+        {
+          "type": "space",
+          "spaceId": "138"
+        },
+        {
+          "type": "space",
+          "spaceId": "139"
+        },
+        {
+          "type": "space",
+          "spaceId": "140"
+        },
+        {
+          "type": "space",
+          "spaceId": "141"
+        },
+        {
+          "type": "space",
+          "spaceId": "142"
+        },
+        {
+          "type": "space",
+          "spaceId": "143"
+        },
+        {
+          "type": "space",
+          "spaceId": "144"
+        },
+        {
+          "type": "space",
+          "spaceId": "145"
+        },
+        {
+          "type": "space",
+          "spaceId": "146"
+        },
+        {
+          "type": "space",
+          "spaceId": "147"
+        },
+        {
+          "type": "space",
+          "spaceId": "148"
+        },
+        {
+          "type": "space",
+          "spaceId": "149"
+        },
+        {
+          "type": "space",
+          "spaceId": "150"
+        }
+      ]
+    },
+    {
+      "id": "bicycle_large",
+      "households": [
+        "997-2",
+        "999-2"
+      ],
+      "candidates": [
+        {
+          "type": "space",
+          "spaceId": "大1"
+        },
+        {
+          "type": "space",
+          "spaceId": "大2"
+        },
+        {
+          "type": "space",
+          "spaceId": "大3"
+        },
+        {
+          "type": "space",
+          "spaceId": "大4"
+        },
+        {
+          "type": "space",
+          "spaceId": "大5"
+        },
+        {
+          "type": "space",
+          "spaceId": "大6"
+        },
+        {
+          "type": "space",
+          "spaceId": "大7"
+        },
+        {
+          "type": "space",
+          "spaceId": "大8"
+        },
+        {
+          "type": "space",
+          "spaceId": "大9"
+        },
+        {
+          "type": "space",
+          "spaceId": "大10"
+        },
+        {
+          "type": "space",
+          "spaceId": "大11"
+        },
+        {
+          "type": "space",
+          "spaceId": "大12"
+        },
+        {
+          "type": "space",
+          "spaceId": "大13"
+        },
+        {
+          "type": "space",
+          "spaceId": "大14"
+        },
+        {
+          "type": "space",
+          "spaceId": "大15"
+        },
+        {
+          "type": "space",
+          "spaceId": "大16"
+        },
+        {
+          "type": "space",
+          "spaceId": "大17"
+        },
+        {
+          "type": "space",
+          "spaceId": "大18"
+        },
+        {
+          "type": "space",
+          "spaceId": "大19"
+        },
+        {
+          "type": "space",
+          "spaceId": "大20"
+        },
+        {
+          "type": "space",
+          "spaceId": "大21"
+        },
+        {
+          "type": "space",
+          "spaceId": "大22"
+        },
+        {
+          "type": "space",
+          "spaceId": "大23"
+        },
+        {
+          "type": "space",
+          "spaceId": "大24"
+        },
+        {
+          "type": "space",
+          "spaceId": "大25"
+        },
+        {
+          "type": "space",
+          "spaceId": "大26"
+        },
+        {
+          "type": "space",
+          "spaceId": "大27"
+        },
+        {
+          "type": "space",
+          "spaceId": "大28"
+        },
+        {
+          "type": "space",
+          "spaceId": "大29"
+        },
+        {
+          "type": "space",
+          "spaceId": "大30"
+        },
+        {
+          "type": "space",
+          "spaceId": "大31"
+        },
+        {
+          "type": "space",
+          "spaceId": "大32"
+        },
+        {
+          "type": "space",
+          "spaceId": "大34"
+        },
+        {
+          "type": "space",
+          "spaceId": "大35"
+        },
+        {
+          "type": "space",
+          "spaceId": "大36"
+        },
+        {
+          "type": "space",
+          "spaceId": "大37"
+        },
+        {
+          "type": "space",
+          "spaceId": "大38"
+        }
+      ]
+    },
+    {
+      "id": "bicycle_small",
+      "households": [],
+      "candidates": [
+        {
+          "type": "space",
+          "spaceId": "小39"
+        },
+        {
+          "type": "space",
+          "spaceId": "小40"
+        },
+        {
+          "type": "space",
+          "spaceId": "小41"
+        },
+        {
+          "type": "space",
+          "spaceId": "小42"
+        },
+        {
+          "type": "space",
+          "spaceId": "小43"
+        },
+        {
+          "type": "space",
+          "spaceId": "小44"
+        },
+        {
+          "type": "space",
+          "spaceId": "小45"
+        },
+        {
+          "type": "space",
+          "spaceId": "小46"
+        },
+        {
+          "type": "space",
+          "spaceId": "小47"
+        },
+        {
+          "type": "space",
+          "spaceId": "小48"
+        },
+        {
+          "type": "space",
+          "spaceId": "小49"
+        },
+        {
+          "type": "space",
+          "spaceId": "小50"
+        },
+        {
+          "type": "space",
+          "spaceId": "小51"
+        },
+        {
+          "type": "space",
+          "spaceId": "小52"
+        },
+        {
+          "type": "space",
+          "spaceId": "小53"
+        },
+        {
+          "type": "space",
+          "spaceId": "小54"
+        },
+        {
+          "type": "space",
+          "spaceId": "小55"
+        },
+        {
+          "type": "space",
+          "spaceId": "小56"
+        },
+        {
+          "type": "space",
+          "spaceId": "小57"
+        }
+      ]
+    }
+  ],
+  "spaceOrigins": [
+    {
+      "category": "motorcycle",
+      "spaceId": "1",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "2",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "2-1",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "3",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "3-1",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "4",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "5",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "6",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "7",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "9",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "10",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "11",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "12",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "13",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "14",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "14-1",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "15",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "16",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "17",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "18",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "19",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "20",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "21",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "22",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "23",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "24",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "25",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "26",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "27",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "28",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "29",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "30",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "31",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "32",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "33",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "34",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "35",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "36",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "37",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "38",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "39",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "40",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "41",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "42",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "43",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "44",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "45",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "46",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "47",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "48",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "49",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "50",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "51",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "52",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "53",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "54",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "55",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "56",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "57",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "58",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "59",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "60",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "61",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "62",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "64",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "65",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "66",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "67",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "68",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "69",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "70",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "71",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "72",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "73",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "74",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "75",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "76",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "77",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "78",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "79",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "80",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "81",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "82",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "83",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "84",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "85",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "86",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "87",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "88",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "90",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "91",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "92",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "93",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "94",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "95",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "96",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "97",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "98",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "99",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "100",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "101",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "102",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "103",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "104",
+      "source": "unpaid_after_deadline"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "105",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "106",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "107",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "108",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "109",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "110",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "111",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "112",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "113",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "114",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "115",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "116",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "117",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "118",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "119",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "120",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "121",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "122",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "123",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "124",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "125",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "126",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "128",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "129",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "130",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "131",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "132",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "133",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "134",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "135",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "136",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "137",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "138",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "139",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "140",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "141",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "142",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "143",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "144",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "145",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "146",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "147",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "148",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "149",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "motorcycle",
+      "spaceId": "150",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大1",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大2",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大3",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大4",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大5",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大6",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大7",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大8",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大9",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大10",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大11",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大12",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大13",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大14",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大15",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大16",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大17",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大18",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大19",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大20",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大21",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大22",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大23",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大24",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大25",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大26",
+      "source": "unpaid_after_deadline"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大27",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大28",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大29",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大30",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大31",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大32",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大34",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大35",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大36",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大37",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_large",
+      "spaceId": "大38",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_small",
+      "spaceId": "小39",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_small",
+      "spaceId": "小40",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_small",
+      "spaceId": "小41",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_small",
+      "spaceId": "小42",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_small",
+      "spaceId": "小43",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_small",
+      "spaceId": "小44",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_small",
+      "spaceId": "小45",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_small",
+      "spaceId": "小46",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_small",
+      "spaceId": "小47",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_small",
+      "spaceId": "小48",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_small",
+      "spaceId": "小49",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_small",
+      "spaceId": "小50",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_small",
+      "spaceId": "小51",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_small",
+      "spaceId": "小52",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_small",
+      "spaceId": "小53",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_small",
+      "spaceId": "小54",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_small",
+      "spaceId": "小55",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_small",
+      "spaceId": "小56",
+      "source": "first_round_vacant"
+    },
+    {
+      "category": "bicycle_small",
+      "spaceId": "小57",
+      "source": "first_round_vacant"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "activityId": "fictional-schema-example",
+  "activityYear": 116,
+  "mode": "test",
+  "createdAt": "2026-10-25T18:00:00.000Z",
+  "createdByAppVersion": "schema-example"
+}

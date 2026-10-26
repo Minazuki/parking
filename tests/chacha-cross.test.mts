@@ -6,7 +6,7 @@ import { mkdir, mkdtemp, readFile, writeFile, rm, access } from 'node:fs/promise
 import { fileURLToPath } from 'node:url'
 import { join } from 'node:path'
 import { chacha20 } from '@noble/ciphers/chacha.js'
-import { drawRound, type Prepared } from '../tools/verify-draw/ts/core.mts'
+import { drawRound, type Prepared } from '../client/src/domain/draw.mts'
 const exec = promisify(execFile)
 const root = fileURLToPath(new URL('../', import.meta.url))
 const read = async (path: string) => JSON.parse(await readFile(path, 'utf8'))

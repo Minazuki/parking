@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:parking:schema:seed",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "provider",
+    "apiVersion",
+    "chainHash",
+    "seed",
+    "round",
+    "buttonPressedAt",
+    "requestStartedAt",
+    "responseReceivedAt",
+    "roundScheduledTimeUtc",
+    "signatureVerified"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "provider": {
+      "const": "drand"
+    },
+    "apiVersion": {
+      "const": "v2"
+    },
+    "chainHash": {
+      "const": "52db9ba70e0cc0f6eaf7803dd07447a1f5477735fd3f661792ba94600c84e971"
+    },
+    "seed": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "round": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "buttonPressedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "requestStartedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "responseReceivedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "roundScheduledTimeUtc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "signatureVerified": {
+      "const": true
+    }
+  }
+}

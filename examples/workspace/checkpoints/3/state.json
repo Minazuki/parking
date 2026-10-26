@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "fileName": "fictional-payments.csv",
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "importedAt": "2026-10-25T18:01:00.000Z"
+  },
+  "payments": [
+    {
+      "household": "997-2",
+      "motorcycle": true,
+      "bicycleLarge": false,
+      "bicycleSmall": false
+    },
+    {
+      "household": "997-3",
+      "motorcycle": true,
+      "bicycleLarge": true,
+      "bicycleSmall": false
+    },
+    {
+      "household": "999-2",
+      "motorcycle": false,
+      "bicycleLarge": true,
+      "bicycleSmall": false
+    },
+    {
+      "household": "999-3",
+      "motorcycle": true,
+      "bicycleLarge": true,
+      "bicycleSmall": false
+    },
+    {
+      "household": "999-4",
+      "motorcycle": true,
+      "bicycleLarge": true,
+      "bicycleSmall": false
+    }
+  ]
+}

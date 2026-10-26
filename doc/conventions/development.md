@@ -13,6 +13,12 @@
 - `data/` 與 `exports/` 分別保留本機正式輸入與匯出結果，不提交；需要長期保存的正式資料另行備份，Git 忽略清單不是備份機制。
 - 可提交的資料範例必須虛構，置於後續建立的 `examples/`，不要放在正式資料目錄。
 
+應用程式來源採[server/src與client/src配置](../architecture/repository-layout.md)；schemas維護共用契約，tools維護CLI驗證工具。
+
+架構基準依[應用程式架構規範](../architecture/application-patterns.md)：Go採Gin RESTful API與Controller–Service–Repository，Vue 3採MVVM，Three.js經TresJS整合。
+
+Go CLI採Cobra，root command用於help，不預設啟動server；版本與Wire組裝遵循[CLI規範](../architecture/cli.md)。
+
 ## Commit
 
 提交格式、語言與scope以[Commit Message規範](commit-messages.md)為唯一來源。僅在使用者要求時提交；push使用已確認的remote及branch。

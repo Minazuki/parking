@@ -1,6 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Prepared draw pools (v2 tool contract draft)",
+  "$id": "urn:parking:schema:draw-pools",
+  "title": "Prepared ordered draw pools",
   "type": "object",
   "additionalProperties": false,
   "required": [

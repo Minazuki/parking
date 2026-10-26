@@ -1,0 +1,8 @@
+{
+  "name": "@parking/client",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@noble/ciphers": "2.4.0"
+  }
+}

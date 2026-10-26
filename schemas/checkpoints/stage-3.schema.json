@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:parking:schema:stage-3",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "source",
+    "payments"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fileName",
+        "sha256",
+        "importedAt"
+      ],
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^\\S(?:.*\\S)?$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "importedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "payments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "household",
+          "motorcycle",
+          "bicycleLarge",
+          "bicycleSmall"
+        ],
+        "properties": {
+          "household": {
+            "type": "string",
+            "pattern": "^[1-9][0-9]*-[1-9][0-9]*$"
+          },
+          "motorcycle": {
+            "type": "boolean"
+          },
+          "bicycleLarge": {
+            "type": "boolean"
+          },
+          "bicycleSmall": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}

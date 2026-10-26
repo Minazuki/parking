@@ -1,8 +1,8 @@
 # ChaCha20 TS／Go可重現驗證工具
 
-[Shell入口](../../../tools/verify-draw.sh)／[可供前端共用的TS核心](../../../tools/verify-draw/ts/core.mts)／[TS worker](../../../tools/verify-draw/ts/main.mts)／[Go獨立實作](../../../tools/verify-draw/go/main.go)。
+[Shell入口](../../../tools/verify-draw.sh)／[獨立TS核心](../../../client/src/domain/draw.mts)／[TS worker](../../../tools/verify-draw/ts/main.mts)／[Go正式核心](../../../server/src/draw/draw.go)／[Go驗證worker](../../../tools/verify-draw/go/main.go)。
 
-狀態：已實作`parking-draw-chacha20-v2`。支援有序多池、雙抽、直接mod、各類第二輪候補、skipped、實際消耗串流保存與既有結果比對。尚未建立主程式、正式0至6存檔讀取器或CSV正規化；這是獨立算法驗證工具，不操作正式社區活動。
+狀態：已實作`parking-draw-chacha20-v2`。支援有序多池、雙抽、直接mod、各類第二輪候補、skipped、實際消耗串流保存與既有結果比對。已建立0至6 Schema與唯讀存檔驗證，正式Go後端已建立階段提交及API，Vue介面與CSV正規化仍待串接；這是獨立算法驗證工具，不操作正式社區活動。
 
 ## 驗證目的
 
@@ -39,7 +39,9 @@
 
 | 參數 | 意義 |
 | --- | --- |
-| `--output` | 必填，必須為尚不存在的新目錄 |
+| `--workspace` | 選填，直接唯讀檢查年度目錄並使用目標輪次的存檔 |
+| `--draw-round` | workspace模式必填1或2；與手動input／round／pools／expected模式互斥 |
+| `--output` | 必填，必須為尚不存在的新目錄；workspace模式不得在來源目錄內 |
 | `--pools` | 有序池JSON；省略使用examples/verify-draw/round-one.json |
 | `--round` | 固定drand round，與input互斥；兩者皆無則取得latest |
 | `--input` | 含info.json與beacon.json的seed證據目錄；離線重驗，不取得新seed |
@@ -60,7 +62,7 @@
 
 `implementationsMatch: true`表示兩邊結果JSON語意完全一致，包含streamHex；指定expected時，`expectedMatches`必須同樣為true，總體`matches`才為true。未指定expected時該欄為null，只表示TS／Go交叉比對，不宣稱核對過主程式結果。
 
-若未來主程式的2/state.json、6/state.json使用相同契約，可直接傳給expected；正式0/state.json、4/state.json的包裝schema仍待定義，須從其中抽取對應有序pools作為輸入，不能目前就把整份state直接當作本工具輸入。算法版本或schema不同時不自動轉換。
+已支援--workspace年度目錄及--draw-round 1或2，自動依已建立的schema抽取0/或4/有序池、1/或5/seed及2/或6/預期結果。此模式不連網、要求結果已保存，輸出必須在工作目錄外；不能與--input、--round、--pools、--expected混用。具體格式與命令見[存檔Schema](../../design/checkpoint-schema.md)。算法版本或schema不同時不自動轉換。
 
 串流或結果有任一差異即非零退出，保留比較紀錄；輸出目錄、worker輸出檔拒絕覆寫。不自動重試、換seed或重抽。不能把重新計算驗證當作正式活動重抽。
 

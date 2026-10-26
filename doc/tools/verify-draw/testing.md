@@ -4,7 +4,7 @@
 
 ## v2驗證（2026-10-26）
 
-`npm test`目前包含17項Node測試（含既有seed工具測試），以及由Node測試編譯Go worker進行的交叉／shell整合驗證；需安裝Go。Go本身亦可在tools/verify-draw/go執行`go test ./...`。
+`npm test`目前包含25項Node測試（含既有seed工具測試），以及由Node測試編譯Go worker進行的交叉／shell整合驗證；需安裝Go。新增8項存檔測試涵蓋0至6 schema、唯讀、回退及篡改檢查，含workspace兩輪shell重算。Go本身亦可在tools/verify-draw/go執行`go test ./...`。
 
 - 四組虛構多池情境，加上一組完整容量第一輪（A65戶／65格、B85戶／88格、大38、小19），分別使用全零、全ff及公開round 33382601對應seed，共15組TS／Go完整JSON交叉比對。
 - 核對跨64-byte區塊的原始串流、先車位再戶號、單項不消耗、穩定移除、各類候補、全候補池及skipped。
@@ -22,7 +22,7 @@
 | [全跳過](../../../examples/verify-draw/all-skipped.json) | [expected](../../../examples/verify-draw/all-skipped.expected.json) | 0 |
 | [第一輪不足](../../../examples/verify-draw/first-round-shortage.json) | [expected](../../../examples/verify-draw/first-round-shortage.expected.json) | 4 |
 
-[輸入Schema](../../../examples/verify-draw/pools.schema.json)及[結果Schema](../../../examples/verify-draw/result.schema.json)另經JSON Schema檢查器驗證。正式0至6包裝格式、CSV匯入與主程式尚未完成，不能把此測試記為主程式全流程驗收。
+[輸入Schema](../../../schemas/checkpoints/draw-pools.schema.json)及[結果Schema](../../../schemas/checkpoints/draw-result.schema.json)另經JSON Schema檢查器驗證。正式0至6包裝格式、CSV匯入與主程式尚未完成，不能把此測試記為主程式全流程驗收。
 
 ## v1歷史實測與檢查
 

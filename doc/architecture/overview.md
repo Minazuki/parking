@@ -1,6 +1,6 @@
 # 架構方向
 
-狀態：前端方向已選Vite＋Vue 3＋TypeScript＋Three.js；尚未建立前端。第一版啟動採Mac＋Chrome＋內嵌前端的Go執行檔，指定年度工作目錄讀寫；存檔契約及Google API整合方式待確認。
+狀態：前端方向已選Vite＋Vue 3＋TypeScript＋Three.js；尚未建立前端。第一版啟動採Mac＋Chrome＋內嵌前端的Go執行檔，指定年度工作目錄讀寫；已建立Go API與0至6 JSON存檔；CSV與發布打包尚待串接。前後端分離開發，來源分別為server/src與client/src，見[目錄配置](repository-layout.md)及[Go後端](backend.md)。
 
 ## 已知條件
 
@@ -14,7 +14,7 @@
 flowchart TD
     p0["行政試算表"]
     p1["匯出本機檔案"]
-    p2["抽籤前端匯入"]
+    p2["Go匯入與驗證"]
     p3["現場抽籤與展示"]
     p4["本機保存結果與報表"]
     p5["上傳 Google Drive 封存"]
@@ -31,13 +31,13 @@ flowchart TD
 
 ## 設計提案
 
-活動階段、逐步CSV轉換與中斷恢復的規劃，集中於[活動階段與CSV產出](../design/activity-states.md)。目前尚未實作，不能僅以CSV檔名當作活動狀態。
+活動階段、逐步CSV轉換與中斷恢復的規劃，集中於[活動階段與CSV產出](../design/activity-states.md)。已建立Go階段保存與恢復，不能僅以CSV檔名當作活動狀態。
 
 - 本機存檔與重播不依賴網路；取得新的drand seed需要連網，失敗不得改成本機亂數。
 - 抽籤結果與動畫分離，支援中斷後恢復及明確標示的重播。
 - 封存本輪輸入、結果、報表、必要執行資訊及可重新啟動的程式版本。
 - 瀏覽器內部儲存不作為唯一封存來源；仍需外部檔案與備份。
-- 正式來源已選drand，ChaCha20跨語言測試已完成；正式配位串接及重抽程序仍待設計，見[Seed與可重現性](../design/randomness.md)。
+- 正式來源已選drand，ChaCha20跨語言測試已完成；Go正式配位已串接；前端演出仍待實作，見[Seed與可重現性](../design/randomness.md)。
 
 ## 定案前需驗證
 

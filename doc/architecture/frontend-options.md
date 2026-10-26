@@ -2,6 +2,8 @@
 
 狀態：2026-10-26使用者選定Vite＋Vue 3＋TypeScript＋Three.js，並說明較熟悉TypeScript。尚未安裝前端套件，套件版本尚待確認；第一版固定Mac＋Chrome，以Go內嵌前端並負責年度目錄讀寫，啟動方式已定案、存檔契約待設計。3D仍屬選配。
 
+2D採Vue 3 MVVM；3D透過TresJS整合Three.js並共用ViewModel。分層規範見[應用程式架構規範](application-patterns.md)。
+
 ## 使用者提出的產出
 
 1. 各抽選段落輸出CSV，可依用途轉成其他報表格式並上傳Google Drive。
@@ -30,14 +32,15 @@
 | --- | --- | --- |
 | 前端 | Vue 3 + TypeScript + Vite | 一套畫面組件支援行政流程、投影演出與後續靜態查詢，產出靜態資源 |
 | 2D演出 | HTML／CSS／SVG，搭配Vue Transition／TransitionGroup | 名單、數量、號碼池、排序與揭曉易讀，先完成現場操作與錄影 |
-| 抽選與清票核心 | 不依賴畫面的TypeScript模組 | 瀏覽器直接運作，核心輸入輸出不綁Vue或3D |
-| 狀態 | 明確階段轉移與事件紀錄，以Vue composable管理；跨頁需求明確後再評估Pinia | 抽選段落與動畫進度分開，避免用大量獨立布林值表示互斥狀態 |
+| 正式抽選與清票核心 | Go後端 | 狀態、取seed、配位與存檔由Go一併執行，Chrome中斷不取消已啟動階段 |
+| 獨立驗證 | client/src/domain中的純TS模組 | 以固定seed及有序輸入核對Go結果，不作正式配位來源 |
+| 狀態 | Go掌握完整斷點；Vue管理畫面與演出進度 | API讀正式狀態，不以畫面進度代表存檔完成 |
 | 恢復 | Go讀取指定年度目錄的JSON存檔 | 不依賴瀏覽器快取恢復正式活動 |
 | 檔案保存 | Go負責指定工作目錄的讀寫，TS經本機服務提交資料 | 正式存檔均為JSON，CSV僅在外部匯入／匯出時轉換，提交契約待設計 |
-| 3D選配 | Three.js，先直接整合Vue元件；封裝函式庫另議 | 在Vue畫面中加入可替換3D場景，不讓3D依賴介入抽選規則 |
+| 3D選配 | Three.js透過TresJS整合Vue 3 MVVM | 在Vue畫面中加入可替換3D場景，不讓3D依賴介入抽選規則 |
 | Drive | 第一版手動上傳產出 | 維持離線核心，直接API授權及同步之後再評估 |
 
-目前Python第二輪核心可作規則原型與測試參考。正式瀏覽器核心以TypeScript實作，既有Python原型需移植並以相同案例驗證，再決定是否保留Python工具；不為重用原型而強迫現場啟動Python API，也不長期維護兩套正式算法。
+Python原型保留作早期規則與測試參考，正式清票及抽選已移至Go。前後端分別位於server/src及client/src，開發時分別啟動Vite與Go、由API溝通，正式發布仍由Go內嵌前端。TS保留獨立重算，不與Go同時維護兩套正式活動狀態。詳見[Repository Layout](repository-layout.md)與[Go後端](backend.md)。
 
 ## 單段演出與存檔邊界
 

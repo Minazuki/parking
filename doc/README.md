@@ -23,9 +23,14 @@
 | [行政工作表樣板](design/admin-template.md) | 現行五個分頁、保護範圍、年度複製與交接 |
 | [116年度測試工作表](design/test-workbook-116.md) | 獨立測試副本、情境數量與驗證紀錄 |
 | [活動階段與CSV產出](design/activity-states.md) | 階段狀態、分頁轉碼、資料快照與第二輪工作表銜接 |
+| [存檔Schema與唯讀驗證](design/checkpoint-schema.md) | 0至6欄位契約、完整性檢查及存檔重算入口 |
 | [工作資料夾與存檔](design/workspace-storage.md) | 選資料夾恢復、按階段確認讀CSV、年度封存與錯誤處理 |
 | [清票與第二輪抽選核心](tools/round-two/tool.md) | 已實作的離線工具、輸入契約、驗證與尚未串接功能 |
 | [本機啟動與版本發布](architecture/local-launch.md) | Mac＋Chrome、Go指定工作目錄、發布包與時間版本號 |
+| [應用程式架構規範](architecture/application-patterns.md) | Gin三層、Vue 3 MVVM及TresJS整合 |
+| [Cobra CLI與版本資訊](architecture/cli.md) | server／version命令、debug／release metadata及Wire組裝 |
+| [Repository Layout](architecture/repository-layout.md) | server/src、client/src及共用schema／工具分工 |
+| [Go後端與階段提交](architecture/backend.md) | API、正式配位與清票、完整提交、恢復與session log |
 | [架構方向](architecture/overview.md) | 部署、保存與恢復的提案 |
 | [前端技術選型討論](architecture/frontend-options.md) | 從CSV、分段演出與選配靜態查詢回推離線前端 |
 | [首次規劃紀錄](meetings/2026-10-25-kickoff.md) | 討論來源與當時狀態 |

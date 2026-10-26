@@ -2,7 +2,7 @@
 
 支援社區年度機車與腳踏車停車位的前置登記、現場抽選、繳費清查及第二輪作業。抽選預計在會議室錄影、直播，透過前端展示參與戶別、車位數量與配位結果。
 
-目前已完成行政試算表樣板與需求規劃；已實作獨立的清票及第二輪抽選核心，完整前端、活動狀態管理、CSV轉碼、繳費單及第二輪工作表產生功能尚未實作，前端方向已選Vite＋Vue 3＋TypeScript＋Three.js，尚未建立前端，部署方式待確認。
+目前已建立Gin RESTful API與三層架構、0至6階段存檔與恢復、清票及兩輪配位，並提供TS／Go可重現性驗證。前端採Vite＋Vue 3＋TypeScript，Three.js為選配；Vue頁面、CSV整合、報表與發布包尚待完成。
 
 ## 行政工作表
 
@@ -41,6 +41,8 @@
 
 ## 程式開發方向
 
+應用程式以server/src（Go／Gin，Controller–Service–Repository）與client/src（Vue／TS，MVVM）分離開發；3D採TresJS整合Three.js，正式狀態、取seed、配位及存檔由Go負責，TS保留獨立驗證。Go API開發入口為`./server/run.sh server --workspace tmp/server-demo --no-browser`；現有根頁顯示API狀態，Vue、CSV及發布打包待接。詳見[目錄配置](doc/architecture/repository-layout.md)與[Go後端](doc/architecture/backend.md)。
+
 ```mermaid
 flowchart TD
     p0["登記確認"]
@@ -55,6 +57,8 @@ flowchart TD
 行政表使用文字下拉選單與入帳核取方塊；程式匯出時轉成數字代碼。活動階段另存結構化紀錄，保留各次輸入與結果，讓中斷後能恢復。完整規劃見[活動階段與CSV產出](doc/design/activity-states.md)及[架構方向](doc/architecture/overview.md)。
 
 ## 文件與協作
+
+已建立0至6存檔Schema及唯讀讀取器；可用`./tools/verify-draw.sh --workspace examples/workspace --draw-round 2 --output tmp/workspace-check-001`直接核對虛構年度存檔的第二輪結果。格式與限制見[存檔Schema](doc/design/checkpoint-schema.md)。
 
 TS／Go使用同一筆drand seed進行多池雙抽與候補驗證：`./tools/verify-draw.sh --output tmp/draw-check-001`。會保存兩邊實際消耗串流與結果並比對，亦可用--expected核對既有結果，操作與固定規格見[ChaCha20交叉驗證](doc/tools/verify-draw/tool.md)。
 

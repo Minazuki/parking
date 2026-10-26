@@ -1,6 +1,6 @@
 # 驗證工具v2資料契約
 
-狀態：v2驗證工具已實作此輸入與結果契約。正式0至6存檔的包裝schema尚未建立；此工具契約先供算法驗證與後續串接使用。舊v1向量與實測另保留作歷史紀錄。
+狀態：v2驗證工具已實作此輸入與結果契約。正式0至6的schema與唯讀驗證已建立，見[存檔Schema](../../design/checkpoint-schema.md)；正式寫入及計算由Go後端執行，Vue與CSV仍待串接，見[後端分工](../../architecture/backend.md)。舊v1向量與實測另保留作歷史紀錄。
 
 ## 工作範圍
 
@@ -10,7 +10,7 @@
 
 ## 有序池輸入
 
-[JSON Schema](../../../examples/verify-draw/pools.schema.json)定義`schemaVersion`、`drawRound`與`pools`。
+[JSON Schema](../../../schemas/checkpoints/draw-pools.schema.json)定義`schemaVersion`、`drawRound`與`pools`。
 
 | 欄位 | 內容 |
 | --- | --- |
@@ -49,7 +49,7 @@ flowchart TD
 
 取值直接`random % 當前大小`，無拒絕取樣；大小1時不讀bytes。原始串流只記錄實際讀取的bytes，不保存ChaCha20最後一個區塊未用到的尾端。候補與實際車位同樣占一個抽取項目；取得候補不列為實體車位配位。
 
-[結果JSON Schema](../../../examples/verify-draw/result.schema.json)定義輸出。結果包含schemaVersion、整輪status／reason、algorithm、nonce、initialCounter、uint32Endian、poolRemoval、streamHex與各池結果。各池包含id、status、reason、assignments、waitlist、unassignedHouseholds、remainingSpaces；waitlist依rank輸出，實際配位保留抽出順序。結果不含逐步trace、輸入摘要或seed副本。
+[結果JSON Schema](../../../schemas/checkpoints/draw-result.schema.json)定義輸出。結果包含schemaVersion、整輪status／reason、algorithm、nonce、initialCounter、uint32Endian、poolRemoval、streamHex與各池結果。各池包含id、status、reason、assignments、waitlist、unassignedHouseholds、remainingSpaces；waitlist依rank輸出，實際配位保留抽出順序。結果不含逐步trace、輸入摘要或seed副本。
 
 跳過原因代碼：no_participants、no_candidates、no_participants_and_no_candidates；正常完成reason為null，集合為空陣列而非null。僅有候補的第二輪池屬有抽取內容，不算skipped。單戶單候補配對也屬完成，消耗串流可為空。整輪皆skipped時，shell仍須取得並保存drand seed。
 
